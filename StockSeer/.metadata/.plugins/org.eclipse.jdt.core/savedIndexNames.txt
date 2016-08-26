@@ -1,0 +1,3 @@
+INDEX VERSION 1.129+/Users/anvu/Desktop/stock-seer/StockSeer/.metadata/.plugins/org.eclipse.jdt.core
+995153890.index
+2979435446.index
