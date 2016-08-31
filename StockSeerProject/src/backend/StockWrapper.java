@@ -68,12 +68,14 @@ public class StockWrapper extends Object {
 
 	/**
 	 * compare 2 stocks based on initial AND fullname
-	 * @param obj stockWrapper object
+	 * 
+	 * @param obj
+	 *            stockWrapper object
 	 * @return true if two stocks have same initials and fullnames
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (this == obj)
 			return true;
 		if (obj == null)
