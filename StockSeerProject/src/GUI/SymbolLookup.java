@@ -14,11 +14,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SymbolLookup extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldSymbol;
+	private JButton btnAddStock;
 
 	/**
 	 * Launch the application.
@@ -64,8 +67,9 @@ public class SymbolLookup extends JFrame {
 		
 		JPanel panel = new JPanel();
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setBackground(UIManager.getColor("TextField.selectionBackground"));
+		btnAddStock = new JButton("Add");
+
+		btnAddStock.setBackground(UIManager.getColor("TextField.selectionBackground"));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -82,7 +86,7 @@ public class SymbolLookup extends JFrame {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnFind)))
 							.addContainerGap())
-						.addComponent(btnAdd, Alignment.TRAILING)))
+						.addComponent(btnAddStock, Alignment.TRAILING)))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -95,7 +99,7 @@ public class SymbolLookup extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-					.addComponent(btnAdd))
+					.addComponent(btnAddStock))
 		);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -115,6 +119,10 @@ public class SymbolLookup extends JFrame {
 	 * create events
 	 */
 	private void createEvents() {
-		
+		btnAddStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add stock button clicked");
+			}
+		});
 	}
 }
