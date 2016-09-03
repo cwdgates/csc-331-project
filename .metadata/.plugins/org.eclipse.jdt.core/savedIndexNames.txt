@@ -16,4 +16,3 @@ INDEX VERSION 1.129+/Users/anvu/Desktop/gitRepo/stock-seer/.metadata/.plugins/or
 624708564.index
 1931402068.index
 2117113611.index
-801007257.index
