@@ -12,7 +12,9 @@ import javax.swing.JButton;
 
 public class LoginScreen {
 
-	private JFrame frmStockseerLogin;
+	private JFrame f_frmStockseerLogin;
+	private JTextField f_textFieldPassword;
+	private JTextField f_textFieldUsername;
 
 	/**
 	 * Launch the application.
@@ -22,7 +24,7 @@ public class LoginScreen {
 			public void run() {
 				try {
 					LoginScreen window = new LoginScreen();
-					window.frmStockseerLogin.setVisible(true);
+					window.f_frmStockseerLogin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,17 +43,17 @@ public class LoginScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmStockseerLogin = new JFrame();
-		frmStockseerLogin.setTitle("StockSeer Login");
-		frmStockseerLogin.setBounds(100, 100, 450, 300);
-		frmStockseerLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f_frmStockseerLogin = new JFrame();
+		f_frmStockseerLogin.setTitle("StockSeer Login");
+		f_frmStockseerLogin.setBounds(100, 100, 450, 300);
+		f_frmStockseerLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JTextField f_textFieldUsername = new JTextField();
+		f_textFieldUsername = new JTextField();
 		f_textFieldUsername.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
 		
-		JTextField f_textFieldPassword = new JTextField();
+		f_textFieldPassword = new JTextField();
 		f_textFieldPassword.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
@@ -61,7 +63,7 @@ public class LoginScreen {
 		JButton btnResetPassword = new JButton("Reset Password");
 		
 		JButton btnCreateNewAccount = new JButton("Create New Account");
-		GroupLayout groupLayout = new GroupLayout(frmStockseerLogin.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(f_frmStockseerLogin.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -111,6 +113,6 @@ public class LoginScreen {
 						.addComponent(btnResetPassword))
 					.addContainerGap())
 		);
-		frmStockseerLogin.getContentPane().setLayout(groupLayout);
+		f_frmStockseerLogin.getContentPane().setLayout(groupLayout);
 	}
 }
