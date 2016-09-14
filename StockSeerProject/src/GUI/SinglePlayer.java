@@ -10,14 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
 
 public class SinglePlayer {
 
@@ -89,14 +85,24 @@ public class SinglePlayer {
 
 		
 		GroupLayout gl_panel_Portfolio = new GroupLayout(panel_Portfolio);
-		gl_panel_Portfolio.setHorizontalGroup(gl_panel_Portfolio.createParallelGroup(Alignment.LEADING)
-				.addComponent(table, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE));
-		gl_panel_Portfolio.setVerticalGroup(gl_panel_Portfolio.createParallelGroup(Alignment.LEADING)
-				.addComponent(table, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE));
-		panel_Portfolio.setLayout(gl_panel_Portfolio);
-
+		gl_panel_Portfolio.setHorizontalGroup(
+				gl_panel_Portfolio.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_Portfolio.createSequentialGroup()));
+		
+		
+		
 		JPanel panel_Transaction = new JPanel();
 		tabbedPane.addTab("Transaction", null, panel_Transaction, null);
+		GroupLayout gl_panel_Transaction = new GroupLayout(panel_Transaction);
+		gl_panel_Transaction.setHorizontalGroup(
+			gl_panel_Transaction.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 767, Short.MAX_VALUE)
+		);
+		gl_panel_Transaction.setVerticalGroup(
+			gl_panel_Transaction.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 485, Short.MAX_VALUE)
+		);
+		panel_Transaction.setLayout(gl_panel_Transaction);
 
 		JPanel panel_FindStock = new JPanel();
 		tabbedPane.addTab("Find Stock", null, panel_FindStock, null);
