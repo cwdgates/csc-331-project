@@ -1,0 +1,12 @@
+1472463562348	Encapsulate field 'volume'
+1472463568565	Encapsulate field 'price'
+1472463573306	Encapsulate field 'initial'
+1472463583891	Encapsulate field 'fullname'
+1472464288881	Encapsulate field 'userFullname'
+1472464292387	Encapsulate field 'username'
+1472464301244	Encapsulate field 'userPassword'
+1472464305616	Encapsulate field 'account_balance'
+1472464309123	Encapsulate field 'stockWrappers'
+1472575038640	Move compilation unit
+1472575059690	Rename type 'GUI'
+1472575135129	Delete element

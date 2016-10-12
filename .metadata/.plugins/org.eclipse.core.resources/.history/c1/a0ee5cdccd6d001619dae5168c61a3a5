@@ -1,0 +1,10 @@
+package backend;
+import backend.StockWrapper;
+
+public class User {
+	private String userFullname;
+	private String username;
+	private String userPassword;
+	
+	private double account_balance;
+}
