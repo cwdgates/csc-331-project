@@ -1,9 +1,0 @@
-package backend;
-import backend.StockWrapper;
-
-public class User {
-	private String user_fullname;
-	private String username;
-	private String user_password;
-	
-}
