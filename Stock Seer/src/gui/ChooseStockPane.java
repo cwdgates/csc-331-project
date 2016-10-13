@@ -6,12 +6,16 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 public class ChooseStockPane extends JPanel {
+	DefaultListModel availableUsers;
+	DefaultListModel addedUsers;
 
 	/**
 	 * Create the panel.
@@ -34,6 +38,12 @@ public class ChooseStockPane extends JPanel {
 
 		JList listLeft = new JList();
 		scrollPane.setViewportView(listLeft);
+		availableUsers = new DefaultListModel();
+		String[] demoAvailUesr = { "An", "John" };
+		for (String temp : demoAvailUesr) {
+			availableUsers.addElement(temp);
+		}
+		listLeft.setModel(availableUsers);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		scrollPane.setColumnHeaderView(horizontalGlue);
@@ -71,6 +81,8 @@ public class ChooseStockPane extends JPanel {
 		JList listRight = new JList();
 		listRight.setSize(listLeft.getSize());
 		scrollPane_1.setViewportView(listRight);
+
+		addedUsers = new DefaultListModel();
 
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		scrollPane_1.setColumnHeaderView(horizontalGlue_1);

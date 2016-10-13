@@ -46,10 +46,10 @@ public class HomePane extends JPanel {
 		btnManageLeagues.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelControl.add(btnManageLeagues);
 		
-		JButton btnHome = new JButton("Home");
-		springLayout.putConstraint(SpringLayout.NORTH, btnHome, 6, SpringLayout.SOUTH, panelControl);
-		springLayout.putConstraint(SpringLayout.WEST, btnHome, 0, SpringLayout.WEST, this);
-		add(btnHome);
+		JButton btnLogout = new JButton("Logout");
+		springLayout.putConstraint(SpringLayout.NORTH, btnLogout, 6, SpringLayout.SOUTH, panelControl);
+		springLayout.putConstraint(SpringLayout.WEST, btnLogout, 0, SpringLayout.WEST, this);
+		add(btnLogout);
 
 	}
 

@@ -41,44 +41,85 @@ public class CreateLeaguePane extends JPanel {
 		gbc_panelForm.gridx = 0;
 		gbc_panelForm.gridy = 0;
 		add(panelForm, gbc_panelForm);
-		panelForm.setLayout(new FormLayout(
-				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
-						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("default:grow"), },
-				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, }));
-
-		JLabel lblLeagueName = new JLabel("League Name");
-		panelForm.add(lblLeagueName, "2, 2, right, default");
-
-		textField = new JTextField();
-		panelForm.add(textField, "4, 2, fill, default");
-		textField.setColumns(10);
-
-		JLabel lblNumberOfPlayers = new JLabel("Number of Players");
-		panelForm.add(lblNumberOfPlayers, "2, 4, right, default");
-
-		JComboBox comboBoxNumPlayers = new JComboBox();
+		GridBagLayout gbl_panelForm = new GridBagLayout();
+		gbl_panelForm.columnWidths = new int[]{115, 327, 0};
+		gbl_panelForm.rowHeights = new int[]{26, 27, 27, 27, 0};
+		gbl_panelForm.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelForm.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelForm.setLayout(gbl_panelForm);
+						
+								JLabel lblLeagueName = new JLabel("League Name");
+								GridBagConstraints gbc_lblLeagueName = new GridBagConstraints();
+								gbc_lblLeagueName.anchor = GridBagConstraints.EAST;
+								gbc_lblLeagueName.insets = new Insets(0, 0, 5, 5);
+								gbc_lblLeagueName.gridx = 0;
+								gbc_lblLeagueName.gridy = 0;
+								panelForm.add(lblLeagueName, gbc_lblLeagueName);
+				
+						textField = new JTextField();
+						GridBagConstraints gbc_textField = new GridBagConstraints();
+						gbc_textField.anchor = GridBagConstraints.NORTH;
+						gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+						gbc_textField.insets = new Insets(0, 0, 5, 0);
+						gbc_textField.gridx = 1;
+						gbc_textField.gridy = 0;
+						panelForm.add(textField, gbc_textField);
+						textField.setColumns(10);
+		
+				JLabel lblNumberOfPlayers = new JLabel("Number of Players");
+				GridBagConstraints gbc_lblNumberOfPlayers = new GridBagConstraints();
+				gbc_lblNumberOfPlayers.anchor = GridBagConstraints.EAST;
+				gbc_lblNumberOfPlayers.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNumberOfPlayers.gridx = 0;
+				gbc_lblNumberOfPlayers.gridy = 1;
+				panelForm.add(lblNumberOfPlayers, gbc_lblNumberOfPlayers);
+		
+				JComboBox comboBoxNumPlayers = new JComboBox();
+				GridBagConstraints gbc_comboBoxNumPlayers = new GridBagConstraints();
+				gbc_comboBoxNumPlayers.anchor = GridBagConstraints.NORTH;
+				gbc_comboBoxNumPlayers.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBoxNumPlayers.insets = new Insets(0, 0, 5, 0);
+				gbc_comboBoxNumPlayers.gridx = 1;
+				gbc_comboBoxNumPlayers.gridy = 1;
+				panelForm.add(comboBoxNumPlayers, gbc_comboBoxNumPlayers);
+		
+				JLabel lblStartDate = new JLabel("Start Date");
+				GridBagConstraints gbc_lblStartDate = new GridBagConstraints();
+				gbc_lblStartDate.anchor = GridBagConstraints.EAST;
+				gbc_lblStartDate.insets = new Insets(0, 0, 5, 5);
+				gbc_lblStartDate.gridx = 0;
+				gbc_lblStartDate.gridy = 2;
+				panelForm.add(lblStartDate, gbc_lblStartDate);
+				
+						DatePickerPane startDatePicker = new DatePickerPane();
+						GridBagConstraints gbc_startDatePicker = new GridBagConstraints();
+						gbc_startDatePicker.fill = GridBagConstraints.BOTH;
+						gbc_startDatePicker.insets = new Insets(0, 0, 5, 0);
+						gbc_startDatePicker.gridx = 1;
+						gbc_startDatePicker.gridy = 2;
+						panelForm.add(startDatePicker, gbc_startDatePicker);
+		
+				JLabel lblEndDate = new JLabel("End Date");
+				GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
+				gbc_lblEndDate.anchor = GridBagConstraints.EAST;
+				gbc_lblEndDate.insets = new Insets(0, 0, 0, 5);
+				gbc_lblEndDate.gridx = 0;
+				gbc_lblEndDate.gridy = 3;
+				panelForm.add(lblEndDate, gbc_lblEndDate);
+		
+				DatePickerPane endDatePicker = new DatePickerPane();
+				GridBagConstraints gbc_endDatePicker = new GridBagConstraints();
+				gbc_endDatePicker.anchor = GridBagConstraints.NORTH;
+				gbc_endDatePicker.fill = GridBagConstraints.HORIZONTAL;
+				gbc_endDatePicker.gridx = 1;
+				gbc_endDatePicker.gridy = 3;
+				panelForm.add(endDatePicker, gbc_endDatePicker);
 		for (int i = 2; i <= 10; i++) {
 			comboBoxNumPlayers.addItem(i);
 		}
-		panelForm.add(comboBoxNumPlayers, "4, 4, fill, default");
-
-		JLabel lblStartDate = new JLabel("Start Date");
-		panelForm.add(lblStartDate, "2, 6, right, default");
 
 		// date format
 		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-
-		DatePickerPane startDatePicker = new DatePickerPane();
-		panelForm.add(startDatePicker, "4, 6, fill, fill");
-
-		JLabel lblEndDate = new JLabel("End Date");
-		panelForm.add(lblEndDate, "2, 8, right, default");
-
-		DatePickerPane endDatePicker = new DatePickerPane();
-		panelForm.add(endDatePicker, "4, 8, fill, default");
 
 		JButton btnCreate = new JButton("Create");
 		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
