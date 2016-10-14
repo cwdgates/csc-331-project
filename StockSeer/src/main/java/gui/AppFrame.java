@@ -1,14 +1,14 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
 
 public class AppFrame extends JFrame {
 
@@ -45,7 +45,19 @@ public class AppFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AppFrame() {
-		setMinimumSize(new Dimension(450, 300));
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+
+		setMinimumSize(new Dimension(500, 300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
