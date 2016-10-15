@@ -7,14 +7,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginPane extends JPanel {
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private JPanel panel;
-	private JButton btnLogin;
-	private JButton btnSignUp;
-	private JButton btnResetPassword;
 
 	/**
 	 * Create the panel.
@@ -68,13 +67,19 @@ public class LoginPane extends JPanel {
 		gbc_panel.gridy = 2;
 		add(panel, gbc_panel);
 
-		btnLogin = new JButton("Login");
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO call controller, send login info to database
+				
+			}
+		});
 		panel.add(btnLogin);
 
-		btnSignUp = new JButton("Sign Up");
+		JButton btnSignUp = new JButton("Sign Up");
 		panel.add(btnSignUp);
 
-		btnResetPassword = new JButton("Reset Password");
+		JButton btnResetPassword = new JButton("Reset Password");
 		panel.add(btnResetPassword);
 
 	}
