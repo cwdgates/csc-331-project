@@ -1,9 +1,0 @@
-import gui.*;
-
-public class StockSeer {
-
-	public static void main(String[] args) {
-		AppView view = new AppView();
-	}
-
-}

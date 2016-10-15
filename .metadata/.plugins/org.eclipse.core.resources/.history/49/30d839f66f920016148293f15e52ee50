@@ -1,7 +1,0 @@
-package controller;
-
-import gui.LoginPane;
-
-public class LoginController {
-	LoginPane loginPane = new LoginPane();
-}
