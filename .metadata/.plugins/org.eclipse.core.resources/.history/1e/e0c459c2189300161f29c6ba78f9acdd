@@ -1,0 +1,14 @@
+import gui.*;
+import model.LoginModel;
+
+public class StockSeer {
+
+	public static void main(String[] args) {
+		LoginModel loginModel = new LoginModel();
+		AppView view = new AppView(loginModel);
+		
+		view.setVisible(true);
+				
+	}
+
+}

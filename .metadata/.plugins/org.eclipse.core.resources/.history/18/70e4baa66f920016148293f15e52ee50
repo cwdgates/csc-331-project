@@ -1,0 +1,14 @@
+package model;
+
+public class CredentialModel {
+	private String username;
+	private String password;
+	
+	public CredentialModel() {
+	}
+	
+	CredentialModel(String u, String p){
+		username = u;
+		p = password;
+	}
+}

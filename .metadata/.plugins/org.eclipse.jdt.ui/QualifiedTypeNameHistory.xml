@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.swing.UIManager"/>
+<fullyQualifiedTypeName name="javax.swing.ComboBoxModel"/>
+<fullyQualifiedTypeName name="javax.swing.UIManager.LookAndFeelInfo"/>
+<fullyQualifiedTypeName name="controller.LoginController"/>
+<fullyQualifiedTypeName name="gui.LoginPane"/>
+<fullyQualifiedTypeName name="model.CredentialModel"/>
+</qualifiedTypeNameHistroy>

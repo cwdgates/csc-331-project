@@ -1,0 +1,10 @@
+package model;
+
+public class CredentialModel {
+	private String username;
+	private String password;
+	
+	public CredentialModel() {
+		// TODO Auto-generated constructor stub
+	}
+}

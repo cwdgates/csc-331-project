@@ -1,0 +1,25 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import gui.LoginPane;
+import model.LoginModel;
+
+public class LoginController implements ActionListener {
+	private LoginPane loginPane;
+	private LoginModel loginModel;
+
+	public LoginController(LoginPane loginPane, LoginModel loginModel) {
+		// TODO Auto-generated constructor stub
+		this.loginPane = loginPane;
+		this.loginModel = loginModel;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
