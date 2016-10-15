@@ -1,8 +1,12 @@
 YahooFinanceAPI-3.5.0/
 <<<<<<< HEAD
-*.project
-*.class
+RemoteSystemsTempFiles/
+.metadata/
+StockSeer/bin/
+.recommenders/
 *.DS_Store
+*.class
+*.project
 =======
 RemoteSystemsTempFiles/
 .metadata/
