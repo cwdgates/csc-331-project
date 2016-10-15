@@ -1,4 +1,14 @@
 YahooFinanceAPI-3.5.0/
+<<<<<<< HEAD
 *.project
 *.class
 *.DS_Store
+=======
+RemoteSystemsTempFiles/
+.metadata/
+StockSeer/bin/
+.recommenders/
+*.DS_Store
+*.class
+*.project
+>>>>>>> development

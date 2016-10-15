@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.util.Calendar;
 
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -19,10 +20,11 @@ public class DatePickerPane extends JPanel {
 		JLabel lblDay = new JLabel("Day");
 		add(lblDay);
 
-		JComboBox cbDay = new JComboBox();
-		for (int i = 1; i <= 31; i++) {
-			cbDay.addItem(i);
+		String[] days = new String[31];
+		for (int i = 0; i < 31; i++) {
+			days[i] = (i + 1) + "";
 		}
+		JComboBox cbDay = new JComboBox(days);
 		add(cbDay);
 
 		JLabel lblMonth = new JLabel("Month");

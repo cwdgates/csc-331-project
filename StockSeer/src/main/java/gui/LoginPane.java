@@ -6,7 +6,13 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import controller.LoginController;
+import model.LoginModel;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginPane extends JPanel {
 	private JTextField txtUsername;
@@ -15,11 +21,15 @@ public class LoginPane extends JPanel {
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
+	
+	private LoginModel loginModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane() {
+	public LoginPane(LoginModel loginModel) {
+		this.loginModel = loginModel;
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -69,6 +79,12 @@ public class LoginPane extends JPanel {
 		add(panel, gbc_panel);
 
 		btnLogin = new JButton("Login");
+//		btnLogin.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO call controller, send login info to database
+//
+//			}
+//		});
 		panel.add(btnLogin);
 
 		btnSignUp = new JButton("Sign Up");
@@ -77,5 +93,9 @@ public class LoginPane extends JPanel {
 		btnResetPassword = new JButton("Reset Password");
 		panel.add(btnResetPassword);
 
+	}
+
+	public void registerListeners(LoginController loginController) {
+		btnLogin.addActionListener(loginController);
 	}
 }
