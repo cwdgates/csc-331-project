@@ -3,3 +3,6 @@ RemoteSystemsTempFiles/
 .metadata/
 StockSeer/bin/
 .recommenders/
+*.DS_Store
+*.class
+*.project
