@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import controller.LoginController;
+import model.LoginModel;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,11 +18,18 @@ public class LoginPane extends JPanel {
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private JPanel panel;
+	private JButton btnLogin;
+	private JButton btnSignUp;
+	private JButton btnResetPassword;
+	
+	private LoginModel loginModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane() {
+	public LoginPane(LoginModel loginModel) {
+		this.loginModel = loginModel;
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -67,20 +78,24 @@ public class LoginPane extends JPanel {
 		gbc_panel.gridy = 2;
 		add(panel, gbc_panel);
 
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO call controller, send login info to database
-				
-			}
-		});
+		btnLogin = new JButton("Login");
+//		btnLogin.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO call controller, send login info to database
+//
+//			}
+//		});
 		panel.add(btnLogin);
 
-		JButton btnSignUp = new JButton("Sign Up");
+		btnSignUp = new JButton("Sign Up");
 		panel.add(btnSignUp);
 
-		JButton btnResetPassword = new JButton("Reset Password");
+		btnResetPassword = new JButton("Reset Password");
 		panel.add(btnResetPassword);
 
+	}
+
+	public void registerListeners(LoginController loginController) {
+		btnLogin.addActionListener(loginController);
 	}
 }
