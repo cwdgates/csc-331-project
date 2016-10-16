@@ -9,6 +9,7 @@ public class ConnectMySQL {
 			System.out.println("Error: unable to load driver class!");
 			System.exit(1);
 		}
+		// "jdbc:mysql://addressofthedatabase/table"
 		final String URL = "jdbc:mysql://localhost/stock_seer";
 		final String USER = "root";
 		final String PASS = "Hoangyen59";
