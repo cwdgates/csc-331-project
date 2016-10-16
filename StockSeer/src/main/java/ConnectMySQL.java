@@ -1,5 +1,6 @@
 import java.sql.*;
 
+
 public class ConnectMySQL {
 	public static void main(String[] args) {
 		try {

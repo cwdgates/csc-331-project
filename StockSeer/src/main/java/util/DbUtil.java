@@ -1,5 +1,6 @@
+
 /**
- * @resources http://thejavatrail.blogspot.com/2012/08/step-by-step-guide-developing-mvc.html
+ * @#resources http://thejavatrail.blogspot.com/2012/08/step-by-step-guide-developing-mvc.html
  */
 
 package util;
@@ -12,6 +13,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * This class handle the database connection to our MySQL server. We read
+ * ".properties" file which contains the information necessary for the
+ * connection.
+ * 
+ * @author aqv
+ *
+ */
 public class DbUtil {
 	private static Connection connection = null;
 
