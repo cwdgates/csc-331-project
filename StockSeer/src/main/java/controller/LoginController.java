@@ -3,8 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import gui.LoginPane;
 import model.LoginModel;
+import view.LoginPane;
 
 /**
  * know about actions performed
@@ -29,6 +29,7 @@ public class LoginController implements ActionListener {
 		String command = event.getActionCommand();
 		if (command.equals("Login")) {
 			System.out.println("Login");
+			loginPane.updateLoginModel();
 		}
 	}
 

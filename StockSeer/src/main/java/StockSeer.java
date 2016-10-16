@@ -1,6 +1,6 @@
 import controller.LoginController;
-import gui.*;
 import model.LoginModel;
+import view.*;
 
 public class StockSeer {
 

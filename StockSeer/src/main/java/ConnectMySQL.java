@@ -9,10 +9,11 @@ public class ConnectMySQL {
 			System.out.println("Error: unable to load driver class!");
 			System.exit(1);
 		}
-		final String URL = "jdbc:mysql://east-mysql-stock-seer.cqyb2iutlbre.us-east-1.rds.amazonaws.com:3306/stock_seer_0";
-		final String USER = "anvu03";
+		final String URL = "jdbc:mysql://localhost/stock_seer";
+		final String USER = "root";
 		final String PASS = "Hoangyen59";
 
+		// try to connect
 		try {
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			System.out.println("Creating statement...");
@@ -32,6 +33,6 @@ public class ConnectMySQL {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} // end try
 	}
 }

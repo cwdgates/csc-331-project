@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -21,7 +21,7 @@ public class LoginPane extends JPanel {
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
-	
+
 	private LoginModel loginModel;
 
 	/**
@@ -29,7 +29,7 @@ public class LoginPane extends JPanel {
 	 */
 	public LoginPane(LoginModel loginModel) {
 		this.loginModel = loginModel;
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -79,12 +79,6 @@ public class LoginPane extends JPanel {
 		add(panel, gbc_panel);
 
 		btnLogin = new JButton("Login");
-//		btnLogin.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO call controller, send login info to database
-//
-//			}
-//		});
 		panel.add(btnLogin);
 
 		btnSignUp = new JButton("Sign Up");
@@ -97,5 +91,10 @@ public class LoginPane extends JPanel {
 
 	public void registerListeners(LoginController loginController) {
 		btnLogin.addActionListener(loginController);
+	}
+
+	public void updateLoginModel() {
+		loginModel.setUsername(txtUsername.getText());
+		loginModel.setPassword(txtPassword.getText());
 	}
 }
