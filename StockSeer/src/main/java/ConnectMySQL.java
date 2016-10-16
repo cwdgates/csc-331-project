@@ -12,7 +12,7 @@ public class ConnectMySQL {
 		// "jdbc:mysql://addressofthedatabase/table"
 		final String URL = "jdbc:mysql://localhost/stock_seer";
 		final String USER = "root";
-		final String PASS = "Hoangyen59";
+		final String PASS = "password";
 
 		// try to connect
 		try {
