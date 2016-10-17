@@ -2,6 +2,11 @@ import controller.LoginController;
 import util.CredentialUtil;
 import view.*;
 
+/**
+ * App runner
+ * @author aqv
+ *
+ */
 public class StockSeer {
 
 	public static void main(String[] args) {

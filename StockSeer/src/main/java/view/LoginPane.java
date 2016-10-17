@@ -6,13 +6,15 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 
+import controller.LoginButtonStateController;
 import controller.LoginController;
 import util.CredentialUtil;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class LoginPane extends JPanel {
 	private JTextField txtUsername;
@@ -91,10 +93,20 @@ public class LoginPane extends JPanel {
 
 	public void registerListeners(LoginController loginController) {
 		btnLogin.addActionListener(loginController);
+		btnSignUp.addActionListener(loginController);
 	}
 
 	public void updateLoginModel() {
-//		loginModel.setUsername(txtUsername.getText());
-//		loginModel.setPassword(txtPassword.getText());
+		// loginModel.setUsername(txtUsername.getText());
+		// loginModel.setPassword(txtPassword.getText());
 	}
+
+	public String getUserName() {
+		return txtUsername.getText();
+	}
+
+	public String getPassword() {
+		return txtPassword.getText();
+	}
+
 }

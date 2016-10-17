@@ -15,6 +15,8 @@ import view.LoginPane;
 public class LoginController implements ActionListener {
 	private LoginPane loginPane;
 	private CredentialUtil loginModel;
+	private final String LOGIN_BTN = "Login";
+	private final String SIGNUP_BTN = "Sign Up";
 
 	public LoginController(LoginPane loginPane, CredentialUtil loginModel) {
 		this.loginPane = loginPane;
@@ -27,10 +29,20 @@ public class LoginController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
-		if (command.equals("Login")) {
-			System.out.println("Login");
+		// login button clicked
+		if (command.equals(LOGIN_BTN)) {
+			System.out.println("Login clicked");
 			loginPane.updateLoginModel();
+			if (loginPane.getUserName().trim().length() >= 6 && loginPane.getPassword().trim().length() >= 6) {
+
+			} else {
+				System.out.println("Please fill in username and password");
+			}
 		}
+		if (command.equals(SIGNUP_BTN)) {
+			System.out.println("Signup btn clicked");
+		}
+
 	}
 
 }
