@@ -24,6 +24,9 @@ import java.util.Properties;
 public class DbUtil {
 	private static Connection connection = null;
 
+	/**
+	 * @return Connection to the database
+	 */
 	public static Connection getConnection() {
 		if (connection != null) {
 			return connection;
@@ -31,11 +34,11 @@ public class DbUtil {
 
 		try {
 			Properties prop = new Properties();
-			InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("/db.properties");
+			InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
 			prop.load(inputStream);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
-			String user = prop.getProperty("appuser");
+			String user = prop.getProperty("username");
 			String password = prop.getProperty("password");
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, user, password);

@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
-import model.CredentialModel;
+import model.CredentialUtil;
 
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -25,7 +25,7 @@ public class AppView extends JFrame {
 	private DifficultyPane difficultyPane;
 
 	// models
-	private CredentialModel loginModel;
+	private CredentialUtil loginModel;
 	
 
 	// Components constraints
@@ -55,7 +55,7 @@ public class AppView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AppView(LoginPane loginPane ,CredentialModel loginModel) {
+	public AppView(LoginPane loginPane ,CredentialUtil loginModel) {
 		// set look and feel
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

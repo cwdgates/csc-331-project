@@ -8,7 +8,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import model.CredentialModel;
+import model.CredentialUtil;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -22,12 +22,12 @@ public class LoginPane extends JPanel {
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
 
-	private CredentialModel loginModel;
+	private CredentialUtil loginModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane(CredentialModel loginModel) {
+	public LoginPane(CredentialUtil loginModel) {
 		this.loginModel = loginModel;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -94,7 +94,7 @@ public class LoginPane extends JPanel {
 	}
 
 	public void updateLoginModel() {
-		loginModel.setUsername(txtUsername.getText());
-		loginModel.setPassword(txtPassword.getText());
+//		loginModel.setUsername(txtUsername.getText());
+//		loginModel.setPassword(txtPassword.getText());
 	}
 }

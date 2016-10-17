@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import model.UserModel;
 import util.DbUtil;
 
+/**
+ * user data access object. Contains the logic for database operation
+ * @author aqv
+ *
+ */
 public class UserDao {
 	private Connection connection;
 
