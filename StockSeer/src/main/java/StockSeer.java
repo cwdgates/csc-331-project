@@ -1,12 +1,12 @@
 import controller.LoginController;
-import model.LoginModel;
+import model.CredentialModel;
 import view.*;
 
 public class StockSeer {
 
 	public static void main(String[] args) {
 		// init models
-		LoginModel loginModel = new LoginModel();
+		CredentialModel loginModel = new CredentialModel();
 		
 		// init panels
 		LoginPane loginPane = new LoginPane(loginModel);

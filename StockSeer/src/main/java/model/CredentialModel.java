@@ -1,10 +1,10 @@
 package model;
 
-public class LoginModel {
+public class CredentialModel {
 	private String username;
 	private String password;
 
-	public LoginModel() {
+	public CredentialModel() {
 		username = "";
 		password = "";
 	}

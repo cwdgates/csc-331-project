@@ -1,6 +1,5 @@
 import java.sql.*;
 
-
 public class ConnectMySQL {
 	public static void main(String[] args) {
 		try {
@@ -12,7 +11,7 @@ public class ConnectMySQL {
 		}
 		// "jdbc:mysql://addressofthedatabase/table"
 		final String URL = "jdbc:mysql://localhost/stock_seer";
-		final String USER = "root";
+		final String USER = "appuser";
 		final String PASS = "password";
 
 		// try to connect

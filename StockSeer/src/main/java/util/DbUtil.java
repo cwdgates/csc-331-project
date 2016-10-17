@@ -35,7 +35,7 @@ public class DbUtil {
 			prop.load(inputStream);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
-			String user = prop.getProperty("user");
+			String user = prop.getProperty("appuser");
 			String password = prop.getProperty("password");
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, user, password);

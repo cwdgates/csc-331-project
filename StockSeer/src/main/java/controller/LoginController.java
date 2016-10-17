@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.LoginModel;
+import model.CredentialModel;
 import view.LoginPane;
 
 /**
@@ -14,9 +14,9 @@ import view.LoginPane;
  */
 public class LoginController implements ActionListener {
 	private LoginPane loginPane;
-	private LoginModel loginModel;
+	private CredentialModel loginModel;
 
-	public LoginController(LoginPane loginPane, LoginModel loginModel) {
+	public LoginController(LoginPane loginPane, CredentialModel loginModel) {
 		this.loginPane = loginPane;
 		this.loginModel = loginModel;
 	}
