@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.EventQueue;
 
@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
-import model.LoginModel;
+import util.CredentialUtil;
 
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -24,8 +24,8 @@ public class AppView extends JFrame {
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 
-	// models
-	private LoginModel loginModel;
+//	// models
+//	private CredentialUtil loginModel;
 	
 
 	// Components constraints
@@ -55,7 +55,7 @@ public class AppView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AppView(LoginPane loginPane ,LoginModel loginModel) {
+	public AppView(LoginPane loginPane ) {
 		// set look and feel
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
