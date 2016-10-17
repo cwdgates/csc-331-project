@@ -24,8 +24,8 @@ public class AppView extends JFrame {
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 
-	// models
-	private CredentialUtil loginModel;
+//	// models
+//	private CredentialUtil loginModel;
 	
 
 	// Components constraints
@@ -55,7 +55,7 @@ public class AppView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AppView(LoginPane loginPane ,CredentialUtil loginModel) {
+	public AppView(LoginPane loginPane ) {
 		// set look and feel
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

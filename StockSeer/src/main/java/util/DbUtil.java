@@ -27,6 +27,7 @@ public class DbUtil {
 	/**
 	 * @return Connection to the database
 	 */
+	@SuppressWarnings("finally")
 	public static Connection getConnection() {
 		if (connection != null) {
 			return connection;
@@ -42,16 +43,17 @@ public class DbUtil {
 			String password = prop.getProperty("password");
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, user, password);
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.err.println("Can't connect to the database.");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return connection;
 	}
 }
