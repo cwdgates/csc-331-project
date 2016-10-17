@@ -1,5 +1,5 @@
 import controller.LoginController;
-import model.CredentialUtil;
+import util.CredentialUtil;
 import view.*;
 
 public class StockSeer {

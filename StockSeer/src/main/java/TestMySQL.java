@@ -2,7 +2,7 @@ import java.sql.*;
 
 import javax.security.auth.login.CredentialException;
 
-import model.CredentialUtil;
+import util.CredentialUtil;
 import util.DbUtil;
 
 public class TestMySQL {

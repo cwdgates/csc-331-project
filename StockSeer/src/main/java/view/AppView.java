@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
-import model.CredentialUtil;
+import util.CredentialUtil;
 
 import java.awt.Dimension;
 import java.awt.CardLayout;

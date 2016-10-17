@@ -8,7 +8,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import model.CredentialUtil;
+import util.CredentialUtil;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
