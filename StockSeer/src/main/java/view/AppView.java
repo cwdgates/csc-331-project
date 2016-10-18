@@ -24,10 +24,6 @@ public class AppView extends JFrame {
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 
-//	// models
-//	private CredentialUtil loginModel;
-	
-
 	// Components constraints
 	private final String LOGIN_PANE = "LOGIN_PANE";
 	private final String HOME_PANE = "HOME_PANE";
@@ -38,32 +34,14 @@ public class AppView extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-//	 public static void main(String[] args) {
-//	 EventQueue.invokeLater(new Runnable() {
-//	 public void run() {
-//	 try {
-//	 AppView frame = new AppView();
-//	 frame.setVisible(true);
-//	 } catch (Exception e) {
-//	 e.printStackTrace();
-//	 }
-//	 }
-//	 });
-//	 }
-	
 
 	/**
 	 * Create the frame.
 	 */
-	public AppView(LoginPane loginPane ) {
+	public AppView(LoginPane loginPane) {
 		// set look and feel
 		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
+			UIManager.setLookAndFeel(UIManager.getLookAndFeel());
 		} catch (Exception e) {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.

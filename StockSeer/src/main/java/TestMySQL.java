@@ -29,15 +29,15 @@ public class TestMySQL {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// get query result
-//			System.out.println("Print result of the query...");
-//			while (rs.next()) {
-//				System.out.println(rs.getString("username"));
-//				System.out.println(rs.getString("first_name"));
-//				System.out.println(rs.getString("last_name"));
-//			}
+			System.out.println("Print result of the query...");
+			while (rs.next()) {
+				System.out.println(rs.getString("username"));
+				System.out.println(rs.getString("first_name"));
+				System.out.println(rs.getString("last_name"));
+			}
 			
 			// check credential
-			if (CredentialUtil.checkUsernamePassword("anvuhero", "nthy59")) {
+			if (CredentialUtil.checkUsernamePassword("ginger", "password")) {
 				System.out.println("Valid credential");
 			} else {
 				System.out.println("Invalid credential");
