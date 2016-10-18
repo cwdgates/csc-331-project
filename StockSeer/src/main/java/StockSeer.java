@@ -1,7 +1,7 @@
 import javax.swing.JOptionPane;
 
 import controller.LoginController;
-import util.CredentialUtil;
+import dao.CredentialDao;
 import util.DbUtil;
 import view.*;
 
@@ -19,7 +19,7 @@ public class StockSeer {
 			JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		CredentialUtil loginModel = new CredentialUtil();
+		CredentialDao loginModel = new CredentialDao();
 
 		// init panels
 		LoginPane loginPane = new LoginPane(loginModel);

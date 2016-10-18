@@ -2,7 +2,7 @@ import java.sql.*;
 
 import javax.security.auth.login.CredentialException;
 
-import util.CredentialUtil;
+import dao.CredentialDao;
 import util.DbUtil;
 
 public class TestMySQL {
@@ -37,7 +37,7 @@ public class TestMySQL {
 			}
 			
 			// check credential
-			if (CredentialUtil.checkUsernamePassword("ginger", "password")) {
+			if (CredentialDao.checkUsernamePassword("ginger", "password")) {
 				System.out.println("Valid credential");
 			} else {
 				System.out.println("Invalid credential");

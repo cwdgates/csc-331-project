@@ -1,9 +1,11 @@
-package util;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import util.DbUtil;
 
 /**
  * check credential, then grant access to app
@@ -11,7 +13,7 @@ import java.sql.SQLException;
  * @author aqv
  *
  */
-public class CredentialUtil {
+public class CredentialDao {
 	private static Connection connection = DbUtil.getConnection();
 
 	public static boolean checkUsernamePassword(String username, String password) {

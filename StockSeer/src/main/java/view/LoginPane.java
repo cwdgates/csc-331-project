@@ -8,7 +8,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import util.CredentialUtil;
+import dao.CredentialDao;
 
 import javax.swing.JButton;
 
@@ -20,12 +20,12 @@ public class LoginPane extends JPanel {
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
 
-	private CredentialUtil loginModel;
+	private CredentialDao loginModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane(CredentialUtil loginModel) {
+	public LoginPane(CredentialDao loginModel) {
 		this.loginModel = loginModel;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();

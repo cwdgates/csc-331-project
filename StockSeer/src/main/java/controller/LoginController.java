@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import util.CredentialUtil;
+import dao.CredentialDao;
 import view.LoginPane;
 
 /**
@@ -14,11 +14,11 @@ import view.LoginPane;
  */
 public class LoginController implements ActionListener {
 	private LoginPane loginPane;
-	private CredentialUtil loginModel;
+	private CredentialDao loginModel;
 	private final String LOGIN_BTN = "Login";
 	private final String SIGNUP_BTN = "Sign Up";
 
-	public LoginController(LoginPane loginPane, CredentialUtil loginModel) {
+	public LoginController(LoginPane loginPane, CredentialDao loginModel) {
 		this.loginPane = loginPane;
 		this.loginModel = loginModel;
 	}
