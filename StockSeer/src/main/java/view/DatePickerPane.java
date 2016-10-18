@@ -20,19 +20,18 @@ public class DatePickerPane extends JPanel {
 		JLabel lblDay = new JLabel("Day");
 		add(lblDay);
 
-		String[] days = new String[31];
-		for (int i = 0; i < 31; i++) {
-			days[i] = (i + 1) + "";
+		JComboBox<String> cbDay = new JComboBox<String>();
+		for (int i = 1; i <= 12; i++) {
+			cbDay.addItem(i + "");
 		}
-		JComboBox cbDay = new JComboBox(days);
 		add(cbDay);
 
 		JLabel lblMonth = new JLabel("Month");
 		add(lblMonth);
 
-		JComboBox cbMonth = new JComboBox();
+		JComboBox<String> cbMonth = new JComboBox<String>();
 		for (int i = 1; i <= 12; i++) {
-			cbMonth.addItem(i);
+			cbMonth.addItem(i + "");
 		}
 		add(cbMonth);
 
@@ -40,10 +39,10 @@ public class DatePickerPane extends JPanel {
 
 		add(lblYear);
 
-		JComboBox cbYear = new JComboBox();
+		JComboBox<String> cbYear = new JComboBox<String>();
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		for (int i = year; i <= year + 2; i++) {
-			cbYear.addItem(i);
+			cbYear.addItem(i + "");
 		}
 		add(cbYear);
 	}

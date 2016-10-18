@@ -1,28 +1,21 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-
-import dao.CredentialDao;
-
-import java.awt.Dimension;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 
 public class AppView extends JFrame {
 
-	// main panel
-	private JPanel contentPane;
+	private JPanel contentPane; // main panel
 
 	private LoginPane loginPane;
 	private HomePane homePane;
 	private CreateLeaguePane createLeaguePane;
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
+	private CardLayout cardLayout;
 
 	// Components constraints
 	private final String LOGIN_PANE = "LOGIN_PANE";
@@ -32,21 +25,10 @@ public class AppView extends JFrame {
 	private final String DIFFICULTY_PANE = "DIFFICULTY_PANE";
 
 	/**
-	 * Launch the application.
-	 */
-
-	/**
 	 * Create the frame.
 	 */
-	public AppView(LoginPane loginPane) {
-		// set look and feel
-		try {
-			UIManager.setLookAndFeel(UIManager.getLookAndFeel());
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
-		}
-
+	public AppView() {
+		setTitle("Stock Seer");
 		setMinimumSize(new Dimension(500, 300));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -54,9 +36,11 @@ public class AppView extends JFrame {
 		contentPane.setMinimumSize(new Dimension(300, 10));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
 
-		this.loginPane = loginPane;
+		cardLayout = new CardLayout();
+		contentPane.setLayout(cardLayout);
+
+		loginPane = new LoginPane();
 		contentPane.add(loginPane, LOGIN_PANE);
 
 		homePane = new HomePane();
@@ -73,4 +57,40 @@ public class AppView extends JFrame {
 
 	}
 
+	public void viewLogin() {
+		cardLayout.show(contentPane, LOGIN_PANE);
+	}
+
+	public void viewHome() {
+		cardLayout.show(contentPane, HOME_PANE);
+		System.out.println("Switched to home pane");
+	}
+
+	public void viewDifficultyPane() {
+		cardLayout.show(contentPane, DIFFICULTY_PANE);
+	}
+
+	public void viewCreateLeaguePane() {
+		cardLayout.show(contentPane, CREATE_LEAGUE_PANE);
+	}
+
+	public void viewChooseStockPane() {
+		cardLayout.show(contentPane, CHOOSE_STOCK_PANE);
+	}
+
+	public LoginPane getLoginPane() {
+		return loginPane;
+	}
+
+	public HomePane getHomePane() {
+		return homePane;
+	}
+
+	public ChooseStockPane getChooseStockPane() {
+		return chooseStockPane;
+	}
+
+	public CreateLeaguePane getCreateLeaguePane() {
+		return createLeaguePane;
+	}
 }

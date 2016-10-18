@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -14,19 +16,16 @@ import javax.swing.JButton;
 
 public class LoginPane extends JPanel {
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JPanel panel;
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
 
-	private CredentialDao loginModel;
-
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane(CredentialDao loginModel) {
-		this.loginModel = loginModel;
+	public LoginPane() {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
@@ -60,7 +59,7 @@ public class LoginPane extends JPanel {
 		gbc_lblPassword.gridy = 1;
 		add(lblPassword, gbc_lblPassword);
 
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
 		gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
@@ -97,12 +96,20 @@ public class LoginPane extends JPanel {
 		// loginModel.setPassword(txtPassword.getText());
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return txtUsername.getText();
 	}
 
 	public String getPassword() {
-		return txtPassword.getText();
+		return String.valueOf(txtPassword.getPassword());
+	}
+
+	/**
+	 * clear username and password field when login success
+	 */
+	public void clear() {
+		txtUsername.setText("");
+		txtPassword.setText("");
 	}
 
 }

@@ -1,4 +1,5 @@
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import controller.LoginController;
 import dao.CredentialDao;
@@ -14,23 +15,29 @@ import view.*;
 public class StockSeer {
 
 	public static void main(String[] args) {
-		// init models
-		if (DbUtil.getConnection() == null){
-			JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error", JOptionPane.ERROR_MESSAGE);
+		// set look and feel
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// try to connect to database
+		if (DbUtil.getConnection() == null) {
+			JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error",
+					JOptionPane.ERROR_MESSAGE);
+			System.err.println("Can't connect to database.");
 			return;
 		}
-		CredentialDao loginModel = new CredentialDao();
 
 		// init panels
-		LoginPane loginPane = new LoginPane(loginModel);
+		AppView appView = new AppView();
 
-		AppView view = new AppView(loginPane);
+		LoginController loginController = new LoginController(appView);
 
-		LoginController loginController = new LoginController(loginPane, loginModel);
-		// panels register listeners
-		loginPane.registerListeners(loginController);
+		appView.getLoginPane().registerListeners(loginController);
 
-		view.setVisible(true);
+		appView.setVisible(true);
 
 	}
 
