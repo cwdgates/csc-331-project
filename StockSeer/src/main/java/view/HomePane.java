@@ -6,11 +6,24 @@ import javax.swing.SpringLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import controller.ViewController;
+
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomePane extends JPanel {
+	private JButton btnCreateLeague;
+	private JButton btnJoinLeague;
+	private JButton btnManageLeagues;
+	private JButton btnLogout;
+	
+	public static final String CREATE_LEAGUE = "Create a League";
+	public static final String JOIN_LEAGUE = "Join A League";
+	public static final String MANAGE_LEAGUE = "Manage Leagues";
+	public static final String LOGOUT = "Logout";
 
 	/**
 	 * Create the panel.
@@ -25,7 +38,7 @@ public class HomePane extends JPanel {
 		setMinimumSize(new Dimension(300, 200));
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
-		
+
 		JPanel panelControl = new JPanel();
 		springLayout.putConstraint(SpringLayout.NORTH, panelControl, 10, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, panelControl, 10, SpringLayout.WEST, this);
@@ -33,24 +46,29 @@ public class HomePane extends JPanel {
 		springLayout.putConstraint(SpringLayout.EAST, panelControl, -10, SpringLayout.EAST, this);
 		add(panelControl);
 		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
-		
-		JButton btnCreateLeague = new JButton("Create a League");
+
+		btnCreateLeague = new JButton(CREATE_LEAGUE);
 		btnCreateLeague.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelControl.add(btnCreateLeague);
-		
-		JButton btnJoinLeague = new JButton("Join A League");
+
+		btnJoinLeague = new JButton(JOIN_LEAGUE);
 		btnJoinLeague.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelControl.add(btnJoinLeague);
-		
-		JButton btnManageLeagues = new JButton("Manage Leagues");
+
+		btnManageLeagues = new JButton(MANAGE_LEAGUE);
 		btnManageLeagues.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelControl.add(btnManageLeagues);
-		
-		JButton btnLogout = new JButton("Logout");
+
+		btnLogout = new JButton(LOGOUT);
 		springLayout.putConstraint(SpringLayout.NORTH, btnLogout, 6, SpringLayout.SOUTH, panelControl);
 		springLayout.putConstraint(SpringLayout.WEST, btnLogout, 0, SpringLayout.WEST, this);
 		add(btnLogout);
 
+	}
+
+	public void registerListeners(ViewController viewController) {
+		btnCreateLeague.addActionListener(viewController);
+		btnJoinLeague.addActionListener(viewController);
 	}
 
 }

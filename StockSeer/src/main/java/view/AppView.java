@@ -93,4 +93,8 @@ public class AppView extends JFrame {
 	public CreateLeaguePane getCreateLeaguePane() {
 		return createLeaguePane;
 	}
+	
+	public void registerListeners(){
+		
+	}
 }
