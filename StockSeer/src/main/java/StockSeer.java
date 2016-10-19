@@ -4,7 +4,7 @@ import javax.swing.UIManager;
 import controller.LoginController;
 import persistence.CredentialDao;
 import persistence.DbUtil;
-import view.*;
+import ui.*;
 
 /**
  * App runner

@@ -1,4 +1,4 @@
-package view;
+package ui;
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;

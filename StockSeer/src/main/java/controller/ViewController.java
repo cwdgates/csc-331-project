@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.AppView;
+import ui.AppView;
 
 public class ViewController implements ActionListener {
 	AppView appView;

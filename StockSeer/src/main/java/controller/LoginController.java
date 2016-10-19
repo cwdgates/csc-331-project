@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import persistence.CredentialDao;
-import view.AppView;
-import view.LoginPane;
+import ui.AppView;
+import ui.LoginPane;
 
 /**
  * know about actions performed
