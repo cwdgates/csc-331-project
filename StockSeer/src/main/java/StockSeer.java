@@ -3,7 +3,7 @@ import javax.swing.UIManager;
 
 import controller.LoginController;
 import persistence.CredentialDao;
-import persistence.DbUtil;
+import persistence.DatabaseConnection;
 import ui.*;
 
 /**
@@ -23,7 +23,7 @@ public class StockSeer {
 		}
 
 		// try to connect to database
-		if (DbUtil.getConnection() == null) {
+		if (DatabaseConnection.getConnection() == null) {
 			JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error",
 					JOptionPane.ERROR_MESSAGE);
 			System.err.println("Can't connect to database.");

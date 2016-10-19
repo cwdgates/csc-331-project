@@ -46,10 +46,10 @@ public class LoginController implements ActionListener {
 					appView.viewHome();
 
 				} else {
-					System.out.println("Invalid credential. Please put in the correct username and password.");
+					loginPane.showWrongPassword();
 				}
 			} else {
-				System.out.println("Please fill in username and password");
+				loginPane.showPleaseFillUsernamePassword();
 			}
 		}
 		if (command.equals(SIGNUP_BTN)) {
