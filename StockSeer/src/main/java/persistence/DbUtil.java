@@ -3,7 +3,7 @@
  * @#resources http://thejavatrail.blogspot.com/2012/08/step-by-step-guide-developing-mvc.html
  */
 
-package util;
+package persistence;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

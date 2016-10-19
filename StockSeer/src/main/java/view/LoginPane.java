@@ -10,7 +10,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import dao.CredentialDao;
+import persistence.CredentialDao;
 
 import javax.swing.JButton;
 

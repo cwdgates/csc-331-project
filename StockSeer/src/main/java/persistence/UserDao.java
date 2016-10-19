@@ -1,10 +1,9 @@
-package dao;
+package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import model.UserModel;
-import util.DbUtil;
 
 /**
  * user data access object. Contains the logic for database operation

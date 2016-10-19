@@ -2,8 +2,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import controller.LoginController;
-import dao.CredentialDao;
-import util.DbUtil;
+import persistence.CredentialDao;
+import persistence.DbUtil;
 import view.*;
 
 /**

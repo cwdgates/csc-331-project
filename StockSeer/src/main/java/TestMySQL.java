@@ -2,8 +2,8 @@ import java.sql.*;
 
 import javax.security.auth.login.CredentialException;
 
-import dao.CredentialDao;
-import util.DbUtil;
+import persistence.CredentialDao;
+import persistence.DbUtil;
 
 public class TestMySQL {
 	public static void main(String[] args) {
