@@ -13,13 +13,13 @@ import ui.LoginPane;
  * @author aqv
  *
  */
-public class LoginController implements ActionListener {
+public class LoginPaneController implements ActionListener {
 	private LoginPane loginPane;
 	private final String LOGIN_BTN = "Login";
 	private final String SIGNUP_BTN = "Sign Up";
 	private AppView appView;
 
-	public LoginController(AppView appView) {
+	public LoginPaneController(AppView appView) {
 		this.loginPane = appView.getLoginPane();
 		this.appView = appView;
 	}

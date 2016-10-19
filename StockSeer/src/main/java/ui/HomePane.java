@@ -6,20 +6,18 @@ import javax.swing.SpringLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import controller.ViewController;
+import controller.HomePaneController;
 
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import java.awt.Component;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class HomePane extends JPanel {
 	private JButton btnCreateLeague;
 	private JButton btnJoinLeague;
 	private JButton btnManageLeagues;
 	private JButton btnLogout;
-	
+
 	public static final String CREATE_LEAGUE = "Create a League";
 	public static final String JOIN_LEAGUE = "Join A League";
 	public static final String MANAGE_LEAGUE = "Manage Leagues";
@@ -66,9 +64,12 @@ public class HomePane extends JPanel {
 
 	}
 
-	public void registerListeners(ViewController viewController) {
-		btnCreateLeague.addActionListener(viewController);
-		btnJoinLeague.addActionListener(viewController);
+	public void registerListeners(HomePaneController homePaneController) {
+		btnCreateLeague.addActionListener(homePaneController);
+		btnJoinLeague.addActionListener(homePaneController);
+		btnManageLeagues.addActionListener(homePaneController);
+		btnLogout.addActionListener(homePaneController);
 	}
-
+	
+	
 }

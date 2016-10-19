@@ -9,7 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 
-import controller.LoginController;
+import controller.LoginPaneController;
 import persistence.CredentialDao;
 
 import javax.swing.JButton;
@@ -94,7 +94,7 @@ public class LoginPane extends JPanel {
 		add(lblStatus, gbc_lblStatus);
 	}
 
-	public void registerListeners(LoginController loginController) {
+	public void registerListeners(LoginPaneController loginController) {
 		btnLogin.addActionListener(loginController);
 		btnSignUp.addActionListener(loginController);
 		btnResetPassword.addActionListener(loginController);
