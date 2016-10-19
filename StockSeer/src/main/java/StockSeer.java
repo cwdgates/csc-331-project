@@ -1,6 +1,7 @@
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import controller.CreateStockPaneController;
 import controller.HomePaneController;
 import controller.LoginPaneController;
 import persistence.CredentialDao;
@@ -35,9 +36,12 @@ public class StockSeer {
 		AppView appView = new AppView();
 
 		LoginPaneController loginController = new LoginPaneController(appView);
-		HomePaneController homePaneController = new HomePaneController(appView.getHomePane());
+		HomePaneController homePaneController = new HomePaneController(appView);
+		CreateStockPaneController createStockPaneController = new CreateStockPaneController(appView);
 
 		appView.getLoginPane().registerListeners(loginController);
+		appView.getHomePane().registerListeners(homePaneController);
+		appView.getCreateLeaguePane().registerListeners(createStockPaneController);
 
 		appView.setVisible(true);
 

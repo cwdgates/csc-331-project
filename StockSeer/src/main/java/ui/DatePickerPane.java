@@ -17,26 +17,26 @@ public class DatePickerPane extends JPanel {
 	public DatePickerPane() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-		JLabel lblDay = new JLabel("Day");
-		add(lblDay);
-
-		JComboBox<String> cbDay = new JComboBox<String>();
-		for (int i = 1; i <= 12; i++) {
-			cbDay.addItem(i + "");
-		}
-		add(cbDay);
 
 		JLabel lblMonth = new JLabel("Month");
 		add(lblMonth);
 
 		JComboBox<String> cbMonth = new JComboBox<String>();
+		add(cbMonth);
 		for (int i = 1; i <= 12; i++) {
 			cbMonth.addItem(i + "");
 		}
-		add(cbMonth);
+
+		JLabel lblDay = new JLabel("Day");
+		add(lblDay);
+		
+		JComboBox<String> cbDay = new JComboBox<String>();
+		add(cbDay);
+		for (int i = 1; i <= 31; i++) {
+			cbDay.addItem(i + "");
+		}
 
 		JLabel lblYear = new JLabel("Year");
-
 		add(lblYear);
 
 		JComboBox<String> cbYear = new JComboBox<String>();

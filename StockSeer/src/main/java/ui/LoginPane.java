@@ -119,6 +119,7 @@ public class LoginPane extends JPanel {
 	public void clear() {
 		txtUsername.setText("");
 		txtPassword.setText("");
+		resetStatus();
 	}
 	
 	public void showWrongPassword(){
@@ -129,6 +130,10 @@ public class LoginPane extends JPanel {
 	public void showPleaseFillUsernamePassword(){
 		lblStatus.setText("Please fill in username and password");
 		lblStatus.setForeground(new Color(255,100,0));
+	}
+	
+	public void resetStatus(){
+		lblStatus.setText("");
 	}
 
 }
