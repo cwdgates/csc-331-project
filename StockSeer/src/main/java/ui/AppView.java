@@ -3,6 +3,9 @@ package ui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.SignUpPane;
+
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
@@ -16,6 +19,7 @@ public class AppView extends JFrame {
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 	private CardLayout cardLayout;
+	private SignUpPane signUpPane;
 
 	// Components constraints
 	private final String LOGIN_PANE = "LOGIN_PANE";
@@ -23,6 +27,7 @@ public class AppView extends JFrame {
 	private final String CREATE_LEAGUE_PANE = "CREATE_LEAGUE_PANE";
 	private final String CHOOSE_STOCK_PANE = "CHOOSE_STOCK_PANE";
 	private final String DIFFICULTY_PANE = "DIFFICULTY_PANE";
+	private final String SIGN_UP_PANE = "SIGN_UP_PANE";
 
 	/**
 	 * Create the frame.
@@ -42,6 +47,9 @@ public class AppView extends JFrame {
 
 		loginPane = new LoginPane();
 		contentPane.add(loginPane, LOGIN_PANE);
+
+		signUpPane = new SignUpPane();
+		contentPane.add(signUpPane, SIGN_UP_PANE);
 
 		homePane = new HomePane();
 		contentPane.add(homePane, HOME_PANE);
@@ -93,8 +101,8 @@ public class AppView extends JFrame {
 	public CreateLeaguePane getCreateLeaguePane() {
 		return createLeaguePane;
 	}
-	
-	public void registerListeners(){
-		
+
+	public void registerListeners() {
+
 	}
 }
