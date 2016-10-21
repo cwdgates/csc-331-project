@@ -42,6 +42,10 @@ public class AppView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
+		initPanes();
+	}
+
+	public void initPanes() {
 		cardLayout = new CardLayout();
 		contentPane.setLayout(cardLayout);
 
@@ -62,7 +66,6 @@ public class AppView extends JFrame {
 
 		chooseStockPane = new ChooseStockPane();
 		contentPane.add(chooseStockPane, CHOOSE_STOCK_PANE);
-
 	}
 
 	public void viewLogin() {
