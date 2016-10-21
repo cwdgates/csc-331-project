@@ -8,19 +8,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPasswordField;
-<<<<<<< HEAD:StockSeer/src/main/java/controller/SignUpPane.java
 import java.awt.Color;
-=======
 import javax.swing.SwingConstants;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-<<<<<<< 4d30a7748ca5a34ed5fd306c713adea87d85d1ac
->>>>>>> 5bcbd534cb445c30b4582eac6b87d9a5b51de9bf:StockSeer/src/main/java/ui/SignUpPane.java
-=======
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
->>>>>>> from mac
 
 public class SignUpPane extends JPanel {
 	private JTextField txtFirstname;
@@ -38,17 +32,14 @@ public class SignUpPane extends JPanel {
 	 */
 	public SignUpPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-<<<<<<< HEAD:StockSeer/src/main/java/controller/SignUpPane.java
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-=======
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
->>>>>>> 5bcbd534cb445c30b4582eac6b87d9a5b51de9bf:StockSeer/src/main/java/ui/SignUpPane.java
 		setLayout(gridBagLayout);
 
 		JLabel lblFirstName = new JLabel("First Name");
@@ -162,13 +153,11 @@ public class SignUpPane extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
 		JButton btnSignUp = new JButton("Sign Up");
-<<<<<<< HEAD:StockSeer/src/main/java/controller/SignUpPane.java
 		GridBagConstraints gbc_btnSignUp = new GridBagConstraints();
 		gbc_btnSignUp.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSignUp.gridx = 2;
 		gbc_btnSignUp.gridy = 7;
 		add(btnSignUp, gbc_btnSignUp);
-=======
 		btnSignUp.setOpaque(true);
 		btnSignUp.setHorizontalAlignment(SwingConstants.LEADING);
 		panel.add(btnSignUp);
@@ -213,24 +202,21 @@ public class SignUpPane extends JPanel {
 		return true;
 	}
 
-<<<<<<< 4d30a7748ca5a34ed5fd306c713adea87d85d1ac
 	public void registerListeners() {
->>>>>>> 5bcbd534cb445c30b4582eac6b87d9a5b51de9bf:StockSeer/src/main/java/ui/SignUpPane.java
-
-=======
-	public boolean validateField() {
-		return false;
->>>>>>> from mac
 	}
 
-//	public void registerListeners(SignUpController) {
-//		
-//	}
+	public boolean validateField() {
+		return false;
+	}
+
+	// public void registerListeners(SignUpController) {
+	//
+	// }
 
 	public void showErrorMessage() {
 		txtError.setText(errorMessage.toString());
 	}
-	
+
 	public StringBuilder getErrorMessage() {
 		return errorMessage;
 	}
