@@ -9,7 +9,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import controller.CreateStockPaneController;
+import controller.CreatingLeagueController;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
@@ -142,7 +142,7 @@ public class CreateLeaguePane extends JPanel {
 
 	}
 
-	public void registerListeners(CreateStockPaneController controller) {
+	public void registerListeners(CreatingLeagueController controller) {
 		btnCancel.addActionListener(controller);
 		btnCreate.addActionListener(controller);
 	}

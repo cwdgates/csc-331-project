@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPasswordField;
@@ -16,7 +15,12 @@ import javax.swing.SwingConstants;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+<<<<<<< 4d30a7748ca5a34ed5fd306c713adea87d85d1ac
 >>>>>>> 5bcbd534cb445c30b4582eac6b87d9a5b51de9bf:StockSeer/src/main/java/ui/SignUpPane.java
+=======
+import javax.swing.JScrollPane;
+import java.awt.SystemColor;
+>>>>>>> from mac
 
 public class SignUpPane extends JPanel {
 	private JTextField txtFirstname;
@@ -25,8 +29,9 @@ public class SignUpPane extends JPanel {
 	private JTextField txtEmail;
 	private JPasswordField pwdPassword;
 	private JPasswordField pwdRetypedpassword;
-	private JLabel lblStatus;
 	private JButton btnCancel;
+	private JTextField txtError;
+	private StringBuilder errorMessage;
 
 	/**
 	 * Create the panel.
@@ -175,14 +180,21 @@ public class SignUpPane extends JPanel {
 		btnCancel.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel.add(btnCancel);
 
-		lblStatus = new JLabel("");
-		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-		gbc_lblStatus.anchor = GridBagConstraints.SOUTH;
-		gbc_lblStatus.insets = new Insets(0, 0, 0, 5);
-		gbc_lblStatus.gridx = 1;
-		gbc_lblStatus.gridy = 7;
-		add(lblStatus, gbc_lblStatus);
-		lblStatus.setForeground(new Color(255, 100, 0)); // color orange
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBackground(SystemColor.window);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 7;
+		add(scrollPane, gbc_scrollPane);
+
+		txtError = new JTextField();
+		txtError.setEditable(false);
+		txtError.setBorder(null);
+		txtError.setBackground(SystemColor.window);
+		scrollPane.setViewportView(txtError);
+		txtError.setColumns(10);
 
 	}
 
@@ -201,29 +213,26 @@ public class SignUpPane extends JPanel {
 		return true;
 	}
 
+<<<<<<< 4d30a7748ca5a34ed5fd306c713adea87d85d1ac
 	public void registerListeners() {
 >>>>>>> 5bcbd534cb445c30b4582eac6b87d9a5b51de9bf:StockSeer/src/main/java/ui/SignUpPane.java
 
+=======
+	public boolean validateField() {
+		return false;
+>>>>>>> from mac
 	}
 
-	public void showDuplicatingError() {
-		lblStatus.setText("Something has been registered");
-	}
+//	public void registerListeners(SignUpController) {
+//		
+//	}
 
-	public void showMissingFieldError() {
-		lblStatus.setText("A field is empty");
+	public void showErrorMessage() {
+		txtError.setText(errorMessage.toString());
 	}
-
-	/**
-	 * display custom message
-	 * 
-	 * @param msg
-	 * @param color
-	 *            Use <i><b>new Color(r,g,b)</b></i> with r,g,b range from 0-255
-	 */
-	public void showCustomStatus(String msg, Color color) {
-		lblStatus.setText(msg);
-		lblStatus.setForeground(color);
+	
+	public StringBuilder getErrorMessage() {
+		return errorMessage;
 	}
 
 }

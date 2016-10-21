@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import ui.AppView;
 import ui.HomePane;
 
-public class HomePaneController implements ActionListener {
+public class HomeController implements ActionListener {
 	HomePane homePane;
 	AppView appView;
 
-	public HomePaneController(AppView appView) {
+	public HomeController(AppView appView) {
 		this.appView = appView;
 		this.homePane = appView.getHomePane();
 	}
