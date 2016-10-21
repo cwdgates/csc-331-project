@@ -13,6 +13,7 @@ import controller.LoginController;
 import persistence.CredentialDao;
 
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class LoginPane extends JPanel {
 	private JTextField txtUsername;
@@ -21,6 +22,7 @@ public class LoginPane extends JPanel {
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
+	private JLabel lblStatus;
 
 	/**
 	 * Create the panel.
@@ -29,9 +31,9 @@ public class LoginPane extends JPanel {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JLabel lblUsername = new JLabel("Username");
@@ -70,6 +72,7 @@ public class LoginPane extends JPanel {
 
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 2;
 		gbc_panel.gridy = 2;
@@ -83,7 +86,12 @@ public class LoginPane extends JPanel {
 
 		btnResetPassword = new JButton("Reset Password");
 		panel.add(btnResetPassword);
-
+		
+		lblStatus = new JLabel("");
+		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+		gbc_lblStatus.gridx = 2;
+		gbc_lblStatus.gridy = 3;
+		add(lblStatus, gbc_lblStatus);
 	}
 
 	public void registerListeners(LoginController loginController) {
@@ -111,6 +119,16 @@ public class LoginPane extends JPanel {
 	public void clear() {
 		txtUsername.setText("");
 		txtPassword.setText("");
+	}
+	
+	public void showWrongPassword(){
+		lblStatus.setText("Wrong username or password");
+		lblStatus.setForeground(Color.RED);
+	}
+	
+	public void showPleaseFillUsernamePassword(){
+		lblStatus.setText("Please fill in username and password");
+		lblStatus.setForeground(new Color(255,100,0));
 	}
 
 }

@@ -14,7 +14,7 @@ public class UserDao {
 	private Connection connection;
 
 	public UserDao() {
-		connection = DbUtil.getConnection();
+		connection = DatabaseConnection.getConnection();
 	}
 
 	public void addUser(UserModel user) {

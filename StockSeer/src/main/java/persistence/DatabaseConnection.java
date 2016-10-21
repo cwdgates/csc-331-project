@@ -21,13 +21,14 @@ import java.util.Properties;
  * @author aqv
  *
  */
-public class DbUtil {
+public class DatabaseConnection {
 	private static Connection connection = null;
 
 	/**
-	 * @return Connection to the database
+	 * @return shared Connection object (only one Connection object is needed
+	 *         for this app since it connect to only one database server (AWS
+	 *         RDS)
 	 */
-	@SuppressWarnings("finally")
 	public static Connection getConnection() {
 		if (connection != null) {
 			return connection;
@@ -35,15 +36,16 @@ public class DbUtil {
 
 		try {
 			Properties prop = new Properties();
-			InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
+			InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream("db.properties");
 			prop.load(inputStream);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
 			String password = prop.getProperty("password");
 			Class.forName(driver);
+			System.out.println("Trying to connect to the database...");
 			connection = DriverManager.getConnection(url, user, password);
-
+			System.out.println("Successfully connect to the database.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
