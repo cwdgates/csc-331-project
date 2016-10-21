@@ -4,9 +4,9 @@ import javax.swing.UIManager;
 import controller.CreatingLeagueController;
 import controller.HomeController;
 import controller.LoginController;
-import controller.SignUpController;
+import controller.RegistrationController;
 import persistence.CredentialDao;
-import persistence.DatabaseConnection;
+import persistence.DBConnection;
 import ui.*;
 
 /**
@@ -26,7 +26,7 @@ public class StockSeer {
 		}
 
 		// try to connect to database
-		if (DatabaseConnection.getConnection() == null) {
+		if (DBConnection.getConnection() == null) {
 			JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error",
 					JOptionPane.ERROR_MESSAGE);
 			System.err.println("Can't connect to database.");
@@ -37,7 +37,7 @@ public class StockSeer {
 		AppView appView = new AppView();
 
 		LoginController loginController = new LoginController(appView);
-		SignUpController signUpController = new SignUpController(appView);
+		RegistrationController signUpController = new RegistrationController(appView);
 		HomeController homePaneController = new HomeController(appView);
 		CreatingLeagueController createStockPaneController = new CreatingLeagueController(appView);
 

@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import ui.AppView;
 import ui.SignUpPane;
 
-public class SignUpController implements ActionListener {
+public class RegistrationController implements ActionListener {
 	AppView appView;
 	SignUpPane signUpPane;
 
-	public SignUpController(AppView appView) {
+	public RegistrationController(AppView appView) {
 		this.appView = appView;
 		signUpPane = appView.getSignUpPane();
 	}

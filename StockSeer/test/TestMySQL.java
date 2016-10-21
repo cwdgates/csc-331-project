@@ -1,9 +1,10 @@
+
 import java.sql.*;
 
 import javax.security.auth.login.CredentialException;
 
 import persistence.CredentialDao;
-import persistence.DatabaseConnection;
+import persistence.DBConnection;
 
 public class TestMySQL {
 	public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class TestMySQL {
 		// try to connect
 		try {
 			// Connection conn = DriverManager.getConnection(URL, USER, PASS);
-			Connection conn = DatabaseConnection.getConnection();
+			Connection conn = DBConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			String sql;
 			sql = "Select username, first_name, last_name from user";

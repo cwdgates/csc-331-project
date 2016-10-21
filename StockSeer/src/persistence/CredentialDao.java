@@ -12,10 +12,10 @@ import java.sql.SQLException;
  *
  */
 public class CredentialDao {
-	private static Connection connection = DatabaseConnection.getConnection();
+	private static Connection connection = DBConnection.getConnection();
 
 	public static boolean checkUsernamePassword(String username, String password) {
-		String query = "select * from user where username = ? and password = ?";
+		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection.prepareStatement(query);

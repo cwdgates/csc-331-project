@@ -10,7 +10,7 @@ import java.awt.Insets;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
-import controller.SignUpController;
+import controller.RegistrationController;
 
 import java.awt.Component;
 import javax.swing.Box;
@@ -21,7 +21,7 @@ import java.awt.SystemColor;
 public class SignUpPane extends JPanel {
 	public static final String SIGN_UP = "Sign Up";
 	public static final String CANCEL = "Cancel";
-	
+
 	private JTextField txtFirstname;
 	private JTextField txtLastname;
 	private JTextField txtUsername;
@@ -183,7 +183,7 @@ public class SignUpPane extends JPanel {
 		return true;
 	}
 
-	public void registerListeners(SignUpController controller) {
+	public void registerListeners(RegistrationController controller) {
 		btnCancel.addActionListener(controller);
 		btnSignUp.addActionListener(controller);
 	}
@@ -191,10 +191,6 @@ public class SignUpPane extends JPanel {
 	public boolean validateField() {
 		return false;
 	}
-
-	// public void registerListeners(SignUpController) {
-	//
-	// }
 
 	public StringBuilder getErrorMessage() {
 		return errorMessage;

@@ -8,10 +8,10 @@ package persistence;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.sql.Connection;
 
 /**
  * This class handle the database connection to our MySQL server. We read
@@ -21,7 +21,7 @@ import java.util.Properties;
  * @author aqv
  *
  */
-public class DatabaseConnection {
+public class DBConnection {
 	private static Connection connection = null;
 
 	/**
@@ -36,7 +36,7 @@ public class DatabaseConnection {
 
 		try {
 			Properties prop = new Properties();
-			InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream("db.properties");
+			InputStream inputStream = DBConnection.class.getClassLoader().getResourceAsStream("db.properties");
 			prop.load(inputStream);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
@@ -44,7 +44,7 @@ public class DatabaseConnection {
 			String password = prop.getProperty("password");
 			Class.forName(driver);
 			System.out.println("Trying to connect to the database...");
-			connection = DriverManager.getConnection(url, user, password);
+			connection = (Connection) DriverManager.getConnection(url, user, password);
 			System.out.println("Successfully connect to the database.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
