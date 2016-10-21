@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import controller.CreatingLeagueController;
 import controller.HomeController;
 import controller.LoginController;
+import controller.SignUpController;
 import persistence.CredentialDao;
 import persistence.DatabaseConnection;
 import ui.*;
@@ -36,12 +37,14 @@ public class StockSeer {
 		AppView appView = new AppView();
 
 		LoginController loginController = new LoginController(appView);
+		SignUpController signUpController = new SignUpController(appView);
 		HomeController homePaneController = new HomeController(appView);
 		CreatingLeagueController createStockPaneController = new CreatingLeagueController(appView);
 
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getHomePane().registerListeners(homePaneController);
 		appView.getCreateLeaguePane().registerListeners(createStockPaneController);
+		appView.getSignUpPane().registerListeners(signUpController);
 
 		appView.setVisible(true);
 

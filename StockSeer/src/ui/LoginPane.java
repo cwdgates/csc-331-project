@@ -98,11 +98,8 @@ public class LoginPane extends JPanel {
 		btnLogin.addActionListener(loginController);
 		btnSignUp.addActionListener(loginController);
 		btnResetPassword.addActionListener(loginController);
-	}
-
-	public void updateLoginModel() {
-		// loginModel.setUsername(txtUsername.getText());
-		// loginModel.setPassword(txtPassword.getText());
+		txtPassword.addKeyListener(loginController);
+		txtUsername.addKeyListener(loginController);
 	}
 
 	public String getUsername() {

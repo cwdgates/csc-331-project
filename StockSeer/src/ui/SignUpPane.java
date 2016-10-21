@@ -8,8 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPasswordField;
-import java.awt.Color;
 import javax.swing.SwingConstants;
+
+import controller.SignUpController;
+
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,43 +19,52 @@ import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 
 public class SignUpPane extends JPanel {
+	public static final String SIGN_UP = "Sign Up";
+	public static final String CANCEL = "Cancel";
+	
 	private JTextField txtFirstname;
 	private JTextField txtLastname;
 	private JTextField txtUsername;
 	private JTextField txtEmail;
 	private JPasswordField pwdPassword;
 	private JPasswordField pwdRetypedpassword;
-	private JButton btnCancel;
-	private JTextField txtError;
 	private StringBuilder errorMessage;
+	private JButton btnSignUp;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
 	 */
 	public SignUpPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { 1, 105, 130, 0 };
+		gridBagLayout.rowHeights = new int[] { 1, 26, 26, 26, 26, 26, 26, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.anchor = GridBagConstraints.NORTH;
+		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		add(panel, gbc_panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
 		JLabel lblFirstName = new JLabel("First Name");
 		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFirstName.anchor = GridBagConstraints.EAST;
+		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFirstName.gridx = 1;
 		gbc_lblFirstName.gridy = 1;
 		add(lblFirstName, gbc_lblFirstName);
 
 		txtFirstname = new JTextField();
 		GridBagConstraints gbc_txtFirstname = new GridBagConstraints();
-		gbc_txtFirstname.insets = new Insets(0, 0, 5, 5);
 		gbc_txtFirstname.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtFirstname.insets = new Insets(0, 0, 5, 0);
 		gbc_txtFirstname.gridx = 2;
 		gbc_txtFirstname.gridy = 1;
 		add(txtFirstname, gbc_txtFirstname);
@@ -69,8 +80,8 @@ public class SignUpPane extends JPanel {
 
 		txtLastname = new JTextField();
 		GridBagConstraints gbc_txtLastname = new GridBagConstraints();
-		gbc_txtLastname.insets = new Insets(0, 0, 5, 5);
 		gbc_txtLastname.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtLastname.insets = new Insets(0, 0, 5, 0);
 		gbc_txtLastname.gridx = 2;
 		gbc_txtLastname.gridy = 2;
 		add(txtLastname, gbc_txtLastname);
@@ -86,8 +97,8 @@ public class SignUpPane extends JPanel {
 
 		txtUsername = new JTextField();
 		GridBagConstraints gbc_txtUsername = new GridBagConstraints();
-		gbc_txtUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_txtUsername.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtUsername.insets = new Insets(0, 0, 5, 0);
 		gbc_txtUsername.gridx = 2;
 		gbc_txtUsername.gridy = 3;
 		add(txtUsername, gbc_txtUsername);
@@ -103,8 +114,8 @@ public class SignUpPane extends JPanel {
 
 		txtEmail = new JTextField();
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
-		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_txtEmail.gridx = 2;
 		gbc_txtEmail.gridy = 4;
 		add(txtEmail, gbc_txtEmail);
@@ -120,70 +131,40 @@ public class SignUpPane extends JPanel {
 
 		pwdPassword = new JPasswordField();
 		GridBagConstraints gbc_pwdPassword = new GridBagConstraints();
-		gbc_pwdPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_pwdPassword.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pwdPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_pwdPassword.gridx = 2;
 		gbc_pwdPassword.gridy = 5;
 		add(pwdPassword, gbc_pwdPassword);
 
 		JLabel lblRetypedpassword = new JLabel("Retype Password");
 		GridBagConstraints gbc_lblRetypedpassword = new GridBagConstraints();
-		gbc_lblRetypedpassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRetypedpassword.anchor = GridBagConstraints.EAST;
+		gbc_lblRetypedpassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRetypedpassword.gridx = 1;
 		gbc_lblRetypedpassword.gridy = 6;
 		add(lblRetypedpassword, gbc_lblRetypedpassword);
 
 		pwdRetypedpassword = new JPasswordField();
 		GridBagConstraints gbc_pwdRetypedpassword = new GridBagConstraints();
-		gbc_pwdRetypedpassword.insets = new Insets(0, 0, 5, 5);
 		gbc_pwdRetypedpassword.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pwdRetypedpassword.insets = new Insets(0, 0, 5, 0);
 		gbc_pwdRetypedpassword.gridx = 2;
 		gbc_pwdRetypedpassword.gridy = 6;
 		add(pwdRetypedpassword, gbc_pwdRetypedpassword);
 
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.anchor = GridBagConstraints.NORTH;
-		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 6;
-		add(panel, gbc_panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		JPanel panelControl = new JPanel();
+		GridBagConstraints gbc_panelControl = new GridBagConstraints();
+		gbc_panelControl.fill = GridBagConstraints.BOTH;
+		gbc_panelControl.gridx = 2;
+		gbc_panelControl.gridy = 7;
+		add(panelControl, gbc_panelControl);
 
-		JButton btnSignUp = new JButton("Sign Up");
-		GridBagConstraints gbc_btnSignUp = new GridBagConstraints();
-		gbc_btnSignUp.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSignUp.gridx = 2;
-		gbc_btnSignUp.gridy = 7;
-		add(btnSignUp, gbc_btnSignUp);
-		btnSignUp.setOpaque(true);
-		btnSignUp.setHorizontalAlignment(SwingConstants.LEADING);
-		panel.add(btnSignUp);
+		btnSignUp = new JButton(SIGN_UP);
+		panelControl.add(btnSignUp);
 
-		Component horizontalGlue = Box.createHorizontalGlue();
-		panel.add(horizontalGlue);
-
-		btnCancel = new JButton("Cancel");
-		btnCancel.setHorizontalAlignment(SwingConstants.TRAILING);
-		panel.add(btnCancel);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBackground(SystemColor.window);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 7;
-		add(scrollPane, gbc_scrollPane);
-
-		txtError = new JTextField();
-		txtError.setEditable(false);
-		txtError.setBorder(null);
-		txtError.setBackground(SystemColor.window);
-		scrollPane.setViewportView(txtError);
-		txtError.setColumns(10);
+		btnCancel = new JButton(CANCEL);
+		panelControl.add(btnCancel);
 
 	}
 
@@ -202,7 +183,9 @@ public class SignUpPane extends JPanel {
 		return true;
 	}
 
-	public void registerListeners() {
+	public void registerListeners(SignUpController controller) {
+		btnCancel.addActionListener(controller);
+		btnSignUp.addActionListener(controller);
 	}
 
 	public boolean validateField() {
@@ -212,10 +195,6 @@ public class SignUpPane extends JPanel {
 	// public void registerListeners(SignUpController) {
 	//
 	// }
-
-	public void showErrorMessage() {
-		txtError.setText(errorMessage.toString());
-	}
 
 	public StringBuilder getErrorMessage() {
 		return errorMessage;

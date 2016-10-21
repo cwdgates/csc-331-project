@@ -87,6 +87,10 @@ public class AppView extends JFrame {
 		cardLayout.show(contentPane, CHOOSE_STOCK_PANE);
 	}
 
+	public void viewSignUp() {
+		cardLayout.show(contentPane, SIGN_UP_PANE);
+	}
+
 	public LoginPane getLoginPane() {
 		return loginPane;
 	}
@@ -101,6 +105,10 @@ public class AppView extends JFrame {
 
 	public CreateLeaguePane getCreateLeaguePane() {
 		return createLeaguePane;
+	}
+	
+	public SignUpPane getSignUpPane() {
+		return signUpPane;
 	}
 
 	public void registerListeners() {
