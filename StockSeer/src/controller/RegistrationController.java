@@ -8,11 +8,11 @@ import ui.RegistrationPane;
 
 public class RegistrationController implements ActionListener {
 	AppView appView;
-	RegistrationPane signUpPane;
+	RegistrationPane registrationPane;
 
 	public RegistrationController(AppView appView) {
 		this.appView = appView;
-		signUpPane = appView.getSignUpPane();
+		registrationPane = appView.getSignUpPane();
 	}
 
 	@Override
@@ -21,7 +21,11 @@ public class RegistrationController implements ActionListener {
 
 		switch (command) {
 		case RegistrationPane.SIGN_UP: {
-			//
+			if (!registrationPane.validateTextFields()) {
+				break;
+			} else {
+				
+			}
 			break;
 		}
 		case RegistrationPane.CANCEL: {

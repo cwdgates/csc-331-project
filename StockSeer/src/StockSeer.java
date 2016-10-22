@@ -20,6 +20,7 @@ public class StockSeer {
 	private RegistrationController registrationController;
 	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
+	private AppView appView;
 
 	public void run() {
 		// set look and feel
@@ -37,8 +38,7 @@ public class StockSeer {
 			return;
 		}
 
-		// init panels
-		AppView appView = new AppView();
+		appView = new AppView();
 
 		loginController = new LoginController(appView);
 		registrationController = new RegistrationController(appView);
@@ -51,6 +51,11 @@ public class StockSeer {
 		appView.getSignUpPane().registerListeners(registrationController);
 
 		appView.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		StockSeer stockSeer = new StockSeer();
+		stockSeer.run();
 	}
 
 }
