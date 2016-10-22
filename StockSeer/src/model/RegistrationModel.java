@@ -25,7 +25,11 @@ public class RegistrationModel {
 	 * @param email
 	 */
 	public RegistrationModel(String firstname, String lastname, String username, String password, String email) {
-
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = password;
+		this.email = email;
 	}
 
 	/**
