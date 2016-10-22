@@ -12,8 +12,6 @@ import javax.swing.JPasswordField;
 
 import controller.RegistrationController;
 
-import javax.swing.BoxLayout;
-
 public class RegistrationPane extends JPanel {
 	public static final String SIGN_UP = "Sign Up";
 	public static final String CANCEL = "Cancel";
@@ -194,6 +192,27 @@ public class RegistrationPane extends JPanel {
 
 	public StringBuilder getErrorMessage() {
 		return errorMessage;
+	}
+
+	public String getFirstName() {
+		return txtFirstname.getText();
+	}
+
+	public String getLastName() {
+		return txtLastname.getText();
+
+	}
+
+	public String getUsername() {
+		return txtUsername.getText();
+	}
+
+	public String getEmail() {
+		return txtEmail.getText();
+	}
+
+	public String getPassword() {
+		return new String(pwdPassword.getPassword());
 	}
 
 }

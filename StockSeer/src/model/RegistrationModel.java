@@ -1,7 +1,8 @@
 package model;
 
 import java.sql.Connection;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import persistence.DBConnection;
 
 /**
@@ -11,12 +12,20 @@ import persistence.DBConnection;
  *
  */
 public class RegistrationModel {
+	public class RegistrationError {
+		public boolean dup_email, dup_username;
+
+		public RegistrationError() {
+			dup_email = false;
+			dup_email = false;
+		}
+	}
 
 	private static Connection connection = DBConnection.getConnection();
 	private String username, password, email, firstname, lastname;
 
 	/**
-	 * construstor
+	 * constructor
 	 * 
 	 * @param firstname
 	 * @param lastname
@@ -24,7 +33,7 @@ public class RegistrationModel {
 	 * @param password
 	 * @param email
 	 */
-	public RegistrationModel(String firstname, String lastname, String username, String password, String email) {
+	public RegistrationModel(String firstname, String lastname, String email, String username, String password) {
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -32,23 +41,28 @@ public class RegistrationModel {
 		this.email = email;
 	}
 
-	/**
-	 * validate registration data
-	 * 
-	 * @return true if registration data meets requirement, false otherwise
-	 */
-	public boolean validate() {
-
-		return false;
-	}
-
-	/**
-	 * insert user data to user table in the database
-	 * 
-	 * @return
-	 */
-	public static boolean registerUser() {
-		return false;
+	public RegistrationError register() {
+		try {
+			RegistrationError error = new RegistrationError();
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT  iduser FROM user WHERE username = ?");
+			preparedStatement.setString(1, username);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				error.dup_email = true;
+			}
+			preparedStatement = connection.prepareStatement("SELECT  iduser FROM user WHERE email = ?");
+			preparedStatement.setString(1, email);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				error.dup_username = true;
+			}
+			return error;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getUsername() {
