@@ -18,7 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 
-public class SignUpPane extends JPanel {
+public class RegistrationPane extends JPanel {
 	public static final String SIGN_UP = "Sign Up";
 	public static final String CANCEL = "Cancel";
 
@@ -35,7 +35,7 @@ public class SignUpPane extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SignUpPane() {
+	public RegistrationPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 1, 105, 130, 0 };
 		gridBagLayout.rowHeights = new int[] { 1, 26, 26, 26, 26, 26, 26, 0, 0 };
@@ -155,7 +155,8 @@ public class SignUpPane extends JPanel {
 
 		JPanel panelControl = new JPanel();
 		GridBagConstraints gbc_panelControl = new GridBagConstraints();
-		gbc_panelControl.fill = GridBagConstraints.BOTH;
+		gbc_panelControl.anchor = GridBagConstraints.NORTH;
+		gbc_panelControl.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panelControl.gridx = 2;
 		gbc_panelControl.gridy = 7;
 		add(panelControl, gbc_panelControl);

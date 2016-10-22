@@ -17,7 +17,7 @@ public class AppView extends JFrame {
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 	private CardLayout cardLayout;
-	private SignUpPane signUpPane;
+	private RegistrationPane signUpPane;
 
 	// Components constraints
 	private final String LOGIN_PANE = "LOGIN_PANE";
@@ -32,7 +32,7 @@ public class AppView extends JFrame {
 	 */
 	public AppView() {
 		setTitle("Stock Seer");
-		setMinimumSize(new Dimension(500, 300));
+		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,7 +50,7 @@ public class AppView extends JFrame {
 		loginPane = new LoginPane();
 		contentPane.add(loginPane, LOGIN_PANE);
 
-		signUpPane = new SignUpPane();
+		signUpPane = new RegistrationPane();
 		contentPane.add(signUpPane, SIGN_UP_PANE);
 
 		homePane = new HomePane();
@@ -107,7 +107,7 @@ public class AppView extends JFrame {
 		return createLeaguePane;
 	}
 	
-	public SignUpPane getSignUpPane() {
+	public RegistrationPane getSignUpPane() {
 		return signUpPane;
 	}
 

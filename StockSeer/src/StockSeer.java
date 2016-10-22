@@ -1,8 +1,8 @@
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import controller.CreatingLeagueController;
-import controller.HomeController;
+import controller.LeagueCreationController;
+import controller.HomePaneController;
 import controller.LoginController;
 import controller.RegistrationController;
 import persistence.CredentialDao;
@@ -16,8 +16,12 @@ import ui.*;
  *
  */
 public class StockSeer {
+	private LoginController loginController;
+	private RegistrationController registrationController;
+	private HomePaneController homePaneController;
+	private LeagueCreationController leagueCreationController;
 
-	public static void main(String[] args) {
+	public void run() {
 		// set look and feel
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -36,18 +40,17 @@ public class StockSeer {
 		// init panels
 		AppView appView = new AppView();
 
-		LoginController loginController = new LoginController(appView);
-		RegistrationController signUpController = new RegistrationController(appView);
-		HomeController homePaneController = new HomeController(appView);
-		CreatingLeagueController createStockPaneController = new CreatingLeagueController(appView);
+		loginController = new LoginController(appView);
+		registrationController = new RegistrationController(appView);
+		homePaneController = new HomePaneController(appView);
+		leagueCreationController = new LeagueCreationController(appView);
 
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getHomePane().registerListeners(homePaneController);
-		appView.getCreateLeaguePane().registerListeners(createStockPaneController);
-		appView.getSignUpPane().registerListeners(signUpController);
+		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
+		appView.getSignUpPane().registerListeners(registrationController);
 
 		appView.setVisible(true);
-
 	}
 
 }

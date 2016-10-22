@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.AppView;
-import ui.SignUpPane;
+import ui.RegistrationPane;
 
 public class RegistrationController implements ActionListener {
 	AppView appView;
-	SignUpPane signUpPane;
+	RegistrationPane signUpPane;
 
 	public RegistrationController(AppView appView) {
 		this.appView = appView;
@@ -20,11 +20,11 @@ public class RegistrationController implements ActionListener {
 		String command = e.getActionCommand();
 
 		switch (command) {
-		case SignUpPane.SIGN_UP: {
+		case RegistrationPane.SIGN_UP: {
 			//
 			break;
 		}
-		case SignUpPane.CANCEL: {
+		case RegistrationPane.CANCEL: {
 			appView.viewLogin();
 			break;
 		}

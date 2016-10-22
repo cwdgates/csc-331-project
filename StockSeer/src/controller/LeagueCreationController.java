@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import ui.AppView;
 import ui.CreateLeaguePane;
 
-public class CreatingLeagueController implements ActionListener {
+public class LeagueCreationController implements ActionListener {
 	AppView appView;
 	CreateLeaguePane createLeaguePane;
 
-	public CreatingLeagueController(AppView appView) {
+	public LeagueCreationController(AppView appView) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
 	}
