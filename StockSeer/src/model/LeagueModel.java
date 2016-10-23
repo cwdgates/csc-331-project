@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LeagueModel {
@@ -13,6 +14,7 @@ public class LeagueModel {
 	private Date startDate;
 	private Date endDate;
 	private Difficulty difficulty;
+	private ArrayList<StockModel> stockList;
 
 	public String getLeagueName() {
 		return leagueName;
@@ -60,5 +62,17 @@ public class LeagueModel {
 
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public ArrayList<StockModel> getStockList() {
+		return stockList;
+	}
+
+	public void setStockList(ArrayList<StockModel> stockList) {
+		this.stockList = stockList;
+	}
+
+	public void addStock(StockModel stock) {
+		this.stockList.add(stock);
 	}
 }
