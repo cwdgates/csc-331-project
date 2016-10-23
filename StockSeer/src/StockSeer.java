@@ -5,7 +5,7 @@ import controller.LeagueCreationController;
 import controller.HomePaneController;
 import controller.LoginController;
 import controller.RegistrationController;
-import persistence.CredentialDao;
+import model.CredentialModel;
 import persistence.DBConnection;
 import ui.*;
 

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import persistence.CredentialDao;
+import model.CredentialModel;
 import ui.AppView;
 import ui.LoginPane;
 
@@ -70,7 +70,7 @@ public class LoginController implements ActionListener, KeyListener {
 		final String password = loginPane.getPassword().trim();
 		if (username.length() >= 4 && password.length() >= 4) {
 			// check credential
-			boolean isValid = CredentialDao.checkUsernamePassword(username, password);
+			boolean isValid = CredentialModel.checkUsernamePassword(username, password);
 			if (isValid) {
 				System.out.println("Valid credential. Grant access to app.");
 				loginPane.clear();
