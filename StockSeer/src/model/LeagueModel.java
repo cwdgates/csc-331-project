@@ -3,11 +3,16 @@ package model;
 import java.util.Date;
 
 public class LeagueModel {
+	public enum Difficulty {
+		EASY, MEDIUM, HARD, NUT
+	}
+
 	private String leagueName;
 	private String leagueID;
 	private int maxPlayers;
 	private Date startDate;
 	private Date endDate;
+	private Difficulty difficulty;
 
 	public String getLeagueName() {
 		return leagueName;
@@ -47,5 +52,13 @@ public class LeagueModel {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
 	}
 }
