@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.RegistrationModel;
-import model.RegistrationModel.RegistrationError;
+import model.RegistrationModel.RegistrationStatus;
 import ui.AppView;
 import ui.RegistrationPane;
 
@@ -31,8 +31,8 @@ public class RegistrationController implements ActionListener {
 			RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
 					regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
 
-			RegistrationError error = regModel.register();
-			if (error != null) {
+			RegistrationStatus error = regModel.register();
+			if (error.dup_email || error.dup_username) {
 				StringBuilder errMsg = new StringBuilder();
 				if (error.dup_email) {
 					errMsg.append("This email has been registered by another account.");
@@ -40,10 +40,8 @@ public class RegistrationController implements ActionListener {
 				if (error.dup_username) {
 					errMsg.append("\nThis username has been registered by another account.");
 				}
-				if (errMsg.toString() != "") {
-					JOptionPane.showMessageDialog(null, errMsg.toString(), "Registration unsuccesssfuls",
-							JOptionPane.WARNING_MESSAGE);
-				}
+				JOptionPane.showMessageDialog(null, errMsg.toString(), "Registration unsuccesssfuls",
+						JOptionPane.WARNING_MESSAGE);
 			}
 			break;
 		} // end SIGNUP

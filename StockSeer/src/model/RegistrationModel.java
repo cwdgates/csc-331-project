@@ -12,10 +12,10 @@ import persistence.DBConnection;
  *
  */
 public class RegistrationModel {
-	public class RegistrationError {
+	public class RegistrationStatus {
 		public boolean dup_email, dup_username;
 
-		public RegistrationError() {
+		public RegistrationStatus() {
 			dup_email = false;
 			dup_email = false;
 		}
@@ -41,28 +41,40 @@ public class RegistrationModel {
 		this.email = email;
 	}
 
-	public RegistrationError register() {
+	public RegistrationStatus register() {
+		RegistrationStatus status = new RegistrationStatus();
 		try {
-			RegistrationError error = new RegistrationError();
 			ResultSet resultSet;
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("SELECT  iduser FROM user WHERE username = ?");
 			preparedStatement.setString(1, username);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				error.dup_email = true;
+				status.dup_username = true;
 			}
 			preparedStatement = connection.prepareStatement("SELECT  iduser FROM user WHERE email = ?");
 			preparedStatement.setString(1, email);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				error.dup_username = true;
+				status.dup_email = true;
 			}
-			return error;
+			return status;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		// insert data
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (firstname,lastname, email ,username, password) VALUES(?,?,?,?,?)");
+			preparedStatement.setString(1, firstname);
+			preparedStatement.setString(2, lastname);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, username);
+			preparedStatement.setString(5, password);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return status;
 	}
 
 	public String getUsername() {
