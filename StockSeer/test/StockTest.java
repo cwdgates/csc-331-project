@@ -15,11 +15,11 @@ public class StockTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//
-//		BigDecimal price = stock.getQuote().getPrice();
-//		BigDecimal change = stock.getQuote().getChangeInPercent();
-//		BigDecimal peg = stock.getStats().getPeg();
-//		BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
+		//
+		// BigDecimal price = stock.getQuote().getPrice();
+		// BigDecimal change = stock.getQuote().getChangeInPercent();
+		// BigDecimal peg = stock.getStats().getPeg();
+		// BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
 		stock.print();
 	}
 

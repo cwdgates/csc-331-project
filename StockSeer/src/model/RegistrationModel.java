@@ -63,14 +63,15 @@ public class RegistrationModel {
 			e.printStackTrace();
 		}
 		// insert data
-		try{
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (firstname,lastname, email ,username, password) VALUES(?,?,?,?,?)");
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO user (firstname,lastname, email ,username, password) VALUES(?,?,?,?,?)");
 			preparedStatement.setString(1, firstname);
 			preparedStatement.setString(2, lastname);
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, username);
 			preparedStatement.setString(5, password);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
