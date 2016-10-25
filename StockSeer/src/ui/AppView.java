@@ -4,8 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import persistence.DBConnection;
+
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AppView extends JFrame {
 
@@ -31,6 +36,12 @@ public class AppView extends JFrame {
 	 * Create the frame.
 	 */
 	public AppView() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				DBConnection.closeConnection();
+			}
+		});
 		setTitle("Stock Seer");
 		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,12 +117,9 @@ public class AppView extends JFrame {
 	public CreateLeaguePane getCreateLeaguePane() {
 		return createLeaguePane;
 	}
-	
+
 	public RegistrationPane getSignUpPane() {
 		return signUpPane;
 	}
 
-	public void registerListeners() {
-
-	}
 }

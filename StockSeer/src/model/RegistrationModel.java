@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import persistence.DBConnection;
 
 /**
@@ -12,26 +14,18 @@ import persistence.DBConnection;
  *
  */
 public class RegistrationModel {
-	public class RegistrationStatus {
-		public boolean dup_email, dup_username;
-
-		public RegistrationStatus() {
-			dup_email = false;
-			dup_email = false;
-		}
-	}
+	private StringBuilder statusMessage;
 
 	private static Connection connection = DBConnection.getConnection();
 	private String username, password, email, firstname, lastname;
 
 	/**
-	 * constructor
 	 * 
 	 * @param firstname
 	 * @param lastname
+	 * @param email
 	 * @param username
 	 * @param password
-	 * @param email
 	 */
 	public RegistrationModel(String firstname, String lastname, String email, String username, String password) {
 		this.username = username;
@@ -41,41 +35,75 @@ public class RegistrationModel {
 		this.email = email;
 	}
 
-	public RegistrationStatus register() {
-		RegistrationStatus status = new RegistrationStatus();
+	public String getStatusMessage() {
+		return statusMessage.toString();
+	}
+
+	public boolean register() {
+		statusMessage = new StringBuilder();
+		PreparedStatement preparedStatement = null;
+		// check for duplicated account
 		try {
 			ResultSet resultSet;
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT  iduser FROM user WHERE username = ?");
+			preparedStatement = connection.prepareStatement("SELECT id FROM user WHERE username = ?");
 			preparedStatement.setString(1, username);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				status.dup_username = true;
+				statusMessage.append("Username has been used by another account");
 			}
-			preparedStatement = connection.prepareStatement("SELECT  iduser FROM user WHERE email = ?");
+			preparedStatement.close();
+			resultSet.close();
+
+			preparedStatement = connection.prepareStatement("SELECT id FROM user WHERE email = ?");
 			preparedStatement.setString(1, email);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				status.dup_email = true;
+				statusMessage.append("\nEmail has been used by another account");
 			}
-			return status;
+			preparedStatement.close();
+			resultSet.close();
+
+			if (statusMessage.toString().length() > 0) {
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		// insert data
+
+		// insert user
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(
-					"INSERT INTO user (firstname,lastname, email ,username, password) VALUES(?,?,?,?,?)");
+			String insertUserSQL = "INSERT INTO user" + "(first_name,last_name, email ,username, password) VALUES"
+					+ "(?,?,?,?,?)";
+			preparedStatement = connection.prepareStatement(insertUserSQL);
 			preparedStatement.setString(1, firstname);
 			preparedStatement.setString(2, lastname);
 			preparedStatement.setString(3, email);
 			preparedStatement.setString(4, username);
 			preparedStatement.setString(5, password);
-
+			statusMessage = new StringBuilder("Successfully created an account");
+			int rowCount = preparedStatement.executeUpdate();
+			System.out.println("rowCount" + rowCount);
+			if (rowCount > 0) {
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return status;
+		return false;
 	}
 
 	public String getUsername() {

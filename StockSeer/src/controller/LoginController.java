@@ -68,7 +68,7 @@ public class LoginController implements ActionListener, KeyListener {
 		// loginPane.updateLoginModel();
 		final String username = loginPane.getUsername().trim();
 		final String password = loginPane.getPassword().trim();
-		if (username.length() >= 4 && password.length() >= 4) {
+		if (username.length() > 0 && password.length() > 0) {
 			// check credential
 			boolean isValid = CredentialModel.checkUsernamePassword(username, password);
 			if (isValid) {
@@ -86,7 +86,6 @@ public class LoginController implements ActionListener, KeyListener {
 
 	private void performSignUp() {
 		System.out.println("Sign Up");
-		
 	}
 
 }

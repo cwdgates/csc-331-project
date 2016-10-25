@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.RegistrationModel;
-import model.RegistrationModel.RegistrationStatus;
 import ui.AppView;
 import ui.RegistrationPane;
 
@@ -25,23 +24,20 @@ public class RegistrationController implements ActionListener {
 
 		switch (command) {
 		case RegistrationPane.SIGN_UP: {
-			if (!regPane.validateTextFields()) {
-				break;
-			}
-			RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
-					regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
-
-			RegistrationStatus error = regModel.register();
-			if (error.dup_email || error.dup_username) {
-				StringBuilder errMsg = new StringBuilder();
-				if (error.dup_email) {
-					errMsg.append("This email has been registered by another account.");
+			if (!regPane.areFieldsEmpty()) {
+				JOptionPane.showMessageDialog(null, "Empty fields", "Error", JOptionPane.WARNING_MESSAGE);
+			} // mismatch password
+			else if (regPane.getPassword().compareTo(regPane.getRetypedPassword()) != 0) {
+				JOptionPane.showMessageDialog(null, "Mismatched password", "Error", JOptionPane.WARNING_MESSAGE);
+			} else {
+				RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
+						regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
+				boolean isSuccess = regModel.register();
+				JOptionPane.showMessageDialog(null, regModel.getStatusMessage(), "Registration Status",
+						JOptionPane.INFORMATION_MESSAGE);
+				if (isSuccess) {
+					appView.viewLogin();
 				}
-				if (error.dup_username) {
-					errMsg.append("\nThis username has been registered by another account.");
-				}
-				JOptionPane.showMessageDialog(null, errMsg.toString(), "Registration unsuccesssfuls",
-						JOptionPane.WARNING_MESSAGE);
 			}
 			break;
 		} // end SIGNUP

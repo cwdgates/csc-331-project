@@ -178,7 +178,7 @@ public class RegistrationPane extends JPanel {
 	 * 
 	 * @return
 	 */
-	public boolean validateTextFields() {
+	public boolean areFieldsEmpty() {
 		for (Component component : this.getComponents()) {
 			if (component instanceof JTextField) {
 				if (((JTextField) component).getText().compareTo("") == 0) {
@@ -213,6 +213,10 @@ public class RegistrationPane extends JPanel {
 
 	public String getPassword() {
 		return new String(pwdPassword.getPassword());
+	}
+	
+	public String getRetypedPassword(){
+		return new String(pwdRetypedpassword.getPassword());
 	}
 
 }
