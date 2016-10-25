@@ -23,32 +23,59 @@ public class RegistrationController implements ActionListener {
 		String command = event.getActionCommand();
 
 		switch (command) {
-		case RegistrationPane.SIGN_UP: {
-			if (!regPane.areFieldsEmpty()) {
-				JOptionPane.showMessageDialog(null, "Empty fields", "Error", JOptionPane.WARNING_MESSAGE);
-			} // mismatch password
-			else if (regPane.getPassword().compareTo(regPane.getRetypedPassword()) != 0) {
-				JOptionPane.showMessageDialog(null, "Mismatched password", "Error", JOptionPane.WARNING_MESSAGE);
-			} else {
-				RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
-						regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
-				boolean isSuccess = regModel.register();
-				JOptionPane.showMessageDialog(null, regModel.getStatusMessage(), "Registration Status",
-						JOptionPane.INFORMATION_MESSAGE);
-				if (isSuccess) {
-					appView.viewLogin();
+			case RegistrationPane.SIGN_UP:
+				if (fieldsEmpty()) {
+					JOptionPane.showMessageDialog(appView, "Empty fields", "Error", JOptionPane.WARNING_MESSAGE);
+				} else if (misMatchedPassword()) {
+					JOptionPane.showMessageDialog(null, "Mismatched password", "Error", JOptionPane.WARNING_MESSAGE);
+				} else {
+					RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
+							regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
+					boolean isSuccess = regModel.register();
+					JOptionPane.showMessageDialog(appView, regModel.getStatusMessage(), "Registration Status",
+							JOptionPane.INFORMATION_MESSAGE);
+					if (isSuccess) {
+						appView.viewLogin();
+					}
 				}
-			}
-			break;
-		} // end SIGNUP
-		case RegistrationPane.CANCEL: {
-			appView.viewLogin();
-			break;
+				break;
+			// ----------- END SIGN UP---------
+			case RegistrationPane.CANCEL:
+				appView.viewLogin();
+				break;
+			// ----------- END CANCEL----------
+			default:
+				break;
 		}
+		// clear all text fields in registration pane
+		regPane.clear();
 
-		default:
-			break;
+	}
+
+	/**
+	 * check if any field is empty
+	 * 
+	 * @return false if at least one field is empty. True otherwise
+	 */
+	private boolean fieldsEmpty() {
+		if (regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
+				|| regPane.getLastName().length() == 0 || regPane.getPassword().length() == 0
+				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0) {
+			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * check if the password field and retyped password field are the same
+	 * 
+	 * @return
+	 */
+	private boolean misMatchedPassword() {
+		if (regPane.getPassword().compareTo(regPane.getRetypedPassword()) == 0) {
+			return false;
+		}
+		return true;
 	}
 
 }

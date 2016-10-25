@@ -4,8 +4,10 @@ import javax.swing.UIManager;
 import controller.LeagueCreationController;
 import controller.HomePaneController;
 import controller.LoginController;
+import controller.LogoutController;
 import controller.RegistrationController;
-import model.CredentialModel;
+import model.CredentialChecker;
+import model.UserModel;
 import persistence.DBConnection;
 import ui.*;
 
@@ -16,11 +18,18 @@ import ui.*;
  *
  */
 public class StockSeer {
+	// view ------------------
+	private AppView appView;
+
+	// controllers --------------------
 	private LoginController loginController;
 	private RegistrationController registrationController;
 	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
-	private AppView appView;
+	private LogoutController logoutController;
+
+	// models ---------------------
+	private UserModel userModel = null; // only one user per instance of application
 
 	public void run() {
 		// set look and feel
@@ -38,18 +47,25 @@ public class StockSeer {
 			return;
 		}
 
+		// ------------------- INITIALIZE VIEW -----------------------
 		appView = new AppView();
 
-		loginController = new LoginController(appView);
+		// ------------------- INITIALIZE MODELS ---------------------
+		userModel = new UserModel();
+		// ----------------- INITIALIZE CONTROLLERS -----------------
+		loginController = new LoginController(appView, userModel);
 		registrationController = new RegistrationController(appView);
 		homePaneController = new HomePaneController(appView);
 		leagueCreationController = new LeagueCreationController(appView);
+		logoutController = new LogoutController(appView, userModel);
 
+		// --------------------REGISTER LISTENERS --------------------------
 		appView.getLoginPane().registerListeners(loginController);
-		appView.getHomePane().registerListeners(homePaneController);
+		appView.getHomePane().registerListeners(homePaneController, logoutController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
 
+		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);
 	}
 

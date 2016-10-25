@@ -10,19 +10,21 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import model.CredentialModel;
+import model.CredentialChecker;
 
 import javax.swing.JButton;
 import java.awt.Color;
 
 public class LoginPane extends JPanel {
+	public static final String LOGIN_BTN = "Login";
+	public static final String SIGNUP_BTN = "Sign Up";
+
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JPanel panel;
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
-	private JLabel lblStatus;
 
 	/**
 	 * Create the panel.
@@ -78,22 +80,22 @@ public class LoginPane extends JPanel {
 		gbc_panel.gridy = 2;
 		add(panel, gbc_panel);
 
-		btnLogin = new JButton("Login");
+		btnLogin = new JButton(LOGIN_BTN);
 		panel.add(btnLogin);
 
-		btnSignUp = new JButton("Sign Up");
+		btnSignUp = new JButton(SIGNUP_BTN);
 		panel.add(btnSignUp);
 
 		btnResetPassword = new JButton("Reset Password");
 		panel.add(btnResetPassword);
-		
-		lblStatus = new JLabel("");
-		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-		gbc_lblStatus.gridx = 2;
-		gbc_lblStatus.gridy = 3;
-		add(lblStatus, gbc_lblStatus);
+
 	}
 
+	/**
+	 * assign listeners to specific buttons
+	 * 
+	 * @param loginController
+	 */
 	public void registerListeners(LoginController loginController) {
 		btnLogin.addActionListener(loginController);
 		btnSignUp.addActionListener(loginController);
@@ -111,26 +113,11 @@ public class LoginPane extends JPanel {
 	}
 
 	/**
-	 * clear username and password field when login success
+	 * clear all text fields
 	 */
 	public void clear() {
 		txtUsername.setText("");
 		txtPassword.setText("");
-		resetStatus();
-	}
-	
-	public void showWrongPassword(){
-		lblStatus.setText("Wrong username or password");
-		lblStatus.setForeground(Color.RED);
-	}
-	
-	public void showPleaseFillUsernamePassword(){
-		lblStatus.setText("Please fill in username and password");
-		lblStatus.setForeground(new Color(255,100,0));
-	}
-	
-	public void resetStatus(){
-		lblStatus.setText("");
 	}
 
 }

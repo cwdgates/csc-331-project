@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import model.CredentialModel;
+import javax.swing.JOptionPane;
+
+import model.CredentialChecker;
+import model.UserModel;
 import ui.AppView;
 import ui.LoginPane;
 
@@ -17,13 +20,18 @@ import ui.LoginPane;
  */
 public class LoginController implements ActionListener, KeyListener {
 	private LoginPane loginPane;
-	private final String LOGIN_BTN = "Login";
-	private final String SIGNUP_BTN = "Sign Up";
-	private AppView appView;
 
-	public LoginController(AppView appView) {
+	private AppView appView;
+	private UserModel userModel;
+
+	public LoginController(AppView appView, UserModel userModel) {
 		this.loginPane = appView.getLoginPane();
 		this.appView = appView;
+		this.userModel = userModel;
+	}
+
+	public void registerUser(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 	/**
@@ -32,60 +40,64 @@ public class LoginController implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
-
-		// login button clicked
-		if (command.equals(LOGIN_BTN)) {
-			performLogin();
-		}
-		if (command.equals(SIGNUP_BTN)) {
+		switch (command) {
+		case LoginPane.LOGIN_BTN:
+			if (validateFields()) {
+				performLogin();
+			}
+			break;
+		case LoginPane.SIGNUP_BTN:
 			appView.viewSignUp();
+			break;
+
+		default:
+			break;
 		}
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		// if press enter key
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			performLogin();
+			if (validateFields()) {
+				performLogin();
+			}
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void performLogin() {
-		System.out.println("Login clicked");
-		// loginPane.updateLoginModel();
-		final String username = loginPane.getUsername().trim();
-		final String password = loginPane.getPassword().trim();
-		if (username.length() > 0 && password.length() > 0) {
-			// check credential
-			boolean isValid = CredentialModel.checkUsernamePassword(username, password);
-			if (isValid) {
-				System.out.println("Valid credential. Grant access to app.");
-				loginPane.clear();
-				appView.viewHome();
-
-			} else {
-				loginPane.showWrongPassword();
-			}
+		// check credential
+		boolean isValid = CredentialChecker.checkUsernameAndPassword(loginPane.getUsername().trim(),
+				loginPane.getPassword().trim());
+		if (isValid) {
+			// ------ GRANT ACCESS -------
+			userModel = new UserModel();
+			userModel.login(loginPane.getUsername().trim(), loginPane.getPassword().trim());
+			JOptionPane.showMessageDialog(appView,
+					"Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + ".\nClick OK to continue.");
+			appView.viewHome();
+			loginPane.clear();
 		} else {
-			loginPane.showPleaseFillUsernamePassword();
+			JOptionPane.showMessageDialog(loginPane, "Wrong username or password.", "Warning",
+					JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
-	private void performSignUp() {
-		System.out.println("Sign Up");
+	private boolean validateFields() {
+		if (loginPane.getUsername().length() == 0 || loginPane.getPassword().length() == 0) {
+			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.", "",
+					JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		return true;
 	}
-
 }
