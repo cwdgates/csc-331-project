@@ -77,12 +77,12 @@ public class LoginController implements ActionListener, KeyListener {
 			if (isValid) {
 				loginPane.clear();
 				appView.viewHome();
-				JOptionPane.showMessageDialog(appView, "Access granted");
+				JOptionPane.showMessageDialog(appView, "Access granted.\nClick OK to continue.");
 			} else {
-				JOptionPane.showMessageDialog(loginPane, "Wrong username or password");
+				JOptionPane.showMessageDialog(loginPane, "Wrong username or password.");
 			}
 		} else {
-			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password");
+			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.");
 		}
 	}
 

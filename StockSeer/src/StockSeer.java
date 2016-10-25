@@ -18,13 +18,18 @@ import ui.*;
  *
  */
 public class StockSeer {
+	// view ------------------
+	private AppView appView;
+
+	// controllers --------------------
 	private LoginController loginController;
 	private RegistrationController registrationController;
 	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
 	private LogoutController logoutController;
-	private AppView appView;
-	private UserModel userModel;
+
+	// models ---------------------
+	private UserModel userModel; // only one user per instance of application
 
 	public void run() {
 		// set look and feel
@@ -42,18 +47,26 @@ public class StockSeer {
 			return;
 		}
 
+		// ------------------- INITIALIZE VIEW -----------------------
 		appView = new AppView();
+
+		// ------------------- INITIALIZE MODELS ---------------------
+		userModel = new UserModel();
+
+		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView);
 		registrationController = new RegistrationController(appView);
 		homePaneController = new HomePaneController(appView);
 		leagueCreationController = new LeagueCreationController(appView);
 		logoutController = new LogoutController(appView);
 
+		// --------------------ASSIGNMENT --------------------------
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getHomePane().registerListeners(homePaneController, logoutController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
 
+		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);
 	}
 
