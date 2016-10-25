@@ -8,15 +8,11 @@ import persistence.DBConnection;
 public class UserModel {
 	private String firstName;
 	private String lastName;
-	private int id;
+	private Integer id = null;
 
 	public UserModel() {
-	}
-
-	public UserModel(String firstName, String lastName, int id) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.id = id;
+		firstName = "";
+		lastName = "";
 	}
 
 	public String getFirstName() {
@@ -27,23 +23,11 @@ public class UserModel {
 		return lastName;
 	}
 
-	public int getUserId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setUserID(int id) {
-		this.id = id;
-	}
-
-	public boolean fetchUserInfo(String username, String password) {
+	public void login(String username, String password) {
 		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		try {
@@ -52,16 +36,23 @@ public class UserModel {
 			preparedStatement.setString(2, password);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				id = resultSet.getInt("id");
+				id = new Integer(resultSet.getInt("id"));
 				firstName = resultSet.getString("first_name");
 				lastName = resultSet.getString("last_name");
 				System.out.println("id: " + id + " first name " + firstName);
-				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+	}
+
+	/**
+	 * clear local data relates to user. Main purpose is for logging out
+	 */
+	public void reset() {
+		id = null;
+		firstName = null;
+		lastName = null;
 	}
 
 }

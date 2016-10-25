@@ -51,22 +51,19 @@ public class StockSeer {
 		appView = new AppView();
 
 		// ------------------- INITIALIZE MODELS ---------------------
-
+		userModel = new UserModel();
 		// ----------------- INITIALIZE CONTROLLERS -----------------
-		loginController = new LoginController(appView);
+		loginController = new LoginController(appView, userModel);
 		registrationController = new RegistrationController(appView);
 		homePaneController = new HomePaneController(appView);
 		leagueCreationController = new LeagueCreationController(appView);
-		logoutController = new LogoutController(appView);
+		logoutController = new LogoutController(appView, userModel);
 
 		// --------------------REGISTER LISTENERS --------------------------
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getHomePane().registerListeners(homePaneController, logoutController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
-		
-		// -------------------
-		loginController.registerUser(userModel);
 
 		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);
