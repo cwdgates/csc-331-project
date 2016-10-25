@@ -7,7 +7,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 
-import model.CredentialModel;
+import model.CredentialChecker;
+import model.UserModel;
 import ui.AppView;
 import ui.LoginPane;
 
@@ -21,10 +22,15 @@ public class LoginController implements ActionListener, KeyListener {
 	private LoginPane loginPane;
 
 	private AppView appView;
+	private UserModel userModel;
 
 	public LoginController(AppView appView) {
 		this.loginPane = appView.getLoginPane();
 		this.appView = appView;
+	}
+
+	public void registerUser(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 	/**
@@ -59,6 +65,9 @@ public class LoginController implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (loginPane.getUsername().length() > 0 && loginPane.getPassword().length() == 0) {
+				JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.");
+			}
 			performLogin();
 		}
 	}
@@ -68,22 +77,17 @@ public class LoginController implements ActionListener, KeyListener {
 	}
 
 	private void performLogin() {
-		// loginPane.updateLoginModel();
-		final String username = loginPane.getUsername().trim();
-		final String password = loginPane.getPassword().trim();
-		if (username.length() > 0 && password.length() > 0) {
-			// check credential
-			boolean isValid = CredentialModel.checkUsernamePassword(username, password);
-			if (isValid) {
-				loginPane.clear();
-				appView.viewHome();
-				JOptionPane.showMessageDialog(appView, "Access granted.\nClick OK to continue.");
-			} else {
-				JOptionPane.showMessageDialog(loginPane, "Wrong username or password.");
-			}
+		// check credential
+		boolean isValid = CredentialChecker.checkUsernameAndPassword(loginPane.getUsername().trim(),
+				loginPane.getPassword().trim());
+		if (isValid) {
+			// ------ GRANT ACCESS -------
+			userModel = new UserModel();
+			userModel.fetchUserInfo(loginPane.getUsername().trim(), loginPane.getPassword().trim());
+			loginPane.clear();
+			JOptionPane.showMessageDialog(appView, "Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + ".\nClick OK to continue.");
 		} else {
-			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.");
+			JOptionPane.showMessageDialog(loginPane, "Wrong username or password.");
 		}
 	}
-
 }
