@@ -153,41 +153,9 @@ public class RegistrationPane extends JPanel {
 
 	}
 
-	/**
-	 * check field
-	 * 
-	 * @return true if at least one field is empty. False if all field are
-	 *         correctly filled
-	 */
-	boolean isFieldEmpty() {
-		if (txtEmail.getText().trim().length() == 0 || txtFirstname.getText().trim().length() == 0
-				|| txtLastname.getText().trim().length() == 0 || txtUsername.getText().trim().length() == 0
-				|| String.valueOf(pwdPassword.getPassword()).trim().length() == 0) {
-			return false;
-		}
-		return true;
-	}
-
 	public void registerListeners(RegistrationController controller) {
 		btnCancel.addActionListener(controller);
 		btnSignUp.addActionListener(controller);
-	}
-
-	/**
-	 * check if at least one text field is empty
-	 * 
-	 * @return
-	 */
-	public boolean areFieldsEmpty() {
-		for (Component component : this.getComponents()) {
-			if (component instanceof JTextField) {
-				if (((JTextField) component).getText().compareTo("") == 0) {
-					System.out.println("Empty field");
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 
 	public StringBuilder getErrorMessage() {
@@ -214,9 +182,18 @@ public class RegistrationPane extends JPanel {
 	public String getPassword() {
 		return new String(pwdPassword.getPassword());
 	}
-	
-	public String getRetypedPassword(){
+
+	public String getRetypedPassword() {
 		return new String(pwdRetypedpassword.getPassword());
+	}
+
+	public void clear() {
+		txtFirstname.setText("");
+		txtLastname.setText("");
+		txtEmail.setText("");
+		pwdPassword.setText("");
+		pwdRetypedpassword.setText("");
+		txtUsername.setText("");
 	}
 
 }

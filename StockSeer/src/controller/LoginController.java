@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
+
 import model.CredentialModel;
 import ui.AppView;
 import ui.LoginPane;
@@ -17,8 +19,7 @@ import ui.LoginPane;
  */
 public class LoginController implements ActionListener, KeyListener {
 	private LoginPane loginPane;
-	private final String LOGIN_BTN = "Login";
-	private final String SIGNUP_BTN = "Sign Up";
+
 	private AppView appView;
 
 	public LoginController(AppView appView) {
@@ -32,13 +33,19 @@ public class LoginController implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
+		switch (command) {
+			case LoginPane.LOGIN_BTN: {
+				performLogin();
+				break;
+			}
+			case LoginPane.SIGNUP_BTN: {
+				appView.viewSignUp();
+				break;
+			}
 
-		// login button clicked
-		if (command.equals(LOGIN_BTN)) {
-			performLogin();
-		}
-		if (command.equals(SIGNUP_BTN)) {
-			appView.viewSignUp();
+			default: {
+				break;
+			}
 		}
 
 	}
@@ -51,7 +58,6 @@ public class LoginController implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			performLogin();
 		}
@@ -59,12 +65,9 @@ public class LoginController implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void performLogin() {
-		System.out.println("Login clicked");
 		// loginPane.updateLoginModel();
 		final String username = loginPane.getUsername().trim();
 		final String password = loginPane.getPassword().trim();
@@ -72,20 +75,15 @@ public class LoginController implements ActionListener, KeyListener {
 			// check credential
 			boolean isValid = CredentialModel.checkUsernamePassword(username, password);
 			if (isValid) {
-				System.out.println("Valid credential. Grant access to app.");
 				loginPane.clear();
 				appView.viewHome();
-
+				JOptionPane.showMessageDialog(appView, "Access granted");
 			} else {
-				loginPane.showWrongPassword();
+				JOptionPane.showMessageDialog(loginPane, "Wrong username or password");
 			}
 		} else {
-			loginPane.showPleaseFillUsernamePassword();
+			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password");
 		}
-	}
-
-	private void performSignUp() {
-		System.out.println("Sign Up");
 	}
 
 }

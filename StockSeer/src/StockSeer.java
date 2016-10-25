@@ -4,8 +4,10 @@ import javax.swing.UIManager;
 import controller.LeagueCreationController;
 import controller.HomePaneController;
 import controller.LoginController;
+import controller.LogoutController;
 import controller.RegistrationController;
 import model.CredentialModel;
+import model.UserModel;
 import persistence.DBConnection;
 import ui.*;
 
@@ -20,7 +22,9 @@ public class StockSeer {
 	private RegistrationController registrationController;
 	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
+	private LogoutController logoutController;
 	private AppView appView;
+	private UserModel userModel;
 
 	public void run() {
 		// set look and feel
@@ -39,14 +43,14 @@ public class StockSeer {
 		}
 
 		appView = new AppView();
-
 		loginController = new LoginController(appView);
 		registrationController = new RegistrationController(appView);
 		homePaneController = new HomePaneController(appView);
 		leagueCreationController = new LeagueCreationController(appView);
+		logoutController = new LogoutController(appView);
 
 		appView.getLoginPane().registerListeners(loginController);
-		appView.getHomePane().registerListeners(homePaneController);
+		appView.getHomePane().registerListeners(homePaneController, logoutController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
 
