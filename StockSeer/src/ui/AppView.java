@@ -18,7 +18,7 @@ public class AppView extends JFrame {
 
 	private LoginPane loginPane;
 	private HomePane homePane;
-	private CreateLeaguePane createLeaguePane;
+	private LeagueCreationPane createLeaguePane;
 	private ChooseStockPane chooseStockPane;
 	private DifficultyPane difficultyPane;
 	private CardLayout cardLayout;
@@ -70,7 +70,7 @@ public class AppView extends JFrame {
 		difficultyPane = new DifficultyPane();
 		contentPane.add(difficultyPane, DIFFICULTY_PANE);
 
-		createLeaguePane = new CreateLeaguePane();
+		createLeaguePane = new LeagueCreationPane();
 		contentPane.add(createLeaguePane, CREATE_LEAGUE_PANE);
 
 		chooseStockPane = new ChooseStockPane();
@@ -114,7 +114,7 @@ public class AppView extends JFrame {
 		return chooseStockPane;
 	}
 
-	public CreateLeaguePane getCreateLeaguePane() {
+	public LeagueCreationPane getCreateLeaguePane() {
 		return createLeaguePane;
 	}
 

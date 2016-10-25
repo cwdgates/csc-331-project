@@ -4,8 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import com.sun.prism.Image;
 
 import model.CredentialChecker;
 import model.UserModel;
@@ -93,9 +101,14 @@ public class LoginController implements ActionListener, KeyListener {
 	}
 
 	private boolean validateFields() {
+		java.net.URL imgURL = getClass().getResource("../ui/success-icon.png");
+		ImageIcon icon = null;
+		if (imgURL != null){
+			icon = new ImageIcon(imgURL);
+		}
 		if (loginPane.getUsername().length() == 0 || loginPane.getPassword().length() == 0) {
 			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.", "",
-					JOptionPane.WARNING_MESSAGE);
+					JOptionPane.WARNING_MESSAGE, icon);
 			return false;
 		}
 		return true;

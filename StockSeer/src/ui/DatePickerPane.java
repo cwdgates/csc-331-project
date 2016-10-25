@@ -1,19 +1,21 @@
 package ui;
 
 import javax.swing.JPanel;
-import org.joda.time.JodaTimePermission;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Component;
+import java.time.Instant;
+
 import javax.swing.Box;
 
 public class DatePickerPane extends JPanel {
 	private JComboBox<String> cbMonth;
-	private JComboBox<String> cbDay;
+	private JComboBox<String> cbDayOfMonth;
 	private JComboBox<String> cbYear;
 
 	/**
@@ -38,11 +40,11 @@ public class DatePickerPane extends JPanel {
 		JLabel lblDay = new JLabel("Day");
 		add(lblDay);
 
-		cbDay = new JComboBox<String>();
-		add(cbDay);
-		cbDay.addItem("--");
+		cbDayOfMonth = new JComboBox<String>();
+		add(cbDayOfMonth);
+		cbDayOfMonth.addItem("--");
 		for (int i = 1; i <= 31; i++) {
-			cbDay.addItem(i + "");
+			cbDayOfMonth.addItem(i + "");
 		}
 
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
@@ -60,11 +62,11 @@ public class DatePickerPane extends JPanel {
 		add(cbYear);
 	}
 
-	public Date getDate() {
-		Date date = new Date();
-		// FIXME working on date
-		date.setMonth(Integer.parseInt((String) cbMonth.getSelectedItem()));
-
+	public GregorianCalendar getDate() {
+		int year = Integer.parseInt((String) cbYear.getSelectedItem());
+		int month = Integer.parseInt((String) cbMonth.getSelectedItem());
+		int dayOfMonth = Integer.parseInt((String) cbDayOfMonth.getSelectedItem());
+		GregorianCalendar date = new GregorianCalendar(year, month, dayOfMonth);
 		return date;
 	}
 }
