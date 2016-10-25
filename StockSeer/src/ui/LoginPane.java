@@ -1,6 +1,8 @@
-package view;
+package ui;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -8,31 +10,32 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import util.CredentialUtil;
+import model.CredentialChecker;
 
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class LoginPane extends JPanel {
+	public static final String LOGIN_BTN = "Login";
+	public static final String SIGNUP_BTN = "Sign Up";
+
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JPanel panel;
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
 
-	private CredentialUtil loginModel;
-
 	/**
 	 * Create the panel.
 	 */
-	public LoginPane(CredentialUtil loginModel) {
-		this.loginModel = loginModel;
+	public LoginPane() {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JLabel lblUsername = new JLabel("Username");
@@ -60,7 +63,7 @@ public class LoginPane extends JPanel {
 		gbc_lblPassword.gridy = 1;
 		add(lblPassword, gbc_lblPassword);
 
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
 		gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
@@ -71,15 +74,16 @@ public class LoginPane extends JPanel {
 
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 2;
 		gbc_panel.gridy = 2;
 		add(panel, gbc_panel);
 
-		btnLogin = new JButton("Login");
+		btnLogin = new JButton(LOGIN_BTN);
 		panel.add(btnLogin);
 
-		btnSignUp = new JButton("Sign Up");
+		btnSignUp = new JButton(SIGNUP_BTN);
 		panel.add(btnSignUp);
 
 		btnResetPassword = new JButton("Reset Password");
@@ -87,22 +91,33 @@ public class LoginPane extends JPanel {
 
 	}
 
+	/**
+	 * assign listeners to specific buttons
+	 * 
+	 * @param loginController
+	 */
 	public void registerListeners(LoginController loginController) {
 		btnLogin.addActionListener(loginController);
 		btnSignUp.addActionListener(loginController);
+		btnResetPassword.addActionListener(loginController);
+		txtPassword.addKeyListener(loginController);
+		txtUsername.addKeyListener(loginController);
 	}
 
-	public void updateLoginModel() {
-		// loginModel.setUsername(txtUsername.getText());
-		// loginModel.setPassword(txtPassword.getText());
-	}
-
-	public String getUserName() {
+	public String getUsername() {
 		return txtUsername.getText();
 	}
 
 	public String getPassword() {
-		return txtPassword.getText();
+		return String.valueOf(txtPassword.getPassword());
+	}
+
+	/**
+	 * clear all text fields
+	 */
+	public void clear() {
+		txtUsername.setText("");
+		txtPassword.setText("");
 	}
 
 }

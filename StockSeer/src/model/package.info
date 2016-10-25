@@ -1,0 +1,7 @@
+Responsibility:
+-User by the persistence layer when information is queried from the database.
+-Provide the ability to store all information pertaining to an image-set in 
+a single unit for easy transfer from the persistence layer to the controller layer.
+
+Functionality: 
+-Store persistence data and provide a means to get and set the field values.

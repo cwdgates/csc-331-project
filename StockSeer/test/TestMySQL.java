@@ -1,9 +1,10 @@
+
 import java.sql.*;
 
 import javax.security.auth.login.CredentialException;
 
-import util.CredentialUtil;
-import util.DbUtil;
+import model.CredentialChecker;
+import persistence.DBConnection;
 
 public class TestMySQL {
 	public static void main(String[] args) {
@@ -22,22 +23,22 @@ public class TestMySQL {
 		// try to connect
 		try {
 			// Connection conn = DriverManager.getConnection(URL, USER, PASS);
-			Connection conn = DbUtil.getConnection();
+			Connection conn = DBConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			String sql;
 			sql = "Select username, first_name, last_name from user";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// get query result
-//			System.out.println("Print result of the query...");
-//			while (rs.next()) {
-//				System.out.println(rs.getString("username"));
-//				System.out.println(rs.getString("first_name"));
-//				System.out.println(rs.getString("last_name"));
-//			}
+			System.out.println("Print result of the query...");
+			while (rs.next()) {
+				System.out.println(rs.getString("username"));
+				System.out.println(rs.getString("first_name"));
+				System.out.println(rs.getString("last_name"));
+			}
 			
 			// check credential
-			if (CredentialUtil.checkUsernamePassword("anvuhero", "nthy59")) {
+			if (CredentialChecker.checkUsernameAndPassword("ginger", "password")) {
 				System.out.println("Valid credential");
 			} else {
 				System.out.println("Invalid credential");

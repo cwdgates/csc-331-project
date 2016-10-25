@@ -3,15 +3,15 @@
  * @#resources http://thejavatrail.blogspot.com/2012/08/step-by-step-guide-developing-mvc.html
  */
 
-package util;
+package persistence;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.sql.Connection;
 
 /**
  * This class handle the database connection to our MySQL server. We read
@@ -21,13 +21,14 @@ import java.util.Properties;
  * @author aqv
  *
  */
-public class DbUtil {
+public class DBConnection {
 	private static Connection connection = null;
 
 	/**
-	 * @return Connection to the database
+	 * @return shared Connection object (only one Connection object is needed
+	 *         for this app since it connect to only one database server (AWS
+	 *         RDS)
 	 */
-	@SuppressWarnings("finally")
 	public static Connection getConnection() {
 		if (connection != null) {
 			return connection;
@@ -35,15 +36,16 @@ public class DbUtil {
 
 		try {
 			Properties prop = new Properties();
-			InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
+			InputStream inputStream = DBConnection.class.getClassLoader().getResourceAsStream("db.properties");
 			prop.load(inputStream);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("username");
 			String password = prop.getProperty("password");
 			Class.forName(driver);
-			connection = DriverManager.getConnection(url, user, password);
-
+			System.out.println("Trying to connect to the database...");
+			connection = (Connection) DriverManager.getConnection(url, user, password);
+			System.out.println("Successfully connect to the database.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -55,5 +57,14 @@ public class DbUtil {
 			e.printStackTrace();
 		}
 		return connection;
+	}
+
+	public static void closeConnection() {
+		try {
+			connection.close();
+			System.out.println("Database Connection closed.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
