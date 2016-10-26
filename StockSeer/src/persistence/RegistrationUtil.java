@@ -64,9 +64,8 @@ public abstract class RegistrationUtil {
 			String password) {
 		UserModel user = null;
 		PreparedStatement insertStatement = null;
-		int numRowAffected = 0;
 		try {
-			String insertQuery = "INSERT INTO user" + "(first_name, last_name, email, username, password) VALUES"
+			String insertQuery = "INSERT INTO user (first_name, last_name, email, username, password) VALUES"
 					+ "(?,?,?,?,?)";
 			insertStatement = DBConnection.getConnection().prepareStatement(insertQuery);
 			insertStatement.setString(1, firstName);
@@ -74,7 +73,9 @@ public abstract class RegistrationUtil {
 			insertStatement.setString(3, email);
 			insertStatement.setString(4, username);
 			insertStatement.setString(5, password);
-			numRowAffected = insertStatement.executeUpdate();
+			int numRowAffected = insertStatement.executeUpdate();
+
+			// get id, first_name, last_name from database
 			if (numRowAffected > 0) {
 				PreparedStatement selectStatement = null;
 				ResultSet rs = null;
@@ -83,8 +84,16 @@ public abstract class RegistrationUtil {
 					selectStatement = DBConnection.getConnection().prepareStatement(selectQuery);
 					selectStatement.setString(1, username);
 					rs = selectStatement.executeQuery();
-					user = new UserModel(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"));
+
+					if (rs.next()) {
+						int retId = rs.getInt("id");
+						String retFirstName = rs.getString("first_name");
+						String retLastName = rs.getString("last_name");
+						user = new UserModel(retId, retFirstName, retLastName);
+					}
+
 				} catch (SQLException e) {
+					System.err.println("Failed to SELECT");
 					e.printStackTrace();
 				} finally {
 					try {
@@ -95,6 +104,7 @@ public abstract class RegistrationUtil {
 				}
 			}
 		} catch (SQLException e) {
+			System.err.println("Failed to INSERT");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -105,4 +115,5 @@ public abstract class RegistrationUtil {
 		}
 		return user;
 	}
+
 }

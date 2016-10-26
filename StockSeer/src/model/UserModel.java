@@ -67,4 +67,11 @@ public class UserModel {
 		return "User: id=" + id + " firstname=" + firstName + " lastname=" + lastName;
 	}
 
+	public boolean getStatus() {
+		// FIXME rough estimation
+		if (id != null)
+			return true;
+		return false;
+	}
+
 }

@@ -29,7 +29,8 @@ public class StockSeer {
 	private LogoutController logoutController;
 
 	// models ---------------------
-	private UserModel userModel = null; // only one user per instance of application
+	private UserModel userModel = null; // only one user per instance of
+										// application
 
 	public void run() {
 		// set look and feel
@@ -51,10 +52,9 @@ public class StockSeer {
 		appView = new AppView();
 
 		// ------------------- INITIALIZE MODELS ---------------------
-		userModel = new UserModel();
 		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView, userModel);
-		registrationController = new RegistrationController(appView);
+		registrationController = new RegistrationController(appView, userModel);
 		homePaneController = new HomePaneController(appView);
 		leagueCreationController = new LeagueCreationController(appView);
 		logoutController = new LogoutController(appView, userModel);
