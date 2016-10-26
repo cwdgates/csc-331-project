@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.AppView;
-import ui.CreateLeaguePane;
+import ui.LeagueCreationPane;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;
-	CreateLeaguePane createLeaguePane;
+	LeagueCreationPane createLeaguePane;
 
 	public LeagueCreationController(AppView appView) {
 		this.appView = appView;
@@ -19,12 +19,12 @@ public class LeagueCreationController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		switch (command) {
-		case CreateLeaguePane.CREATE: {
-			System.out.println(CreateLeaguePane.CREATE);
+		case LeagueCreationPane.CREATE: {
+			System.out.println(LeagueCreationPane.CREATE);
 			break;
 		}
-		case CreateLeaguePane.CANCEL: {
-			System.out.println(CreateLeaguePane.CANCEL);
+		case LeagueCreationPane.CANCEL: {
+			System.out.println(LeagueCreationPane.CANCEL);
 			appView.viewHome();
 			break;
 		}

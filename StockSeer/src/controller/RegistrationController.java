@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.RegistrationModel;
+import persistence.RegistrationUtil;
 import ui.AppView;
 import ui.RegistrationPane;
 
@@ -23,32 +23,31 @@ public class RegistrationController implements ActionListener {
 		String command = event.getActionCommand();
 
 		switch (command) {
-			case RegistrationPane.SIGN_UP:
-				if (fieldsEmpty()) {
-					JOptionPane.showMessageDialog(appView, "Empty fields", "Error", JOptionPane.WARNING_MESSAGE);
-				} else if (misMatchedPassword()) {
-					JOptionPane.showMessageDialog(null, "Mismatched password", "Error", JOptionPane.WARNING_MESSAGE);
-				} else {
-					RegistrationModel regModel = new RegistrationModel(regPane.getFirstName(), regPane.getLastName(),
-							regPane.getEmail(), regPane.getUsername(), regPane.getPassword());
-					boolean isSuccess = regModel.register();
-					JOptionPane.showMessageDialog(appView, regModel.getStatusMessage(), "Registration Status",
-							JOptionPane.INFORMATION_MESSAGE);
-					if (isSuccess) {
-						appView.viewLogin();
-					}
+		case RegistrationPane.SIGN_UP:
+			if (isFieldsEmpty()) {
+				JOptionPane.showMessageDialog(appView, "There is at least one empty field.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+			} else if (!isPasswordsMatched()) {
+				JOptionPane.showMessageDialog(null, "The passwords you entered did not match.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				if (!RegistrationUtil.isUsernameUnique(regPane.getUsername())) {
+					// FIXME still need to work on
+				} else if (!RegistrationUtil.isEmailUnique(regPane.getEmail())) {
+
 				}
-				break;
-			// ----------- END SIGN UP---------
-			case RegistrationPane.CANCEL:
-				appView.viewLogin();
-				break;
-			// ----------- END CANCEL----------
-			default:
-				break;
+			}
+			break;
+		// ----------- END SIGN UP---------
+		case RegistrationPane.CANCEL:
+			appView.viewLogin();
+			break;
+		// ----------- END CANCEL----------
+		default:
+			break;
 		}
 		// clear all text fields in registration pane
-		regPane.clear();
+		regPane.setTextFieldsEmpty();
 
 	}
 
@@ -57,7 +56,7 @@ public class RegistrationController implements ActionListener {
 	 * 
 	 * @return false if at least one field is empty. True otherwise
 	 */
-	private boolean fieldsEmpty() {
+	private boolean isFieldsEmpty() {
 		if (regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
 				|| regPane.getLastName().length() == 0 || regPane.getPassword().length() == 0
 				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0) {
@@ -71,11 +70,11 @@ public class RegistrationController implements ActionListener {
 	 * 
 	 * @return
 	 */
-	private boolean misMatchedPassword() {
+	private boolean isPasswordsMatched() {
 		if (regPane.getPassword().compareTo(regPane.getRetypedPassword()) == 0) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 }

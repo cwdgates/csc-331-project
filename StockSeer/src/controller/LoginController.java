@@ -4,8 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import com.sun.prism.Image;
 
 import model.CredentialChecker;
 import model.UserModel;
@@ -82,10 +90,12 @@ public class LoginController implements ActionListener, KeyListener {
 			// ------ GRANT ACCESS -------
 			userModel = new UserModel();
 			userModel.login(loginPane.getUsername().trim(), loginPane.getPassword().trim());
-			JOptionPane.showMessageDialog(appView,
-					"Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + ".\nClick OK to continue.");
+
+			String msg = "Welcome " + userModel.getFirstName() + " " + userModel.getLastName()
+					+ ".\nClick OK to continue.";
+			JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
 			appView.viewHome();
-			loginPane.clear();
+			loginPane.setTextFieldsEmpty();
 		} else {
 			JOptionPane.showMessageDialog(loginPane, "Wrong username or password.", "Warning",
 					JOptionPane.WARNING_MESSAGE);
