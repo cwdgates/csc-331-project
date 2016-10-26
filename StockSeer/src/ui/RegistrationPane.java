@@ -187,7 +187,7 @@ public class RegistrationPane extends JPanel {
 		return new String(pwdRetypedpassword.getPassword());
 	}
 
-	public void clear() {
+	public void setTextFieldsEmpty() {
 		txtFirstname.setText("");
 		txtLastname.setText("");
 		txtEmail.setText("");

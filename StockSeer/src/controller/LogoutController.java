@@ -23,8 +23,7 @@ public class LogoutController implements ActionListener {
 				JOptionPane.OK_CANCEL_OPTION);
 		switch (choice) {
 		case JOptionPane.OK_OPTION:
-			userModel.reset();
-			System.out.println(userModel.toString());
+			userModel.setFieldsNull();
 			appView.viewLogin();
 			break;
 		case JOptionPane.CANCEL_OPTION:

@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.GregorianCalendar;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,11 +17,11 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class CreateLeaguePane extends JPanel {
+public class LeagueCreationPane extends JPanel {
 	private JTextField textField;
 	private JButton btnCancel;
 	private JButton btnCreate;
-	private JComboBox comboBoxNumPlayers;
+	private JComboBox<Integer> comboBoxNumPlayers;
 	private DatePickerPane startDatePicker;
 	private DatePickerPane endDatePicker;
 
@@ -30,7 +31,7 @@ public class CreateLeaguePane extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CreateLeaguePane() {
+	public LeagueCreationPane() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 194, 0, 0 };
@@ -79,7 +80,7 @@ public class CreateLeaguePane extends JPanel {
 		gbc_lblNumberOfPlayers.gridy = 1;
 		panelForm.add(lblNumberOfPlayers, gbc_lblNumberOfPlayers);
 
-		comboBoxNumPlayers = new JComboBox();
+		comboBoxNumPlayers = new JComboBox<Integer>();
 		GridBagConstraints gbc_comboBoxNumPlayers = new GridBagConstraints();
 		gbc_comboBoxNumPlayers.anchor = GridBagConstraints.NORTH;
 		gbc_comboBoxNumPlayers.fill = GridBagConstraints.HORIZONTAL;
@@ -145,6 +146,14 @@ public class CreateLeaguePane extends JPanel {
 	public void registerListeners(LeagueCreationController controller) {
 		btnCancel.addActionListener(controller);
 		btnCreate.addActionListener(controller);
+	}
+
+	public GregorianCalendar getStartDate() {
+		return startDatePicker.getDate();
+	}
+
+	public GregorianCalendar getEndDate() {
+		return endDatePicker.getDate();
 	}
 
 }
