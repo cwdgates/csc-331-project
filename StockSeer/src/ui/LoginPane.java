@@ -115,7 +115,7 @@ public class LoginPane extends JPanel {
 	/**
 	 * clear all text fields
 	 */
-	public void clear() {
+	public void setTextFieldsEmpty() {
 		txtUsername.setText("");
 		txtPassword.setText("");
 	}

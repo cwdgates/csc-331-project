@@ -21,7 +21,7 @@ public class LeagueCreationPane extends JPanel {
 	private JTextField textField;
 	private JButton btnCancel;
 	private JButton btnCreate;
-	private JComboBox comboBoxNumPlayers;
+	private JComboBox<Integer> comboBoxNumPlayers;
 	private DatePickerPane startDatePicker;
 	private DatePickerPane endDatePicker;
 
@@ -80,7 +80,7 @@ public class LeagueCreationPane extends JPanel {
 		gbc_lblNumberOfPlayers.gridy = 1;
 		panelForm.add(lblNumberOfPlayers, gbc_lblNumberOfPlayers);
 
-		comboBoxNumPlayers = new JComboBox();
+		comboBoxNumPlayers = new JComboBox<Integer>();
 		GridBagConstraints gbc_comboBoxNumPlayers = new GridBagConstraints();
 		gbc_comboBoxNumPlayers.anchor = GridBagConstraints.NORTH;
 		gbc_comboBoxNumPlayers.fill = GridBagConstraints.HORIZONTAL;

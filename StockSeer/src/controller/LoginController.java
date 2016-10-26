@@ -90,10 +90,12 @@ public class LoginController implements ActionListener, KeyListener {
 			// ------ GRANT ACCESS -------
 			userModel = new UserModel();
 			userModel.login(loginPane.getUsername().trim(), loginPane.getPassword().trim());
-			JOptionPane.showMessageDialog(appView,
-					"Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + ".\nClick OK to continue.");
+
+			String msg = "Welcome " + userModel.getFirstName() + " " + userModel.getLastName()
+					+ ".\nClick OK to continue.";
+			JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
 			appView.viewHome();
-			loginPane.clear();
+			loginPane.setTextFieldsEmpty();
 		} else {
 			JOptionPane.showMessageDialog(loginPane, "Wrong username or password.", "Warning",
 					JOptionPane.WARNING_MESSAGE);
@@ -101,14 +103,9 @@ public class LoginController implements ActionListener, KeyListener {
 	}
 
 	private boolean validateFields() {
-		java.net.URL imgURL = getClass().getResource("../ui/success-icon.png");
-		ImageIcon icon = null;
-		if (imgURL != null){
-			icon = new ImageIcon(imgURL);
-		}
 		if (loginPane.getUsername().length() == 0 || loginPane.getPassword().length() == 0) {
 			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.", "",
-					JOptionPane.WARNING_MESSAGE, icon);
+					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;

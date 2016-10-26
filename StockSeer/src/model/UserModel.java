@@ -6,13 +6,17 @@ import java.sql.ResultSet;
 import persistence.DBConnection;
 
 public class UserModel {
-	private String firstName;
-	private String lastName;
+	private String firstName = null;
+	private String lastName = null;
 	private Integer id = null;
 
 	public UserModel() {
-		firstName = "";
-		lastName = "";
+	}
+
+	public UserModel(Integer id, String firstName, String lastName) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public String getFirstName() {
@@ -23,8 +27,12 @@ public class UserModel {
 		return lastName;
 	}
 
-	public int getId() {
-		return id;
+	public int getId() throws NullPointerException {
+		if (id == null) {
+			throw new NullPointerException("User object's fields are null");
+		} else {
+			return id;
+		}
 	}
 
 	public void login(String username, String password) {
@@ -39,7 +47,6 @@ public class UserModel {
 				id = new Integer(resultSet.getInt("id"));
 				firstName = resultSet.getString("first_name");
 				lastName = resultSet.getString("last_name");
-				System.out.println("id: " + id + " first name " + firstName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,10 +56,15 @@ public class UserModel {
 	/**
 	 * clear local data relates to user. Main purpose is for logging out
 	 */
-	public void reset() {
+	public void setFieldsNull() {
 		id = null;
 		firstName = null;
 		lastName = null;
+	}
+
+	@Override
+	public String toString() {
+		return "User: id=" + id + " firstname=" + firstName + " lastname=" + lastName;
 	}
 
 }
