@@ -23,31 +23,41 @@ public class RegistrationController implements ActionListener {
 		String command = event.getActionCommand();
 
 		switch (command) {
-		case RegistrationPane.SIGN_UP:
-			if (isFieldsEmpty()) {
-				JOptionPane.showMessageDialog(appView, "There is at least one empty field.", "Error",
-						JOptionPane.WARNING_MESSAGE);
-			} else if (!isPasswordsMatched()) {
-				JOptionPane.showMessageDialog(null, "The passwords you entered did not match.", "Error",
-						JOptionPane.WARNING_MESSAGE);
-			} else {
-				if (!RegistrationUtil.isUsernameUnique(regPane.getUsername())) {
-					// FIXME still need to work on
-				} else if (!RegistrationUtil.isEmailUnique(regPane.getEmail())) {
+			case RegistrationPane.SIGN_UP:
+				if (isFieldsEmpty()) {
+					JOptionPane.showMessageDialog(appView, "There is at least one empty field.", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				} else if (!isPasswordsMatched()) {
+					JOptionPane.showMessageDialog(appView, "The passwords you entered did not match.", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				} else {
+					if (!RegistrationUtil.isUsernameUnique(regPane.getUsername())) {
+						JOptionPane.showMessageDialog(appView, "This username has been used by another account", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (!RegistrationUtil.isEmailUnique(regPane.getEmail())) {
+						JOptionPane.showMessageDialog(appView, "This email has been used by another account.", "",
+								JOptionPane.WARNING_MESSAGE);
+					}  else if (regPane.getPassword().length() < 6) {
+						JOptionPane.showMessageDialog(appView, "Password need to have lastleast 6 characters", "",
+								JOptionPane.WARNING_MESSAGE);
+					} else {
+						// register
 
+						// clear text fields
+						regPane.setTextFieldsEmpty();
+					}
 				}
-			}
-			break;
-		// ----------- END SIGN UP---------
-		case RegistrationPane.CANCEL:
-			appView.viewLogin();
-			break;
-		// ----------- END CANCEL----------
-		default:
-			break;
+				break;
+			// ----------- END SIGN UP---------
+			case RegistrationPane.CANCEL:
+				appView.viewLogin();
+				regPane.setTextFieldsEmpty();
+				break;
+			// ----------- END CANCEL----------
+			default:
+				break;
 		}
 		// clear all text fields in registration pane
-		regPane.setTextFieldsEmpty();
 
 	}
 
