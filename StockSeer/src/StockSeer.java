@@ -6,7 +6,6 @@ import controller.HomePaneController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.RegistrationController;
-import model.CredentialChecker;
 import model.UserModel;
 import persistence.DBConnection;
 import ui.*;

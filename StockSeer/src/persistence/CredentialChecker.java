@@ -1,10 +1,8 @@
-package model;
+package persistence;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import persistence.DBConnection;
 
 /**
  * check credential, then grant access to app
