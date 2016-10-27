@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  */
 public class CredentialChecker {
-	
+
 	public static boolean checkUsernameAndPassword(String username, String password) {
 		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
