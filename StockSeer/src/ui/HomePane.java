@@ -7,7 +7,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import controller.HomePaneController;
-import controller.LogoutController;
 
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
@@ -65,12 +64,11 @@ public class HomePane extends JPanel {
 
 	}
 
-	public void registerListeners(HomePaneController homePaneController, LogoutController logoutController) {
+	public void registerListeners(HomePaneController homePaneController) {
 		btnCreateLeague.addActionListener(homePaneController);
 		btnJoinLeague.addActionListener(homePaneController);
 		btnManageLeagues.addActionListener(homePaneController);
-		btnLogout.addActionListener(logoutController);
+		btnLogout.addActionListener(homePaneController);
 	}
-	
-	
+
 }

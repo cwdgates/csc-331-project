@@ -1,9 +1,7 @@
 
 import java.sql.*;
 
-import javax.security.auth.login.CredentialException;
-
-import model.CredentialChecker;
+import persistence.CredentialChecker;
 import persistence.DBConnection;
 
 public class TestMySQL {
@@ -36,7 +34,7 @@ public class TestMySQL {
 				System.out.println(rs.getString("first_name"));
 				System.out.println(rs.getString("last_name"));
 			}
-			
+
 			// check credential
 			if (CredentialChecker.checkUsernameAndPassword("ginger", "password")) {
 				System.out.println("Valid credential");

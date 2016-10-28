@@ -11,12 +11,44 @@ public class UserModel {
 	private Integer id = null;
 
 	public UserModel() {
+		this.id = null;
+		this.firstName = null;
+		this.lastName = null;
 	}
 
 	public UserModel(Integer id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+
+	/**
+	 * Object factory
+	 * 
+	 * @param username
+	 * @param password
+	 * @return UserModel object if username and password match <br>
+	 *         null if username and password not match
+	 */
+	public static UserModel getUser(String username, String password) {
+		UserModel userModel = null;
+		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = DBConnection.getConnection().prepareStatement(query);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				userModel = new UserModel();
+				userModel.id = new Integer(resultSet.getInt("id"));
+				userModel.firstName = resultSet.getString("first_name");
+				userModel.lastName = resultSet.getString("last_name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userModel;
 	}
 
 	public String getFirstName() {
@@ -28,42 +60,26 @@ public class UserModel {
 	}
 
 	public int getId() throws NullPointerException {
-		if (id == null) {
-			throw new NullPointerException("User object's fields are null");
-		} else {
-			return id;
-		}
-	}
-
-	public void login(String username, String password) {
-		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
-		PreparedStatement preparedStatement = null;
-		try {
-			preparedStatement = DBConnection.getConnection().prepareStatement(query);
-			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, password);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				id = new Integer(resultSet.getInt("id"));
-				firstName = resultSet.getString("first_name");
-				lastName = resultSet.getString("last_name");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return id;
 	}
 
 	/**
-	 * clear local data relates to user. Main purpose is for logging out
+	 * clear local data relates to user. Main purpose is for logging out<br>
+	 * This will set id, firstname, and lastname to null
 	 */
-	public void setFieldsNull() {
-		id = null;
-		firstName = null;
-		lastName = null;
+	public void clearUser() {
+		if (id != null)
+			id = null;
+		if (firstName != null)
+			firstName = null;
+		if (lastName != null)
+			lastName = null;
 	}
 
-	@Override
-	public String toString() {
+	/**
+	 * @return a string in this format User: id= firstname= lastname=
+	 */
+	public String getInfo() {
 		return "User: id=" + id + " firstname=" + firstName + " lastname=" + lastName;
 	}
 

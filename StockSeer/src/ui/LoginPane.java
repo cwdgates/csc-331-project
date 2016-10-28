@@ -10,7 +10,6 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import controller.LoginController;
-import model.CredentialChecker;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -105,11 +104,11 @@ public class LoginPane extends JPanel {
 	}
 
 	public String getUsername() {
-		return txtUsername.getText();
+		return txtUsername.getText().trim();
 	}
 
 	public String getPassword() {
-		return String.valueOf(txtPassword.getPassword());
+		return String.valueOf(txtPassword.getPassword()).trim();
 	}
 
 	/**

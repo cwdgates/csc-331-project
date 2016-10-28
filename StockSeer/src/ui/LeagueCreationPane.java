@@ -6,19 +6,18 @@ import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.GregorianCalendar;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import controller.LeagueCreationController;
-
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class LeagueCreationPane extends JPanel {
-	private JTextField textField;
+	private JTextField txtLeagueName;
 	private JButton btnCancel;
 	private JButton btnCreate;
 	private JComboBox<Integer> comboBoxNumPlayers;
@@ -27,6 +26,7 @@ public class LeagueCreationPane extends JPanel {
 
 	public final static String CANCEL = "Cancel";
 	public final static String CREATE = "Create";
+	private final ButtonGroup btnGrpDifficulty = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -49,9 +49,9 @@ public class LeagueCreationPane extends JPanel {
 		add(panelForm, gbc_panelForm);
 		GridBagLayout gbl_panelForm = new GridBagLayout();
 		gbl_panelForm.columnWidths = new int[] { 115, 327, 0 };
-		gbl_panelForm.rowHeights = new int[] { 26, 27, 27, 27, 0 };
-		gbl_panelForm.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panelForm.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelForm.rowHeights = new int[] { 26, 27, 27, 27, 0, 0 };
+		gbl_panelForm.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelForm.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelForm.setLayout(gbl_panelForm);
 
 		JLabel lblLeagueName = new JLabel("League Name");
@@ -62,15 +62,15 @@ public class LeagueCreationPane extends JPanel {
 		gbc_lblLeagueName.gridy = 0;
 		panelForm.add(lblLeagueName, gbc_lblLeagueName);
 
-		textField = new JTextField();
+		txtLeagueName = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.anchor = GridBagConstraints.NORTH;
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 0;
-		panelForm.add(textField, gbc_textField);
-		textField.setColumns(10);
+		panelForm.add(txtLeagueName, gbc_textField);
+		txtLeagueName.setColumns(10);
 
 		JLabel lblNumberOfPlayers = new JLabel("Number of Players");
 		GridBagConstraints gbc_lblNumberOfPlayers = new GridBagConstraints();
@@ -108,18 +108,39 @@ public class LeagueCreationPane extends JPanel {
 		JLabel lblEndDate = new JLabel("End Date");
 		GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
 		gbc_lblEndDate.anchor = GridBagConstraints.EAST;
-		gbc_lblEndDate.insets = new Insets(0, 0, 0, 5);
+		gbc_lblEndDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEndDate.gridx = 0;
 		gbc_lblEndDate.gridy = 3;
 		panelForm.add(lblEndDate, gbc_lblEndDate);
 
 		endDatePicker = new DatePickerPane();
 		GridBagConstraints gbc_endDatePicker = new GridBagConstraints();
+		gbc_endDatePicker.insets = new Insets(0, 0, 5, 0);
 		gbc_endDatePicker.anchor = GridBagConstraints.NORTH;
 		gbc_endDatePicker.fill = GridBagConstraints.HORIZONTAL;
 		gbc_endDatePicker.gridx = 1;
 		gbc_endDatePicker.gridy = 3;
 		panelForm.add(endDatePicker, gbc_endDatePicker);
+
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 1;
+		gbc_panel_1.gridy = 4;
+		panelForm.add(panel_1, gbc_panel_1);
+
+		JRadioButton rdbtnEasy = new JRadioButton("Easy");
+		rdbtnEasy.setSelected(true);
+		btnGrpDifficulty.add(rdbtnEasy);
+		panel_1.add(rdbtnEasy);
+
+		JRadioButton rdbtnMedium = new JRadioButton("Medium");
+		btnGrpDifficulty.add(rdbtnMedium);
+		panel_1.add(rdbtnMedium);
+
+		JRadioButton rdbtnHard = new JRadioButton("Hard");
+		btnGrpDifficulty.add(rdbtnHard);
+		panel_1.add(rdbtnHard);
 		for (int i = 2; i <= 10; i++) {
 			comboBoxNumPlayers.addItem(i);
 		}
@@ -148,12 +169,32 @@ public class LeagueCreationPane extends JPanel {
 		btnCreate.addActionListener(controller);
 	}
 
+	/**
+	 * 
+	 * @return null if date is invalid <br>
+	 *         GregorianCalendar object if date is valid
+	 */
 	public GregorianCalendar getStartDate() {
 		return startDatePicker.getDate();
 	}
 
+	/**
+	 * 
+	 * @return null if date is invalid <br>
+	 *         GregorianCalendar object if date is valid
+	 */
 	public GregorianCalendar getEndDate() {
 		return endDatePicker.getDate();
+	}
+
+	/**
+	 * 
+	 * @return Name of the league.<br>
+	 *         Whitespace at beginning and end will be trimmed<br>
+	 *         Case sensitive
+	 */
+	public String getLeagueName() {
+		return txtLeagueName.getText().trim();
 	}
 
 }

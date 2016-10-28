@@ -1,10 +1,8 @@
-package model;
+package persistence;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import persistence.DBConnection;
 
 /**
  * check credential, then grant access to app
@@ -13,7 +11,7 @@ import persistence.DBConnection;
  *
  */
 public class CredentialChecker {
-	
+
 	public static boolean checkUsernameAndPassword(String username, String password) {
 		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
