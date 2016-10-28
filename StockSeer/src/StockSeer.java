@@ -33,11 +33,11 @@ public class StockSeer {
 
 	public void run() {
 		// set look and feel
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		// try to connect to database
 		if (DBConnection.getConnection() == null) {
