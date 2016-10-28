@@ -6,6 +6,7 @@ import controller.HomePaneController;
 import controller.LoginController;
 import controller.RegistrationController;
 import model.CurrentUserModel;
+import model.LeagueListModel;
 import persistence.DBConnection;
 import ui.*;
 
@@ -27,7 +28,8 @@ public class StockSeer {
 
 	// models ---------------------
 	private CurrentUserModel userModel = null; // only one user per instance of
-										// application
+	// application
+	private LeagueListModel leagueListModel = null;
 
 	public void run() {
 		// set look and feel
@@ -49,7 +51,7 @@ public class StockSeer {
 		appView = new AppView();
 
 		// ------------------- INITIALIZE MODELS ---------------------
-
+		leagueListModel = new LeagueListModel();
 		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView, userModel);
 		registrationController = new RegistrationController(appView);
