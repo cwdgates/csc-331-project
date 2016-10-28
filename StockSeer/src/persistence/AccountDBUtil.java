@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author anvu
  *
  */
-public abstract class AccountUtil {
+public abstract class AccountDBUtil {
 	/**
 	 * 
 	 * @param username

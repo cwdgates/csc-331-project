@@ -1,10 +1,38 @@
 package model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import persistence.DBConnection;
+
 public class LeagueModel {
+	public static boolean isLeagueUnique(String leagueName) {
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT id FROM league WHERE name = ?";
+			statement = DBConnection.getConnection().prepareStatement(sql);
+			statement.setString(1, leagueName);
+			rs = statement.executeQuery();
+			if (rs.next()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
+
 	public enum Difficulty {
 		EASY, MEDIUM, HARD, NUT
 	}
@@ -15,6 +43,7 @@ public class LeagueModel {
 	private Date startDate;
 	private Date endDate;
 	private Difficulty difficulty;
+
 	private ArrayList<StockModel> stockList;
 
 	public String getLeagueName() {

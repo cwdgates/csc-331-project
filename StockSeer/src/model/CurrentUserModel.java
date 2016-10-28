@@ -5,18 +5,18 @@ import java.sql.ResultSet;
 
 import persistence.DBConnection;
 
-public class UserModel {
+public class CurrentUserModel {
 	private String firstName = null;
 	private String lastName = null;
 	private Integer id = null;
 
-	public UserModel() {
+	public CurrentUserModel() {
 		this.id = null;
 		this.firstName = null;
 		this.lastName = null;
 	}
 
-	public UserModel(Integer id, String firstName, String lastName) {
+	public CurrentUserModel(Integer id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -30,8 +30,8 @@ public class UserModel {
 	 * @return UserModel object if username and password match <br>
 	 *         null if username and password not match
 	 */
-	public static UserModel getUser(String username, String password) {
-		UserModel userModel = null;
+	public static CurrentUserModel getUserFromDB(String username, String password) {
+		CurrentUserModel userModel = null;
 		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		try {
@@ -40,7 +40,7 @@ public class UserModel {
 			preparedStatement.setString(2, password);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				userModel = new UserModel();
+				userModel = new CurrentUserModel();
 				userModel.id = new Integer(resultSet.getInt("id"));
 				userModel.firstName = resultSet.getString("first_name");
 				userModel.lastName = resultSet.getString("last_name");

@@ -5,7 +5,7 @@ import controller.LeagueCreationController;
 import controller.HomePaneController;
 import controller.LoginController;
 import controller.RegistrationController;
-import model.UserModel;
+import model.CurrentUserModel;
 import persistence.DBConnection;
 import ui.*;
 
@@ -26,7 +26,7 @@ public class StockSeer {
 	private LeagueCreationController leagueCreationController;
 
 	// models ---------------------
-	private UserModel userModel = null; // only one user per instance of
+	private CurrentUserModel userModel = null; // only one user per instance of
 										// application
 
 	public void run() {

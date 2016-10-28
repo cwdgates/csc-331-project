@@ -7,16 +7,17 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 
-import model.UserModel;
+import model.LeagueModel;
+import model.CurrentUserModel;
 import ui.AppView;
 import ui.LeagueCreationPane;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;
 	LeagueCreationPane createLeaguePane;
-	UserModel userModel;
+	CurrentUserModel userModel;
 
-	public LeagueCreationController(AppView appView, UserModel userModel) {
+	public LeagueCreationController(AppView appView, CurrentUserModel userModel) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
 		this.userModel = userModel;
@@ -32,6 +33,10 @@ public class LeagueCreationController implements ActionListener {
 			// check name
 			if (createLeaguePane.getLeagueName().length() == 0) {
 				JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
+						JOptionPane.WARNING_MESSAGE);
+			} else if (LeagueModel.isLeagueUnique(createLeaguePane.getLeagueName())) {
+				JOptionPane.showMessageDialog(appView,
+						"The name has been used in another league.\nPlease use another name.", "",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
 				GregorianCalendar startDate = createLeaguePane.getStartDate();

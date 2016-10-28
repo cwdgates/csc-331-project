@@ -3,8 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.UserModel;
-import persistence.AccountUtil;
+import model.CurrentUserModel;
+import persistence.AccountDBUtil;
 import ui.AppView;
 import ui.RegistrationPane;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -35,12 +35,12 @@ public class RegistrationController implements ActionListener {
 							"The password you entered is not valid.\nPassword cannot have space(s).", "",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
-					if (!AccountUtil.isUsernameUnique(regPane.getUsername())) {
+					if (!AccountDBUtil.isUsernameUnique(regPane.getUsername())) {
 						JOptionPane.showMessageDialog(appView, "This username has been used by another account", "",
 								JOptionPane.WARNING_MESSAGE);
 					} else if (!EmailValidator.getInstance().isValid(regPane.getEmail())) {
 						JOptionPane.showMessageDialog(appView, "Invalid email.", "", JOptionPane.WARNING_MESSAGE);
-					} else if (!AccountUtil.isEmailUnique(regPane.getEmail())) {
+					} else if (!AccountDBUtil.isEmailUnique(regPane.getEmail())) {
 						JOptionPane.showMessageDialog(appView, "This email has been used by another account.", "",
 								JOptionPane.WARNING_MESSAGE);
 					} else if (regPane.getPassword().length() < 6) {
@@ -53,7 +53,7 @@ public class RegistrationController implements ActionListener {
 						String email = regPane.getEmail();
 						String username = regPane.getUsername();
 						String password = regPane.getPassword();
-						boolean result = AccountUtil.registerAccount(firstName, lastName, email, username, password);
+						boolean result = AccountDBUtil.registerAccount(firstName, lastName, email, username, password);
 						if (result) {
 							JOptionPane.showMessageDialog(appView, "Successfully created an account.", "",
 									JOptionPane.INFORMATION_MESSAGE);

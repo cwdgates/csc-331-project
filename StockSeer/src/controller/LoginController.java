@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import persistence.CredentialChecker;
-import model.UserModel;
+import model.CurrentUserModel;
 import ui.AppView;
 import ui.LoginPane;
 
@@ -20,15 +20,15 @@ public class LoginController implements ActionListener, KeyListener {
 	private LoginPane loginPane;
 
 	private AppView appView;
-	private UserModel userModel;
+	private CurrentUserModel userModel;
 
-	public LoginController(AppView appView, UserModel userModel) {
+	public LoginController(AppView appView, CurrentUserModel userModel) {
 		this.loginPane = appView.getLoginPane();
 		this.appView = appView;
 		this.userModel = userModel;
 	}
 
-	public void registerUser(UserModel userModel) {
+	public void registerUser(CurrentUserModel userModel) {
 		this.userModel = userModel;
 	}
 
@@ -81,8 +81,8 @@ public class LoginController implements ActionListener, KeyListener {
 			 * Grant access to the application. The object stay alive until
 			 * logout.
 			 */
-			userModel = new UserModel();
-			userModel = UserModel.getUser(loginPane.getUsername(), loginPane.getPassword());
+			userModel = new CurrentUserModel();
+			userModel = CurrentUserModel.getUserFromDB(loginPane.getUsername(), loginPane.getPassword());
 
 			// show welcome pane
 			String msg = "Welcome " + userModel.getFirstName() + " " + userModel.getLastName()

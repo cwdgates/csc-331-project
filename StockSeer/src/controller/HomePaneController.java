@@ -3,16 +3,16 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.UserModel;
+import model.CurrentUserModel;
 import ui.AppView;
 import ui.HomePane;
 
 public class HomePaneController implements ActionListener {
 	HomePane homePane;
 	AppView appView;
-	UserModel userModel;
+	CurrentUserModel userModel;
 
-	public HomePaneController(AppView appView, UserModel userModel) {
+	public HomePaneController(AppView appView, CurrentUserModel userModel) {
 		this.appView = appView;
 		this.homePane = appView.getHomePane();
 		this.userModel = userModel;
