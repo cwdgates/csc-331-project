@@ -42,7 +42,6 @@ public class TestMySQL {
 				System.out.println("Invalid credential");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // end try
 

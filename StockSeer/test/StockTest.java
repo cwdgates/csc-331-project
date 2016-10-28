@@ -12,7 +12,6 @@ public class StockTest {
 		try {
 			stock = YahooFinance.get("SSNLF");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//

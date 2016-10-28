@@ -20,7 +20,7 @@ public class LeagueCreationPane extends JPanel {
 	private JTextField txtLeagueName;
 	private JButton btnCancel;
 	private JButton btnCreate;
-	private JComboBox<Integer> comboBoxNumPlayers;
+	private JComboBox<Integer> comboBoxCapacity;
 	private DatePickerPane startDatePicker;
 	private DatePickerPane endDatePicker;
 
@@ -80,14 +80,14 @@ public class LeagueCreationPane extends JPanel {
 		gbc_lblNumberOfPlayers.gridy = 1;
 		panelForm.add(lblNumberOfPlayers, gbc_lblNumberOfPlayers);
 
-		comboBoxNumPlayers = new JComboBox<Integer>();
-		GridBagConstraints gbc_comboBoxNumPlayers = new GridBagConstraints();
-		gbc_comboBoxNumPlayers.anchor = GridBagConstraints.NORTH;
-		gbc_comboBoxNumPlayers.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxNumPlayers.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxNumPlayers.gridx = 1;
-		gbc_comboBoxNumPlayers.gridy = 1;
-		panelForm.add(comboBoxNumPlayers, gbc_comboBoxNumPlayers);
+		comboBoxCapacity = new JComboBox<Integer>();
+		GridBagConstraints gbc_comboBoxCapacity = new GridBagConstraints();
+		gbc_comboBoxCapacity.anchor = GridBagConstraints.NORTH;
+		gbc_comboBoxCapacity.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxCapacity.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxCapacity.gridx = 1;
+		gbc_comboBoxCapacity.gridy = 1;
+		panelForm.add(comboBoxCapacity, gbc_comboBoxCapacity);
 
 		JLabel lblStartDate = new JLabel("Start Date");
 		GridBagConstraints gbc_lblStartDate = new GridBagConstraints();
@@ -142,7 +142,7 @@ public class LeagueCreationPane extends JPanel {
 		btnGrpDifficulty.add(rdbtnHard);
 		panel_1.add(rdbtnHard);
 		for (int i = 2; i <= 10; i++) {
-			comboBoxNumPlayers.addItem(i);
+			comboBoxCapacity.addItem(i);
 		}
 
 		JPanel panel = new JPanel();
@@ -197,6 +197,10 @@ public class LeagueCreationPane extends JPanel {
 	 */
 	public String getLeagueName() {
 		return txtLeagueName.getText().trim();
+	}
+
+	public int getCapacity() {
+		return Integer.parseInt((String) comboBoxCapacity.getSelectedItem());
 	}
 
 }

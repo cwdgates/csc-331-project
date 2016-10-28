@@ -62,7 +62,7 @@ public class LeagueCreationController implements ActionListener {
 					int choice = JOptionPane.showConfirmDialog(appView, "Do you want to create this league?", "",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (choice == JOptionPane.OK_OPTION) {
-						createLeague();
+						// FIXME create league
 					}
 				}
 			}
@@ -79,9 +79,5 @@ public class LeagueCreationController implements ActionListener {
 		default:
 			break;
 		}
-	}
-
-	private void createLeague() {
-		System.out.println("Start creating league...");
 	}
 }

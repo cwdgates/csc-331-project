@@ -30,7 +30,6 @@ public class HomePane extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getLookAndFeel());
 		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		setMinimumSize(new Dimension(300, 200));
