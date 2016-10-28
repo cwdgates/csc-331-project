@@ -208,7 +208,7 @@ public class LeagueCreationPane extends JPanel {
 	}
 
 	public int getCapacity() {
-		return Integer.parseInt((String) comboBoxCapacity.getSelectedItem());
+		return (int) comboBoxCapacity.getSelectedItem();
 	}
 
 	/**
