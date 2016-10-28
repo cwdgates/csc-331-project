@@ -62,7 +62,7 @@ public class LeagueModel {
 		PreparedStatement insertStatement = null;
 		try {
 			// purpose: to insert league into database
-			String sql = "INSERT INTO league " + " (name, start_date, end_data, capacity, difficulty) "
+			String sql = "INSERT INTO league " + " (name, start_date, end_date, capacity, difficulty) "
 					+ " VALUES (?,?,?,?,?)";
 			insertStatement = DBConnection.getConnection().prepareStatement(sql);
 			insertStatement.setString(1, name);
