@@ -8,11 +8,8 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
-
 import controller.LoginController;
-
 import javax.swing.JButton;
-import java.awt.Color;
 
 public class LoginPane extends JPanel {
 	public static final String LOGIN_BTN = "Login";

@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 import model.LeagueModel;
+import model.LeagueModel.Difficulty;
 import model.CurrentUserModel;
 import ui.AppView;
 import ui.LeagueCreationPane;
@@ -34,7 +35,7 @@ public class LeagueCreationController implements ActionListener {
 			if (createLeaguePane.getLeagueName().length() == 0) {
 				JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
 						JOptionPane.WARNING_MESSAGE);
-			} else if (LeagueModel.isLeagueUnique(createLeaguePane.getLeagueName())) {
+			} else if (!LeagueModel.isLeagueUnique(createLeaguePane.getLeagueName())) {
 				JOptionPane.showMessageDialog(appView,
 						"The name has been used in another league.\nPlease use another name.", "",
 						JOptionPane.WARNING_MESSAGE);
@@ -62,7 +63,19 @@ public class LeagueCreationController implements ActionListener {
 					int choice = JOptionPane.showConfirmDialog(appView, "Do you want to create this league?", "",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (choice == JOptionPane.OK_OPTION) {
-						// FIXME create league
+						String name = createLeaguePane.getLeagueName();
+						int capacity = createLeaguePane.getCapacity();
+						Difficulty difficulty = createLeaguePane.getDifficulty();
+						LeagueModel leagueModel = LeagueModel.createLeague(name, capacity, startDate, endDate,
+								difficulty);
+						if (leagueModel == null) {
+							JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",
+									JOptionPane.WARNING_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
+									JOptionPane.INFORMATION_MESSAGE);
+							createLeaguePane.reset();
+						}
 					}
 				}
 			}

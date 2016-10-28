@@ -107,4 +107,10 @@ public class DatePickerPane extends JPanel {
 		}
 		return "";
 	}
+
+	public void reset() {
+		cbDayOfMonth.setSelectedIndex(0);
+		cbMonth.setSelectedIndex(0);
+		cbYear.setSelectedIndex(0);
+	}
 }

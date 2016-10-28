@@ -5,20 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
-import javax.naming.ldap.Rdn;
-
-import com.mysql.jdbc.Statement;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
 import persistence.DBConnection;
 
 public class LeagueModel {
 
 	public enum Difficulty {
-		EASY, MEDIUM, HARD, NUT
+		EASY, MEDIUM, HARD, NUT;
 	}
 
 	private String leagueName;
@@ -54,13 +47,14 @@ public class LeagueModel {
 	}
 
 	/**
+	 * Object factory for LeagueModel
 	 * 
 	 * @param name
 	 * @param capacity
 	 * @param startDate
 	 * @param endDate
 	 * @param difficulty
-	 * @return
+	 * @return null if the function can't insert league into database
 	 */
 	public static LeagueModel createLeague(String name, int capacity, GregorianCalendar startDate,
 			GregorianCalendar endDate, LeagueModel.Difficulty difficulty) {

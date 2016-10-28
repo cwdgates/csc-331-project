@@ -5,13 +5,18 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import controller.LeagueCreationController;
+import model.LeagueModel.Difficulty;
+
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+
+import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -27,6 +32,9 @@ public class LeagueCreationPane extends JPanel {
 	public final static String CANCEL = "Cancel";
 	public final static String CREATE = "Create";
 	private final ButtonGroup btnGrpDifficulty = new ButtonGroup();
+	private JRadioButton rdbtnEasy;
+	private JRadioButton rdbtnMedium;
+	private JRadioButton rdbtnHard;
 
 	/**
 	 * Create the panel.
@@ -129,16 +137,16 @@ public class LeagueCreationPane extends JPanel {
 		gbc_panel_1.gridy = 4;
 		panelForm.add(panel_1, gbc_panel_1);
 
-		JRadioButton rdbtnEasy = new JRadioButton("Easy");
+		rdbtnEasy = new JRadioButton("Easy");
 		rdbtnEasy.setSelected(true);
 		btnGrpDifficulty.add(rdbtnEasy);
 		panel_1.add(rdbtnEasy);
 
-		JRadioButton rdbtnMedium = new JRadioButton("Medium");
+		rdbtnMedium = new JRadioButton("Medium");
 		btnGrpDifficulty.add(rdbtnMedium);
 		panel_1.add(rdbtnMedium);
 
-		JRadioButton rdbtnHard = new JRadioButton("Hard");
+		rdbtnHard = new JRadioButton("Hard");
 		btnGrpDifficulty.add(rdbtnHard);
 		panel_1.add(rdbtnHard);
 		for (int i = 2; i <= 10; i++) {
@@ -201,6 +209,32 @@ public class LeagueCreationPane extends JPanel {
 
 	public int getCapacity() {
 		return Integer.parseInt((String) comboBoxCapacity.getSelectedItem());
+	}
+
+	/**
+	 * get difficulty level that the user choose
+	 * 
+	 * @return
+	 */
+	public Difficulty getDifficulty() {
+		if (rdbtnEasy.isSelected())
+			return Difficulty.EASY;
+		if (rdbtnMedium.isSelected())
+			return Difficulty.MEDIUM;
+		if (rdbtnHard.isSelected())
+			return Difficulty.HARD;
+		return null;
+	}
+
+	/**
+	 * set all fields to initial values
+	 */
+	public void reset() {
+		txtLeagueName.setText("");
+		comboBoxCapacity.setSelectedIndex(0);
+		rdbtnEasy.setSelected(true);
+		startDatePicker.reset();
+		endDatePicker.reset();
 	}
 
 }
