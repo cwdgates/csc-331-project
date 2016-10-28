@@ -4,10 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.Component;
+
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JPasswordField;
 
 import controller.RegistrationController;
@@ -120,6 +123,27 @@ public class RegistrationPane extends JPanel {
 		gbc_pwdPassword.gridx = 2;
 		gbc_pwdPassword.gridy = 4;
 		add(pwdPassword, gbc_pwdPassword);
+		pwdPassword.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == ' ') {
+					e.consume(); // prevent space bar
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+			}
+		});
 
 		JLabel lblRetypedpassword = new JLabel("Retype Password");
 		GridBagConstraints gbc_lblRetypedpassword = new GridBagConstraints();
