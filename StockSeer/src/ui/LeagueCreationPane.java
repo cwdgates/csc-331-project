@@ -175,6 +175,7 @@ public class LeagueCreationPane extends JPanel {
 	 *         GregorianCalendar object if date is valid
 	 */
 	public GregorianCalendar getStartDate() {
+		System.out.println("***" + startDatePicker.displayDate());
 		return startDatePicker.getDate();
 	}
 
@@ -184,6 +185,7 @@ public class LeagueCreationPane extends JPanel {
 	 *         GregorianCalendar object if date is valid
 	 */
 	public GregorianCalendar getEndDate() {
+		System.out.println("***" + endDatePicker.displayDate());
 		return endDatePicker.getDate();
 	}
 

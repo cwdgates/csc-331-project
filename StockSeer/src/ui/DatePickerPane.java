@@ -12,8 +12,8 @@ import java.awt.Component;
 import javax.swing.Box;
 
 public class DatePickerPane extends JPanel {
-	private JComboBox<String> cbMonth;
 	private JComboBox<String> cbDayOfMonth;
+	private JComboBox<String> cbMonth;
 	private JComboBox<String> cbYear;
 
 	/**
@@ -25,11 +25,13 @@ public class DatePickerPane extends JPanel {
 		JLabel lblMonth = new JLabel("Month");
 		add(lblMonth);
 
+		// month combo box
 		cbMonth = new JComboBox<String>();
 		add(cbMonth);
 		cbMonth.addItem("--");
-		for (int i = 1; i <= 12; i++) {
-			cbMonth.addItem(i + "");
+		String[] months = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+		for (String m : months) {
+			cbMonth.addItem(m);
 		}
 
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -38,12 +40,12 @@ public class DatePickerPane extends JPanel {
 		JLabel lblDay = new JLabel("Day");
 		add(lblDay);
 
+		// day combo box
 		cbDayOfMonth = new JComboBox<String>();
 		add(cbDayOfMonth);
 		cbDayOfMonth.addItem("--");
-		String[] months = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
-		for (String m : months) {
-			cbDayOfMonth.addItem(m);
+		for (int i = 1; i <= 31; i++) {
+			cbDayOfMonth.addItem(i + "");
 		}
 
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
@@ -64,8 +66,8 @@ public class DatePickerPane extends JPanel {
 	public GregorianCalendar getDate() {
 		if (isDateValid()) {
 			int year = Integer.parseInt((String) cbYear.getSelectedItem());
-			int month = Integer.parseInt((String) cbMonth.getSelectedItem());
-			int dayOfMonth = Integer.parseInt((String) cbDayOfMonth.getSelectedItem());
+			int month = cbMonth.getSelectedIndex();
+			int dayOfMonth = cbDayOfMonth.getSelectedIndex();
 			GregorianCalendar date = new GregorianCalendar(year, month, dayOfMonth);
 			return date;
 		}
@@ -73,7 +75,7 @@ public class DatePickerPane extends JPanel {
 	}
 
 	public boolean isDateValid() {
-		if (cbDayOfMonth.getSelectedIndex() == 0 || cbMonth.getSelectedIndex() == 0 || cbYear.getSelectedIndex() == 0) {
+		if (cbMonth.getSelectedIndex() == 0 || cbDayOfMonth.getSelectedIndex() == 0 || cbYear.getSelectedIndex() == 0) {
 			return false;
 		}
 		int month = cbMonth.getSelectedIndex();
@@ -83,9 +85,7 @@ public class DatePickerPane extends JPanel {
 			// leap year
 			if (year % 4 == 0 && day > 29) {
 				return false;
-			}
-			// non-leap year
-			if (day > 28) {
+			} else if (year % 4 != 0 && day > 28) {
 				return false;
 			}
 		}
@@ -94,5 +94,17 @@ public class DatePickerPane extends JPanel {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String displayDate() {
+		if (isValid()) {
+			return (String) cbMonth.getSelectedItem() + "-" + (String) cbDayOfMonth.getSelectedItem() + "-"
+					+ (String) cbYear.getSelectedItem();
+		}
+		return "";
 	}
 }
