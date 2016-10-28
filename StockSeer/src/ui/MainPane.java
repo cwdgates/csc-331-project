@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 
+import controller.JoinController;
 import controller.LogoutController;
 
 import javax.swing.JList;
@@ -73,7 +74,11 @@ public class MainPane extends JPanel {
 	}
 
 	public void registerLogoutListener(LogoutController logoutController) {
-		
+		btnLogout.addActionListener(logoutController);
+	}
+	
+	public void registerJoinController(JoinController controller){
+		btnJoin.addActionListener(controller);
 	}
 
 }
