@@ -39,17 +39,17 @@ public class LoginController implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		switch (command) {
-		case LoginPane.LOGIN_BTN:
-			if (validateFields()) {
-				performLogin();
-			}
-			break;
-		case LoginPane.SIGNUP_BTN:
-			appView.viewSignUp();
-			break;
+			case LoginPane.LOGIN_BTN:
+				if (validateFields()) {
+					performLogin();
+				}
+				break;
+			case LoginPane.SIGNUP_BTN:
+				appView.viewSignUp();
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 
 	}
@@ -74,24 +74,34 @@ public class LoginController implements ActionListener, KeyListener {
 
 	private void performLogin() {
 		// check credential
-		boolean isValid = CredentialChecker.checkUsernameAndPassword(loginPane.getUsername().trim(),
+		boolean isValid = CredentialChecker.checkUsernameAndPassword(loginPane.getUsername(),
 				loginPane.getPassword().trim());
 		if (isValid) {
-			// ------ GRANT ACCESS -------
+			/*
+			 * Grant access to the application. The object stay alive until
+			 * logout.
+			 */
 			userModel = new UserModel();
-			userModel.login(loginPane.getUsername().trim(), loginPane.getPassword().trim());
+			userModel = UserModel.getUser(loginPane.getUsername(), loginPane.getPassword());
 
+			// show welcome pane
 			String msg = "Welcome " + userModel.getFirstName() + " " + userModel.getLastName()
 					+ ".\nClick OK to continue.";
 			JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
-			appView.viewHome();
-			loginPane.setTextFieldsEmpty();
+			appView.viewHome(); // change the scene to Home
+			loginPane.setTextFieldsEmpty(); // clear text field
 		} else {
 			JOptionPane.showMessageDialog(loginPane, "Wrong username or password.", "Warning",
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
+	/**
+	 * Check whether the username and password fields are empty
+	 * 
+	 * @return <b>True</b> if username and password are not empty.<br>
+	 *         <b>False</b> otherwise.
+	 */
 	private boolean validateFields() {
 		if (loginPane.getUsername().length() == 0 || loginPane.getPassword().length() == 0) {
 			JOptionPane.showMessageDialog(loginPane, "Please fill in username and password.", "",

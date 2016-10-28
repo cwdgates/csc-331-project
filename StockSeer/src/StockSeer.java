@@ -4,7 +4,6 @@ import javax.swing.UIManager;
 import controller.LeagueCreationController;
 import controller.HomePaneController;
 import controller.LoginController;
-import controller.LogoutController;
 import controller.RegistrationController;
 import model.UserModel;
 import persistence.DBConnection;
@@ -25,7 +24,6 @@ public class StockSeer {
 	private RegistrationController registrationController;
 	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
-	private LogoutController logoutController;
 
 	// models ---------------------
 	private UserModel userModel = null; // only one user per instance of
@@ -51,18 +49,18 @@ public class StockSeer {
 		appView = new AppView();
 
 		// ------------------- INITIALIZE MODELS ---------------------
+
 		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView, userModel);
-		registrationController = new RegistrationController(appView, userModel);
-		homePaneController = new HomePaneController(appView);
-		leagueCreationController = new LeagueCreationController(appView);
-		logoutController = new LogoutController(appView, userModel);
+		registrationController = new RegistrationController(appView);
+		homePaneController = new HomePaneController(appView, userModel);
+		leagueCreationController = new LeagueCreationController(appView, userModel);
 
 		// --------------------REGISTER LISTENERS --------------------------
 		appView.getLoginPane().registerListeners(loginController);
-		appView.getHomePane().registerListeners(homePaneController, logoutController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
+		appView.getHomePane().registerListeners(homePaneController);
 
 		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);

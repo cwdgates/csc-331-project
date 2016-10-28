@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class LeagueModel {
 	public enum Difficulty {
@@ -74,5 +75,12 @@ public class LeagueModel {
 
 	public void addStock(StockModel stock) {
 		this.stockList.add(stock);
+	}
+
+	public static LeagueModel createLeague(String name, int maxPlayer, GregorianCalendar startDate,
+			GregorianCalendar endDate) {
+		LeagueModel leagueModel = null;
+
+		return leagueModel;
 	}
 }

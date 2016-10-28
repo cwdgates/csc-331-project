@@ -104,11 +104,11 @@ public class LoginPane extends JPanel {
 	}
 
 	public String getUsername() {
-		return txtUsername.getText();
+		return txtUsername.getText().trim();
 	}
 
 	public String getPassword() {
-		return String.valueOf(txtPassword.getPassword());
+		return String.valueOf(txtPassword.getPassword()).trim();
 	}
 
 	/**
