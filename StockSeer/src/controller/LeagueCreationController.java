@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import persistence.DBUtililty;
 import persistence.Date;
@@ -26,6 +25,7 @@ public class LeagueCreationController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		
 		switch (command) {
 		// CREATE button clicked
 		case LeagueCreationPane.CREATE: {

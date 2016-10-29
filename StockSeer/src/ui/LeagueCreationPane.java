@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import controller.LeagueCreationController;

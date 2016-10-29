@@ -39,15 +39,20 @@ public class Date extends GregorianCalendar {
 	}
 
 	/**
-	 * @param field
 	 * @param value
 	 *            If value is month, then it should be 1 for January, and 12 for
 	 *            December
 	 */
-	public void set(int field, int value) {
-		if (field == Calendar.MONTH) {
-			super.set(field, value - 1);
-		}
+	public void setMonth(int value) {
+		this.set(MONTH, value - 1);
+	}
+
+	public void setDayOfMonth(int value) {
+		this.set(DAY_OF_MONTH, value);
+	}
+
+	public void setYear(int value) {
+		this.set(YEAR, value);
 	}
 
 	/**
@@ -61,5 +66,13 @@ public class Date extends GregorianCalendar {
 		String dd = (day + "").length() == 2 ? (day + "") : ("0" + day);
 		String mm = (month + "").length() == 2 ? (month + "") : ("0" + month);
 		return year + "-" + mm + "-" + dd;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(new Date(2016, 2, 1).toString());
+		System.out.println(new Date().toString());
+		Date date = new Date();
+		date.setMonth(2);
+		System.out.println(date.toString());
 	}
 }
