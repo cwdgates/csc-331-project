@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import controller.LoginController;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class LoginPane extends JPanel {
@@ -21,6 +22,7 @@ public class LoginPane extends JPanel {
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnResetPassword;
+	private JLabel labelImage;
 
 	/**
 	 * Create the panel.
@@ -29,17 +31,30 @@ public class LoginPane extends JPanel {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
+
+		labelImage = new JLabel("");
+		try {
+			ImageIcon image = new ImageIcon(this.getClass().getResource("/ui/resources/logo.png"));
+			labelImage = new JLabel(image);
+		} catch (Exception e) {
+		}
+
+		GridBagConstraints gbc_labelImage = new GridBagConstraints();
+		gbc_labelImage.insets = new Insets(0, 0, 5, 0);
+		gbc_labelImage.gridx = 2;
+		gbc_labelImage.gridy = 0;
+		add(labelImage, gbc_labelImage);
 
 		JLabel lblUsername = new JLabel("Username");
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.gridx = 1;
-		gbc_lblUsername.gridy = 0;
+		gbc_lblUsername.gridy = 1;
 		add(lblUsername, gbc_lblUsername);
 
 		txtUsername = new JTextField();
@@ -47,7 +62,7 @@ public class LoginPane extends JPanel {
 		gbc_txtUsername.insets = new Insets(0, 0, 5, 0);
 		gbc_txtUsername.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtUsername.gridx = 2;
-		gbc_txtUsername.gridy = 0;
+		gbc_txtUsername.gridy = 1;
 		add(txtUsername, gbc_txtUsername);
 		txtUsername.setColumns(10);
 
@@ -56,7 +71,7 @@ public class LoginPane extends JPanel {
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 1;
+		gbc_lblPassword.gridy = 2;
 		add(lblPassword, gbc_lblPassword);
 
 		txtPassword = new JPasswordField();
@@ -64,7 +79,7 @@ public class LoginPane extends JPanel {
 		gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPassword.gridx = 2;
-		gbc_txtPassword.gridy = 1;
+		gbc_txtPassword.gridy = 2;
 		add(txtPassword, gbc_txtPassword);
 		txtPassword.setColumns(10);
 
@@ -73,7 +88,7 @@ public class LoginPane extends JPanel {
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 2;
-		gbc_panel.gridy = 2;
+		gbc_panel.gridy = 3;
 		add(panel, gbc_panel);
 
 		btnLogin = new JButton(LOGIN_BTN);

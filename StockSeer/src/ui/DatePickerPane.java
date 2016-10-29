@@ -1,17 +1,13 @@
 package ui;
 
 import javax.swing.JPanel;
-
 import persistence.Date;
-
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.stream.IntStream;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Component;
-
 import javax.swing.Box;
 
 public class DatePickerPane extends JPanel {
