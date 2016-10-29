@@ -1,73 +1,84 @@
 package ui;
 
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import controller.HomePaneController;
-
-import java.awt.Dimension;
-import javax.swing.BoxLayout;
 import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+
+import controller.JoinController;
+import controller.LogoutController;
+
+import javax.swing.JList;
 
 public class HomePane extends JPanel {
-	private JButton btnCreateLeague;
-	private JButton btnJoinLeague;
-	private JButton btnManageLeagues;
-	private JButton btnLogout;
 
-	public static final String CREATE_LEAGUE = "Create a League";
-	public static final String JOIN_LEAGUE = "Join A League";
-	public static final String MANAGE_LEAGUE = "Manage Leagues";
+	public static final String CREATE_LEAGUE = "Create a league";
+	public static final String JOIN_LEAGUE = "Join";
 	public static final String LOGOUT = "Logout";
+	public static final String REFRESH = "Refresh";
+	public static final String DETAIL = "Detail";
+	private JList leagueList;
+	private JButton btnCreate;
+	private JButton btnLogout;
+	private JButton btnJoin;
+	private JButton btnRefresh;
+	private JButton btnDetail;
 
 	/**
 	 * Create the panel.
 	 */
 	public HomePane() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-		setMinimumSize(new Dimension(300, 200));
-		SpringLayout springLayout = new SpringLayout();
-		setLayout(springLayout);
+		setLayout(new BorderLayout(0, 0));
 
-		JPanel panelControl = new JPanel();
-		springLayout.putConstraint(SpringLayout.NORTH, panelControl, 10, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, panelControl, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, panelControl, -35, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, panelControl, -10, SpringLayout.EAST, this);
-		add(panelControl);
-		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
+		JPanel panelBottomControl = new JPanel();
+		add(panelBottomControl, BorderLayout.SOUTH);
+		panelBottomControl.setLayout(new BoxLayout(panelBottomControl, BoxLayout.X_AXIS));
 
-		btnCreateLeague = new JButton(CREATE_LEAGUE);
-		btnCreateLeague.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelControl.add(btnCreateLeague);
+		btnDetail = new JButton(DETAIL);
+		panelBottomControl.add(btnDetail);
 
-		btnJoinLeague = new JButton(JOIN_LEAGUE);
-		btnJoinLeague.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelControl.add(btnJoinLeague);
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		panelBottomControl.add(horizontalGlue_1);
 
-		btnManageLeagues = new JButton(MANAGE_LEAGUE);
-		btnManageLeagues.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelControl.add(btnManageLeagues);
+		btnRefresh = new JButton(REFRESH);
+		panelBottomControl.add(btnRefresh);
+
+		Component horizontalGlue = Box.createHorizontalGlue();
+		panelBottomControl.add(horizontalGlue);
+
+		btnJoin = new JButton(JOIN_LEAGUE);
+		panelBottomControl.add(btnJoin);
+
+		JPanel panelTopControl = new JPanel();
+		add(panelTopControl, BorderLayout.NORTH);
+		panelTopControl.setLayout(new BoxLayout(panelTopControl, BoxLayout.X_AXIS));
 
 		btnLogout = new JButton(LOGOUT);
-		springLayout.putConstraint(SpringLayout.NORTH, btnLogout, 6, SpringLayout.SOUTH, panelControl);
-		springLayout.putConstraint(SpringLayout.WEST, btnLogout, 0, SpringLayout.WEST, this);
-		add(btnLogout);
+		panelTopControl.add(btnLogout);
+
+		Component horizontalGlue_2 = Box.createHorizontalGlue();
+		panelTopControl.add(horizontalGlue_2);
+
+		btnCreate = new JButton(CREATE_LEAGUE);
+		panelTopControl.add(btnCreate);
+
+		JScrollPane scrollPane = new JScrollPane();
+		add(scrollPane, BorderLayout.CENTER);
+
+		leagueList = new JList();
+		scrollPane.setViewportView(leagueList);
 
 	}
 
-	public void registerListeners(HomePaneController homePaneController) {
-		btnCreateLeague.addActionListener(homePaneController);
-		btnJoinLeague.addActionListener(homePaneController);
-		btnManageLeagues.addActionListener(homePaneController);
-		btnLogout.addActionListener(homePaneController);
+	public void registerLogoutListener(LogoutController logoutController) {
+		btnLogout.addActionListener(logoutController);
+	}
+	
+	public void registerJoinController(JoinController controller){
+		btnJoin.addActionListener(controller);
 	}
 
 }

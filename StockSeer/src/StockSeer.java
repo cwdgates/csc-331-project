@@ -2,13 +2,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import controller.LeagueCreationController;
-import controller.HomePaneController;
 import controller.LoginController;
+import controller.LogoutController;
 import controller.RegistrationController;
 import model.CurrentUserModel;
 import model.LeagueListModel;
 import persistence.DBConnection;
-import ui.*;
+import ui.AppView;;
 
 /**
  * App runner
@@ -23,8 +23,8 @@ public class StockSeer {
 	// controllers --------------------
 	private LoginController loginController;
 	private RegistrationController registrationController;
-	private HomePaneController homePaneController;
 	private LeagueCreationController leagueCreationController;
+	private LogoutController logoutController;
 
 	// models ---------------------
 	private CurrentUserModel userModel = null; // only one user per instance of
@@ -33,11 +33,11 @@ public class StockSeer {
 
 	public void run() {
 		// set look and feel
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// try to connect to database
 		if (DBConnection.getConnection() == null) {
@@ -52,17 +52,18 @@ public class StockSeer {
 
 		// ------------------- INITIALIZE MODELS ---------------------
 		leagueListModel = new LeagueListModel();
+
 		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView, userModel);
 		registrationController = new RegistrationController(appView);
-		homePaneController = new HomePaneController(appView, userModel);
 		leagueCreationController = new LeagueCreationController(appView, userModel);
+		logoutController = new LogoutController(appView);
 
 		// --------------------REGISTER LISTENERS --------------------------
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
-		appView.getHomePane().registerListeners(homePaneController);
+		appView.getHomePane().registerLogoutListener(logoutController);
 
 		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);

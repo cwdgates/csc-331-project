@@ -16,20 +16,19 @@ public class AppView extends JFrame {
 	private JPanel contentPane; // main panel
 
 	private LoginPane loginPane;
-	private HomePane homePane;
 	private LeagueCreationPane createLeaguePane;
 	private ChooseStockPane chooseStockPane;
-	private CardLayout cardLayout;
 	private RegistrationPane signUpPane;
-	private MainPane mainPane;
+	private HomePane homePane;
+
+	private CardLayout cardLayout;
 
 	// Components constraints
 	private final String LOGIN_PANE = "LOGIN_PANE";
-	private final String HOME_PANE = "HOME_PANE";
 	private final String CREATE_LEAGUE_PANE = "CREATE_LEAGUE_PANE";
 	private final String CHOOSE_STOCK_PANE = "CHOOSE_STOCK_PANE";
 	private final String SIGN_UP_PANE = "SIGN_UP_PANE";
-	private final String MAIN_PANE = "MAIN_PANE";
+	private final String HOME_PANE = "MAIN_PANE";
 
 	/**
 	 * Create the frame.
@@ -66,9 +65,6 @@ public class AppView extends JFrame {
 		homePane = new HomePane();
 		contentPane.add(homePane, HOME_PANE);
 
-		mainPane = new MainPane();
-		contentPane.add(mainPane, MAIN_PANE);
-
 		createLeaguePane = new LeagueCreationPane();
 		contentPane.add(createLeaguePane, CREATE_LEAGUE_PANE);
 
@@ -83,10 +79,6 @@ public class AppView extends JFrame {
 	public void viewHome() {
 		cardLayout.show(contentPane, HOME_PANE);
 		System.out.println("Switched to home pane");
-	}
-
-	public void viewMainPane() {
-		cardLayout.show(contentPane, MAIN_PANE);
 	}
 
 	public void viewCreateLeaguePane() {
@@ -105,10 +97,6 @@ public class AppView extends JFrame {
 		return loginPane;
 	}
 
-	public HomePane getHomePane() {
-		return homePane;
-	}
-
 	public ChooseStockPane getChooseStockPane() {
 		return chooseStockPane;
 	}
@@ -121,8 +109,8 @@ public class AppView extends JFrame {
 		return signUpPane;
 	}
 
-	public MainPane getMainView() {
-		return mainPane;
+	public HomePane getHomePane() {
+		return homePane;
 	}
 
 }

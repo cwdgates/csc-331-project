@@ -5,19 +5,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.LeagueListModel;
 import ui.AppView;
 import ui.HomePane;
-import ui.MainPane;
 
 public class LogoutController implements ActionListener {
 	AppView appView;
-	MainPane mainView;
+	HomePane mainView;
 
-	public LogoutController(AppView appView, LeagueListModel leagueList) {
+	public LogoutController(AppView appView) {
 		this.appView = appView;
-		mainView = appView.getMainView();
-
+		mainView = appView.getHomePane();
 	}
 
 	@Override
