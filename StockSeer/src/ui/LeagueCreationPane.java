@@ -10,7 +10,8 @@ import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import controller.LeagueCreationController;
-import model.LeagueModel.Difficulty;
+import model.Difficulty;
+import model.LeagueModel;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
@@ -236,5 +237,4 @@ public class LeagueCreationPane extends JPanel {
 		startDatePicker.reset();
 		endDatePicker.reset();
 	}
-
 }

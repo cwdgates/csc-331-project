@@ -10,7 +10,6 @@ import java.util.ArrayList;
  */
 public class LeagueListModel {
 	ArrayList<LeagueModel> leagueList;
-	boolean isFetched = false;
 
 	public LeagueListModel() {
 		leagueList = new ArrayList<LeagueModel>();
@@ -33,14 +32,10 @@ public class LeagueListModel {
 	}
 
 	/**
-	 * pull leagues from database at the beginning.
+	 * pull data from database
 	 */
-	public void fetchLeage() {
-		isFetched = true;
-	}
-
 	public void update() {
-		
+
 	}
 
 }

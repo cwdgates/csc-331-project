@@ -8,8 +8,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 
+import controller.HomePaneController;
 import controller.JoinController;
-import controller.LogoutController;
 
 import javax.swing.JList;
 
@@ -26,6 +26,7 @@ public class HomePane extends JPanel {
 	private JButton btnJoin;
 	private JButton btnRefresh;
 	private JButton btnDetail;
+	private Component horizontalGlue_3;
 
 	/**
 	 * Create the panel.
@@ -37,20 +38,26 @@ public class HomePane extends JPanel {
 		add(panelBottomControl, BorderLayout.SOUTH);
 		panelBottomControl.setLayout(new BoxLayout(panelBottomControl, BoxLayout.X_AXIS));
 
-		btnDetail = new JButton(DETAIL);
-		panelBottomControl.add(btnDetail);
+		btnRefresh = new JButton(REFRESH);
+		panelBottomControl.add(btnRefresh);
 
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue_1);
 
-		btnRefresh = new JButton(REFRESH);
-		panelBottomControl.add(btnRefresh);
+		btnDetail = new JButton(DETAIL);
+		panelBottomControl.add(btnDetail);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue);
 
 		btnJoin = new JButton(JOIN_LEAGUE);
 		panelBottomControl.add(btnJoin);
+
+		horizontalGlue_3 = Box.createHorizontalGlue();
+		panelBottomControl.add(horizontalGlue_3);
+
+		btnCreate = new JButton(CREATE_LEAGUE);
+		panelBottomControl.add(btnCreate);
 
 		JPanel panelTopControl = new JPanel();
 		add(panelTopControl, BorderLayout.NORTH);
@@ -62,9 +69,6 @@ public class HomePane extends JPanel {
 		Component horizontalGlue_2 = Box.createHorizontalGlue();
 		panelTopControl.add(horizontalGlue_2);
 
-		btnCreate = new JButton(CREATE_LEAGUE);
-		panelTopControl.add(btnCreate);
-
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
@@ -73,12 +77,16 @@ public class HomePane extends JPanel {
 
 	}
 
-	public void registerLogoutListener(LogoutController logoutController) {
-		btnLogout.addActionListener(logoutController);
+	public void refresh() {
+		
 	}
-	
-	public void registerJoinController(JoinController controller){
-		btnJoin.addActionListener(controller);
+
+	public void registerListeners(HomePaneController homePaneController) {
+		btnCreate.addActionListener(homePaneController);
+		btnLogout.addActionListener(homePaneController);
+		btnJoin.addActionListener(homePaneController);
+		btnRefresh.addActionListener(homePaneController);
+		btnDetail.addActionListener(homePaneController);
 	}
 
 }

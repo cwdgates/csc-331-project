@@ -5,49 +5,54 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.CurrentUserModel;
 import ui.AppView;
-import ui._HomePane;
+import ui.HomePane;
 
 public class HomePaneController implements ActionListener {
-	_HomePane homePane;
 	AppView appView;
-	CurrentUserModel userModel;
+	HomePane homePane;
 
-	public HomePaneController(AppView appView, CurrentUserModel userModel) {
+	public HomePaneController(AppView appView) {
 		this.appView = appView;
-		this.userModel = userModel;
+		this.homePane = appView.getHomePane();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+
 		switch (command) {
-		case _HomePane.CREATE_LEAGUE: {
-			System.out.println(_HomePane.CREATE_LEAGUE);
+		case HomePane.CREATE_LEAGUE: {
+			System.out.println(HomePane.CREATE_LEAGUE);
 			appView.viewCreateLeaguePane();
 			break;
 		}
 
-		case _HomePane.JOIN_LEAGUE: {
-			System.out.println(_HomePane.JOIN_LEAGUE);
+		case HomePane.REFRESH: {
+			// FIXME working ...
+			System.out.println(HomePane.REFRESH);
+			homePane.refresh();
 			break;
 		}
 
-		case _HomePane.MANAGE_LEAGUE: {
-			System.out.println(_HomePane.MANAGE_LEAGUE);
-			break;
-		}
-
-		case _HomePane.LOGOUT: {
-			System.out.println(_HomePane.LOGOUT);
+		case HomePane.LOGOUT: {
+			System.out.println(HomePane.LOGOUT);
 			int choice = JOptionPane.showConfirmDialog(appView, "Do you want to log out ?", "",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (choice == JOptionPane.OK_OPTION) {
-				System.out.println("User: " + (userModel == null ? true : false));
 				appView.viewLogin();
 			}
+			break;
+		}
 
+		case HomePane.JOIN_LEAGUE: {
+			// FIXME working ...
+			System.out.println(HomePane.REFRESH);
+			int choice = JOptionPane.showConfirmDialog(appView, "Do you want to join this league?", "",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (choice == JOptionPane.OK_OPTION) {
+				// join the league
+			}
 			break;
 		}
 
