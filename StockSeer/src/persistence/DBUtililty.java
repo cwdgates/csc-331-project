@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import model.Difficulty;
+import model.LeagueModel;
 
 public abstract class DBUtililty {
 	public static abstract class User {
@@ -55,6 +56,8 @@ public abstract class DBUtililty {
 					System.err.println("Can't insert a league to the database");
 					return false;
 				} else {
+					System.out.println(name + " " + dateToString(startDate) + " " + dateToString(endDate) + " "
+							+ difficulty.toString());
 					return true;
 				}
 			} catch (SQLException e) {
@@ -71,7 +74,31 @@ public abstract class DBUtililty {
 			return false;
 		}
 
-		private static String dateToString(GregorianCalendar date) {
+		public LeagueModel getLeague(String leagueName) {
+			LeagueModel league = null;
+			PreparedStatement statement = null;
+			ResultSet rs = null;
+			try {
+				String sql = "";
+				statement = DBConnection.getConnection().prepareStatement(sql);
+				rs = statement.executeQuery();
+				if (rs.next()) {
+					league = new LeagueModel();
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					int capacity = rs.getInt("capacity");
+					Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
+					
+				}
+			} catch (SQLException e) {
+				System.err.println("Can't get league.");
+				e.printStackTrace();
+				return null;
+			}
+			return league;
+		}
+
+		public static String dateToString(GregorianCalendar date) {
 			int day = date.get(Calendar.DATE);
 			int month = date.get(Calendar.MONTH);
 			int year = date.get(Calendar.YEAR);

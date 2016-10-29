@@ -5,19 +5,16 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import controller.LeagueCreationController;
 import model.Difficulty;
-import model.LeagueModel;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 
-import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -224,7 +221,7 @@ public class LeagueCreationPane extends JPanel {
 			return Difficulty.MEDIUM;
 		if (rdbtnHard.isSelected())
 			return Difficulty.HARD;
-		return null;
+		return Difficulty.EASY;
 	}
 
 	/**
