@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import controller.LeagueCreationController;
 import model.Difficulty;
+import persistence.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
@@ -180,8 +181,7 @@ public class LeagueCreationPane extends JPanel {
 	 * @return null if date is invalid <br>
 	 *         GregorianCalendar object if date is valid
 	 */
-	public GregorianCalendar getStartDate() {
-		System.out.println("***" + startDatePicker.displayDate());
+	public Date getStartDate() {
 		return startDatePicker.getDate();
 	}
 
@@ -190,8 +190,7 @@ public class LeagueCreationPane extends JPanel {
 	 * @return null if date is invalid <br>
 	 *         GregorianCalendar object if date is valid
 	 */
-	public GregorianCalendar getEndDate() {
-		System.out.println("***" + endDatePicker.displayDate());
+	public Date getEndDate() {
 		return endDatePicker.getDate();
 	}
 

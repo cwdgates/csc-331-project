@@ -39,16 +39,16 @@ public abstract class DBUtililty {
 			return true;
 		}
 
-		public static boolean createLeague(String name, int capacity, GregorianCalendar startDate,
-				GregorianCalendar endDate, Difficulty difficulty) {
+		public static boolean createLeague(String name, int capacity, Date startDate, Date endDate,
+				Difficulty difficulty) {
 			PreparedStatement insertStatement = null;
 			try {
 				String sql = "INSERT INTO league " + " (name, start_date, end_date, capacity, difficulty) "
 						+ " VALUES (?,?,?,?,?)";
 				insertStatement = DBConnection.getConnection().prepareStatement(sql);
 				insertStatement.setString(1, name);
-				insertStatement.setString(2, dateToString(startDate));
-				insertStatement.setString(3, dateToString(endDate));
+				insertStatement.setString(2, startDate.toString());
+				insertStatement.setString(3, endDate.toString());
 				insertStatement.setInt(4, capacity);
 				insertStatement.setString(5, difficulty.toString());
 				int numAffectedRow = insertStatement.executeUpdate();
@@ -56,8 +56,8 @@ public abstract class DBUtililty {
 					System.err.println("Can't insert a league to the database");
 					return false;
 				} else {
-					System.out.println(name + " " + dateToString(startDate) + " " + dateToString(endDate) + " "
-							+ difficulty.toString());
+					System.out.println(
+							name + " " + startDate.toString() + " " + endDate.toString() + " " + difficulty.toString());
 					return true;
 				}
 			} catch (SQLException e) {
@@ -88,7 +88,7 @@ public abstract class DBUtililty {
 					String name = rs.getString("name");
 					int capacity = rs.getInt("capacity");
 					Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
-					
+
 				}
 			} catch (SQLException e) {
 				System.err.println("Can't get league.");
@@ -96,15 +96,6 @@ public abstract class DBUtililty {
 				return null;
 			}
 			return league;
-		}
-
-		public static String dateToString(GregorianCalendar date) {
-			int day = date.get(Calendar.DATE);
-			int month = date.get(Calendar.MONTH);
-			int year = date.get(Calendar.YEAR);
-			String dd = (day + "").length() == 2 ? (day + "") : ("0" + day);
-			String mm = (month + "").length() == 2 ? (month + "") : ("0" + month);
-			return year + "-" + mm + "-" + dd;
 		}
 	}
 }

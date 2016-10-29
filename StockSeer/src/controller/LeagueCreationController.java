@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import persistence.DBUtililty;
+import persistence.Date;
 import model.CurrentUserModel;
 import model.Difficulty;
 import ui.AppView;
@@ -38,8 +39,8 @@ public class LeagueCreationController implements ActionListener {
 						"The name has been used in another league.\nPlease use another name.", "",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
-				GregorianCalendar startDate = createLeaguePane.getStartDate();
-				GregorianCalendar endDate = createLeaguePane.getEndDate();
+				Date startDate = createLeaguePane.getStartDate();
+				Date endDate = createLeaguePane.getEndDate();
 				// check start date
 				if (startDate == null) {
 					JOptionPane.showMessageDialog(appView, "Start date is invalid.", "", JOptionPane.WARNING_MESSAGE);

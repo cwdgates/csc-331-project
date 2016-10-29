@@ -1,6 +1,9 @@
 package ui;
 
 import javax.swing.JPanel;
+
+import persistence.Date;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.stream.IntStream;
@@ -63,12 +66,12 @@ public class DatePickerPane extends JPanel {
 		add(cbYear);
 	}
 
-	public GregorianCalendar getDate() {
+	public Date getDate() {
 		if (isDateValid()) {
 			int year = Integer.parseInt((String) cbYear.getSelectedItem());
 			int month = cbMonth.getSelectedIndex();
 			int dayOfMonth = cbDayOfMonth.getSelectedIndex();
-			GregorianCalendar date = new GregorianCalendar(year, month, dayOfMonth);
+			Date date = new Date(year, month, dayOfMonth);
 			return date;
 		}
 		return null;
@@ -94,18 +97,6 @@ public class DatePickerPane extends JPanel {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String displayDate() {
-		if (isValid()) {
-			return (String) cbMonth.getSelectedItem() + "-" + (String) cbDayOfMonth.getSelectedItem() + "-"
-					+ (String) cbYear.getSelectedItem();
-		}
-		return "";
 	}
 
 	public void reset() {

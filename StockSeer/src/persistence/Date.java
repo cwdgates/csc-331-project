@@ -1,23 +1,22 @@
-package model;
+package persistence;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.mysql.fabric.xmlrpc.base.Data;
+public class Date extends GregorianCalendar {
 
-public class DateModel extends GregorianCalendar {
-
-	public DateModel() {
+	public Date() {
 	}
 
 	/**
 	 * 
 	 * @param year
 	 * @param month
-	 *            1-January and 12-December
+	 *            Start from 1 (January)
 	 * @param dayOfMonth
+	 *            Start from 1
 	 */
-	public DateModel(int year, int month, int dayOfMonth) {
+	public Date(int year, int month, int dayOfMonth) {
 		super(year, month - 1, dayOfMonth);
 	}
 
@@ -28,7 +27,7 @@ public class DateModel extends GregorianCalendar {
 	 * @param mySQLdate
 	 *            <b>YYYY-MM-DD</b>
 	 */
-	public DateModel(String mySQLdate) {
+	public Date(String mySQLdate) {
 		super();
 		String[] date = mySQLdate.split("-");
 		int year = Integer.parseInt(date[0]);
@@ -52,7 +51,7 @@ public class DateModel extends GregorianCalendar {
 	}
 
 	/**
-	 * @return YYYY-MM-DD
+	 * @return YYYY-MM-DD. This can be used for SQL Date
 	 */
 	public String toString() {
 		int day = this.get(Calendar.DATE);
