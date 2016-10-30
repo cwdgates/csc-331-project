@@ -29,9 +29,8 @@ public class HomePaneController implements ActionListener {
 		}
 
 		case HomePane.REFRESH: {
-			// FIXME working ...
 			System.out.println(HomePane.REFRESH);
-			homePane.refresh();
+			homePane.refreshTable();
 			break;
 		}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import persistence.Date;
 
-public class LeagueModel {
+public class League {
 	private String leagueName;
 	private Integer leagueID;
 	private int capacity;
@@ -14,7 +14,7 @@ public class LeagueModel {
 
 	private ArrayList<StockModel> stockList;
 
-	public LeagueModel() {
+	public League() {
 		leagueID = null;
 		leagueName = null;
 		capacity = 0;
@@ -24,7 +24,7 @@ public class LeagueModel {
 		stockList = null;
 	}
 
-	public LeagueModel(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty) {
+	public League(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty) {
 		this.leagueID = id;
 		this.leagueName = name;
 		this.capacity = 0;
@@ -34,64 +34,36 @@ public class LeagueModel {
 		stockList = null;
 	}
 
-	public String getLeagueName() {
+	/**
+	 * 
+	 * @return name of the league
+	 */
+	public String getName() {
 		return leagueName;
-	}
-
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
 	}
 
 	public Integer getLeagueID() {
 		return leagueID;
 	}
 
-	public void setLeagueID(Integer leagueID) {
-		this.leagueID = leagueID;
-	}
-
-	public int getMaxPlayers() {
+	public int getCapacity() {
 		return capacity;
-	}
-
-	public void setMaxPlayers(int maxPlayers) {
-		this.capacity = maxPlayers;
 	}
 
 	public GregorianCalendar getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
 	public GregorianCalendar getEndDate() {
 		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
 
-	public void setDifficulty(Difficulty difficulty) {
-		this.difficulty = difficulty;
-	}
-
 	public ArrayList<StockModel> getStockList() {
 		return stockList;
-	}
-
-	public void setStockList(ArrayList<StockModel> stockList) {
-		this.stockList = stockList;
-	}
-
-	public void addStock(StockModel stock) {
-		this.stockList.add(stock);
 	}
 
 	/**
@@ -100,6 +72,6 @@ public class LeagueModel {
 	@Override
 	public String toString() {
 		return "ID=" + leagueID + " NAME=" + leagueName + " START=" + startDate.toString() + " END="
-				+ endDate.toString() + " DIFFICULTY=" + difficulty.name();
+				+ endDate.toString() + " CAPACITY=" + capacity + " DIFFICULTY=" + difficulty.name();
 	}
 }

@@ -4,14 +4,21 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Component;
+import java.util.Arrays;
+import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 import controller.HomePaneController;
 import controller.JoinController;
 
 import javax.swing.JList;
+import javax.swing.JTable;
 
 public class HomePane extends JPanel {
 
@@ -20,18 +27,22 @@ public class HomePane extends JPanel {
 	public static final String LOGOUT = "Logout";
 	public static final String REFRESH = "Refresh";
 	public static final String DETAIL = "Detail";
-	private JList leagueList;
 	private JButton btnCreate;
 	private JButton btnLogout;
 	private JButton btnJoin;
 	private JButton btnRefresh;
 	private JButton btnDetail;
-	private Component horizontalGlue_3;
+	private final String[] columnNames = { "Name", "Start", "End", "Capacity", "Difficulty" };
+	private Vector<String> columnIdentifiers = new Vector<String>();
+
+	// "Name", "Start", "End", "Capacity", "Difficulty"
+	private DefaultTableModel leagueTableModel;
 
 	/**
 	 * Create the panel.
 	 */
 	public HomePane() {
+
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panelBottomControl = new JPanel();
@@ -53,7 +64,7 @@ public class HomePane extends JPanel {
 		btnJoin = new JButton(JOIN_LEAGUE);
 		panelBottomControl.add(btnJoin);
 
-		horizontalGlue_3 = Box.createHorizontalGlue();
+		Component horizontalGlue_3 = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue_3);
 
 		btnCreate = new JButton(CREATE_LEAGUE);
@@ -72,13 +83,25 @@ public class HomePane extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
-		leagueList = new JList();
-		scrollPane.setViewportView(leagueList);
+		// --------TABLE------------------------------------------
+		columnIdentifiers.addAll(Arrays.asList(columnNames));
+		leagueTableModel = new DefaultTableModel();
+		leagueTableModel.setDataVector(null, columnIdentifiers);
+		JTable table = new JTable(leagueTableModel);
+		scrollPane.setViewportView(table);
 
 	}
 
-	public void refresh() {
-		
+	public void refreshTable() {
+		leagueTableModel.fireTableDataChanged();
+	}
+
+	public void initializeTable(Vector<String[]> vector) {
+		leagueTableModel.setDataVector(vector, columnIdentifiers);
+	}
+
+	public void setLeagueTableModel(DefaultTableModel model) {
+		leagueTableModel = model;
 	}
 
 	public void registerListeners(HomePaneController homePaneController) {
