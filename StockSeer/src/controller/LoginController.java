@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import persistence.CredentialChecker;
+import view.AppView;
+import view.LoginPane;
 import model.CurrentUserModel;
-import ui.AppView;
-import ui.LoginPane;
 
 /**
  * know about actions performed

@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -28,7 +28,6 @@ public class LoginPane extends JPanel {
 	 * Create the panel.
 	 */
 	public LoginPane() {
-
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 17, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -38,7 +37,7 @@ public class LoginPane extends JPanel {
 
 		labelImage = new JLabel("");
 		try {
-			ImageIcon image = new ImageIcon(this.getClass().getResource("/ui/resources/logo.png"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("/view/resources/logo.png"));
 			labelImage = new JLabel(image);
 		} catch (Exception e) {
 		}

@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import ui.AppView;
-import ui.HomePane;
+import view.AppView;
+import view.HomePane;
 
 public class HomePaneController implements ActionListener {
 	AppView appView;

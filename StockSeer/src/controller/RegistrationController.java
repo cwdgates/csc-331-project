@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import persistence.AccountDBUtil;
-import ui.AppView;
-import ui.RegistrationPane;
+import view.AppView;
+import view.RegistrationPane;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class RegistrationController implements ActionListener {

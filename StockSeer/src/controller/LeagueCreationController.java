@@ -6,10 +6,10 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import persistence.DBUtililty;
 import persistence.Date;
+import view.AppView;
+import view.LeagueCreationPane;
 import model.CurrentUserModel;
 import model.Difficulty;
-import ui.AppView;
-import ui.LeagueCreationPane;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;

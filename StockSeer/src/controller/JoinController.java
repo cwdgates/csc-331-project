@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.AppView;
+import view.AppView;
 
 public class JoinController implements ActionListener {
 	AppView appView;

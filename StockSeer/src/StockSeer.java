@@ -8,7 +8,7 @@ import controller.RegistrationController;
 import model.CurrentUserModel;
 import model.LeagueListModel;
 import persistence.DBConnection;
-import ui.AppView;;
+import view.AppView;;
 
 /**
  * App runner
