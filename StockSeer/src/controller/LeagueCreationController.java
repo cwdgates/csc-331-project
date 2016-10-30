@@ -71,6 +71,7 @@ public class LeagueCreationController implements ActionListener {
 							JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
 									JOptionPane.INFORMATION_MESSAGE);
 							createLeaguePane.reset();
+							appView.viewHome();
 						} else {
 							JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",
 									JOptionPane.WARNING_MESSAGE);

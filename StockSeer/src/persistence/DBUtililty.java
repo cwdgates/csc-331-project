@@ -13,6 +13,7 @@ public abstract class DBUtililty {
 
 	}
 
+	// -------------------------------------------------------------------------------
 	public abstract static class League {
 		public static boolean isLeagueNameUnique(String leagueName) {
 			PreparedStatement statement = null;
@@ -74,21 +75,28 @@ public abstract class DBUtililty {
 			return false;
 		}
 
-		public LeagueModel getLeague(String leagueName) {
+		/**
+		 * 
+		 * @param leagueName
+		 * @return
+		 */
+		public static LeagueModel getLeague(String leagueName) {
 			LeagueModel league = null;
 			PreparedStatement statement = null;
 			ResultSet rs = null;
 			try {
-				String sql = "";
+				String sql = "SELECT * FROM league WHERE name = ?";
 				statement = DBConnection.getConnection().prepareStatement(sql);
+				statement.setString(1, leagueName);
 				rs = statement.executeQuery();
 				if (rs.next()) {
-					league = new LeagueModel();
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int capacity = rs.getInt("capacity");
+					Date startDate = new Date(rs.getString("start_date"));
+					Date endDate = new Date(rs.getString("end_date"));
 					Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
-
+					league = new LeagueModel(id, name, capacity, startDate, endDate, difficulty);
 				}
 			} catch (SQLException e) {
 				System.err.println("Can't get league.");
@@ -96,6 +104,11 @@ public abstract class DBUtililty {
 				return null;
 			}
 			return league;
+		}
+
+		public static void main(String[] args) {
+			LeagueModel leagueModel = DBUtililty.League.getLeague("sp500");
+			System.out.println(leagueModel.toString());
 		}
 	}
 }

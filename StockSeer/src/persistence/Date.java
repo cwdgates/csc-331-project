@@ -67,12 +67,4 @@ public class Date extends GregorianCalendar {
 		String mm = (month + "").length() == 2 ? (month + "") : ("0" + month);
 		return year + "-" + mm + "-" + dd;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(new Date(2016, 2, 1).toString());
-		System.out.println(new Date().toString());
-		Date date = new Date();
-		date.setMonth(2);
-		System.out.println(date.toString());
-	}
 }

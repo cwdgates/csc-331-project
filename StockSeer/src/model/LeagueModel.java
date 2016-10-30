@@ -1,19 +1,15 @@
 package model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
-import persistence.DBConnection;
+import persistence.Date;
 
 public class LeagueModel {
 	private String leagueName;
 	private Integer leagueID;
 	private int capacity;
-	private GregorianCalendar startDate;
-	private GregorianCalendar endDate;
+	private Date startDate;
+	private Date endDate;
 	private Difficulty difficulty;
 
 	private ArrayList<StockModel> stockList;
@@ -25,6 +21,16 @@ public class LeagueModel {
 		startDate = null;
 		endDate = null;
 		difficulty = null;
+		stockList = null;
+	}
+
+	public LeagueModel(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty) {
+		this.leagueID = id;
+		this.leagueName = name;
+		this.capacity = 0;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.difficulty = difficulty;
 		stockList = null;
 	}
 
@@ -56,7 +62,7 @@ public class LeagueModel {
 		return startDate;
 	}
 
-	public void setStartDate(GregorianCalendar startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -64,7 +70,7 @@ public class LeagueModel {
 		return endDate;
 	}
 
-	public void setEndDate(GregorianCalendar endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -89,10 +95,11 @@ public class LeagueModel {
 	}
 
 	/**
-	 * Return the string representation of GregorianCalendar date as
-	 * <b>YYYY-MM-DD</b> format. Main purpose is for database
-	 * 
-	 * @param date
-	 * @return date in <b>YYYY-MM-DD</b> format. Example 2015-04-23
+	 * @return id name start_date end_date difficulty
 	 */
+	@Override
+	public String toString() {
+		return "ID=" + leagueID + " NAME=" + leagueName + " START=" + startDate.toString() + " END="
+				+ endDate.toString() + " DIFFICULTY=" + difficulty.name();
+	}
 }
