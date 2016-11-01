@@ -69,7 +69,7 @@ public class LeagueCreationController implements ActionListener {
 						if (isSuccess) {
 							JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
 									JOptionPane.INFORMATION_MESSAGE);
-							createLeaguePane.reset();
+							createLeaguePane.resetFields();
 							appView.viewHome();
 						} else {
 							JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",
@@ -84,7 +84,12 @@ public class LeagueCreationController implements ActionListener {
 		// CANCEL button clicked
 		case LeagueCreationPane.CANCEL: {
 			System.out.println(LeagueCreationPane.CANCEL);
-			appView.viewHome();
+			int choice = JOptionPane.showConfirmDialog(appView, "Do you want to cancel?", "",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (choice == JOptionPane.OK_OPTION) {
+				appView.viewHome();
+				createLeaguePane.resetFields();
+			}
 			break;
 		}
 

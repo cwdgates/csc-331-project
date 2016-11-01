@@ -225,7 +225,7 @@ public class LeagueCreationPane extends JPanel {
 	/**
 	 * set all fields to initial values
 	 */
-	public void reset() {
+	public void resetFields() {
 		txtLeagueName.setText("");
 		comboBoxCapacity.setSelectedIndex(0);
 		rdbtnEasy.setSelected(true);

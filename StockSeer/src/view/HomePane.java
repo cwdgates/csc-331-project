@@ -89,7 +89,6 @@ public class HomePane extends JPanel {
 		leagueTableModel.setDataVector(null, columnIdentifiers);
 		JTable table = new JTable(leagueTableModel);
 		scrollPane.setViewportView(table);
-
 	}
 
 	public void refreshTable() {

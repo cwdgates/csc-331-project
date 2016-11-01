@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author anvu
  *
  */
-public abstract class AccountDBUtil {
+public abstract class AccountUtil {
 
 	public static boolean checkUsernameAndPassword(String username, String password) {
 		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
