@@ -13,6 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class AppView extends JFrame {
+	//
 
 	private JPanel contentPane; // main panel
 
