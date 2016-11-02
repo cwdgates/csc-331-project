@@ -4,3 +4,5 @@ Fetch leagues from database when open app
 
 
 User A using machine PC_A, user B using machine PC_B, when User A change a league (update, delete) on the database, how can other user know that league has been changed ?
+
+More problems...
