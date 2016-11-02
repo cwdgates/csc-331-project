@@ -8,15 +8,15 @@ import persistence.Date;
 import persistence.LeagueUtil;
 import view.AppView;
 import view.LeagueCreationPane;
-import model.CurrentUserModel;
+import model.UserModel;
 import model.Difficulty;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;
 	LeagueCreationPane createLeaguePane;
-	CurrentUserModel userModel;
+	UserModel userModel;
 
-	public LeagueCreationController(AppView appView, CurrentUserModel userModel) {
+	public LeagueCreationController(AppView appView, UserModel userModel) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
 		this.userModel = userModel;

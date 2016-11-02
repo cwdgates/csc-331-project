@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import persistence.AccountUtil;
 import view.AppView;
 import view.LoginPane;
-import model.CurrentUserModel;
+import model.UserModel;
 
 /**
  * know about actions performed
@@ -21,15 +21,15 @@ public class LoginController implements ActionListener, KeyListener {
 	private LoginPane loginPane;
 
 	private AppView appView;
-	private CurrentUserModel userModel;
+	private UserModel userModel;
 
-	public LoginController(AppView appView, CurrentUserModel userModel) {
+	public LoginController(AppView appView, UserModel userModel) {
 		this.loginPane = appView.getLoginPane();
 		this.appView = appView;
 		this.userModel = userModel;
 	}
 
-	public void registerUser(CurrentUserModel userModel) {
+	public void registerUser(UserModel userModel) {
 		this.userModel = userModel;
 	}
 
@@ -82,8 +82,8 @@ public class LoginController implements ActionListener, KeyListener {
 			 * Grant access to the application. The object stay alive until
 			 * logout.
 			 */
-			userModel = new CurrentUserModel();
-			userModel = CurrentUserModel.getUserFromDB(loginPane.getUsername(), loginPane.getPassword());
+			userModel = new UserModel();
+			userModel = UserModel.getUserFromDB(loginPane.getUsername(), loginPane.getPassword());
 
 			// show welcome pane
 			String msg = "Welcome " + userModel.getFirstName() + " " + userModel.getLastName()
