@@ -1,0 +1,6 @@
+Fetch leagues from database when open app
+	Select all from league table, each row of league table render into an object.
+	Each object will be added to array list. The array list will be rendered for DefaultTableModel use.
+
+
+User A using machine PC_A, user B using machine PC_B, when User A change a league (update, delete) on the database, how can other user know that league has been changed ?
