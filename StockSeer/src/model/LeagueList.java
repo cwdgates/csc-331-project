@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  */
 public class LeagueList {
-	ArrayList<League> leagues;
+	ArrayList<League> leagues = null;
 
 	public LeagueList() {
 		this.leagues = new ArrayList<League>();
@@ -35,11 +35,13 @@ public class LeagueList {
 		return null;
 	}
 
-	/**
-	 * pull data from database
-	 */
-	public void update() {
-
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (League league : leagues) {
+			sb.append(league.toString());
+		}
+		return sb.toString();
 	}
 
 }
