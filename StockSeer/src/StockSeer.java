@@ -10,7 +10,7 @@ import model.LeagueList;
 import persistence.DBConnection;
 import persistence.LeagueUtil;
 import view.AppView;;
-
+//
 /**
  * App runner
  * 
