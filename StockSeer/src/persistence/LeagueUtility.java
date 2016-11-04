@@ -111,7 +111,7 @@ public abstract class LeagueUtility {
         ArrayList<League> leagues = null;
 
         try {
-            String sql = "SELECT * FROM league";
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty FROM league";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             rs = selectSTMT.executeQuery();
             leagues = new ArrayList<League>();
@@ -135,7 +135,7 @@ public abstract class LeagueUtility {
             try {
                 selectSTMT.close();
             } catch (SQLException e) {
-                System.err.println("Can't close selectStatement.");
+                System.err.println("Can't close SELECT statement.");
                 e.printStackTrace();
             }
         }

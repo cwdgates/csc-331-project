@@ -28,7 +28,7 @@ public class AppView extends JFrame {
 	private final String CREATE_LEAGUE_PANE = "CREATE_LEAGUE_PANE";
 	private final String CHOOSE_STOCK_PANE = "CHOOSE_STOCK_PANE";
 	private final String SIGN_UP_PANE = "SIGN_UP_PANE";
-	private final String HOME_PANE = "MAIN_PANE";
+	private final String HOME_PANE = "HOME_PANE";
 
 	/**
 	 * Create the frame.
@@ -52,7 +52,7 @@ public class AppView extends JFrame {
 		initPanes();
 	}
 
-	public void initPanes() {
+	private void initPanes() {
 		cardLayout = new CardLayout();
 		contentPane.setLayout(cardLayout);
 

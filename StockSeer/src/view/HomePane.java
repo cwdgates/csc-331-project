@@ -10,10 +10,22 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
 import controller.HomePaneController;
+
 import javax.swing.JTable;
 
 public class HomePane extends JPanel {
+
+    /**
+     * create NonEditableTableModel class in order to disable ability to edit leagues data using GUI at Home Pane
+     */
+    private final class NonEditableTableModel extends DefaultTableModel {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
 
     public static final String CREATE_LEAGUE = "Create a league";
     public static final String JOIN_LEAGUE = "Join";
@@ -27,7 +39,7 @@ public class HomePane extends JPanel {
     private JButton btnDetail;
     private Vector<String> columnIdentifiers;
 
-    private DefaultTableModel leagueTableModel;
+    private NonEditableTableModel leagueTableModel;
 
     /**
      * Create the panel.
@@ -78,7 +90,7 @@ public class HomePane extends JPanel {
         final String[] columnNames = {"Name", "Start", "End", "Capacity", "Difficulty"};
         columnIdentifiers = new Vector<>();
         columnIdentifiers.addAll(Arrays.asList(columnNames));
-        leagueTableModel = new DefaultTableModel();
+        leagueTableModel = new NonEditableTableModel();
         leagueTableModel.setDataVector(null, columnIdentifiers);
         JTable table = new JTable(leagueTableModel);
         scrollPane.setViewportView(table);
@@ -88,12 +100,8 @@ public class HomePane extends JPanel {
         leagueTableModel.fireTableDataChanged();
     }
 
-    public void initializeTable(Vector<String[]> vector) {
+    public void setTableData(Vector<Vector<String>> vector) {
         leagueTableModel.setDataVector(vector, columnIdentifiers);
-    }
-
-    public void setLeagueTableModel(DefaultTableModel model) {
-        leagueTableModel = model;
     }
 
     public void registerListeners(HomePaneController homePaneController) {

@@ -28,7 +28,7 @@ public class StockSeer {
 
 	// models ---------------------
 	private UserModel userModel = null; // only one user per instance of
-	private LeagueList leagueList = null;
+	private LeagueList leagues = null;
 
 	public void run() {
 		// set look and feel
@@ -50,18 +50,21 @@ public class StockSeer {
 		appView = new AppView();
 
 		// ------------------- INITIALIZE MODELS ---------------------
-
+		leagues = new LeagueList();
 		// ----------------- INITIALIZE CONTROLLERS -----------------
 		loginController = new LoginController(appView, userModel);
 		registrationController = new RegistrationController(appView);
 		leagueCreationController = new LeagueCreationController(appView, userModel);
 		homePaneController = new HomePaneController(appView);
 
+		loginController.setLeagueList(leagues);
+
 		// --------------------REGISTER LISTENERS --------------------------
 		appView.getLoginPane().registerListeners(loginController);
 		appView.getCreateLeaguePane().registerListeners(leagueCreationController);
 		appView.getSignUpPane().registerListeners(registrationController);
 		appView.getHomePane().registerListeners(homePaneController);
+
 
 		// -------------------- SET VISIBLE -------------------------
 		appView.setVisible(true);

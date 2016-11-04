@@ -9,8 +9,8 @@ import view.AppView;
 import view.HomePane;
 
 public class HomePaneController implements ActionListener {
-	AppView appView;
-	HomePane homePane;
+	private AppView appView;
+	private HomePane homePane;
 
 	public HomePaneController(AppView appView) {
 		this.appView = appView;
@@ -45,7 +45,7 @@ public class HomePaneController implements ActionListener {
 		}
 
 		case HomePane.JOIN_LEAGUE: {
-			// FIXME working ...
+			// FIXME still working
 			System.out.println(HomePane.REFRESH);
 			int choice = JOptionPane.showConfirmDialog(appView, "Do you want to join this league?", "",
 					JOptionPane.OK_CANCEL_OPTION);
