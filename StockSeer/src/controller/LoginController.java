@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 
-import persistence.AccountUtil;
+import persistence.AccountUtility;
 import view.AppView;
 import view.LoginPane;
 import model.UserModel;
@@ -75,7 +75,7 @@ public class LoginController implements ActionListener, KeyListener {
 
 	private void performLogin() {
 		// check credential
-		boolean isValid = AccountUtil.checkUsernameAndPassword(loginPane.getUsername(),
+		boolean isValid = AccountUtility.checkUsernameAndPassword(loginPane.getUsername(),
 				loginPane.getPassword().trim());
 		if (isValid) {
 			/*

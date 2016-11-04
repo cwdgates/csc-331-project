@@ -1,7 +1,7 @@
 
 import java.sql.*;
 
-import persistence.AccountUtil;
+import persistence.AccountUtility;
 import persistence.DBConnection;
 
 public class TestMySQL {
@@ -36,7 +36,7 @@ public class TestMySQL {
 			}
 
 			// check credential
-			if (AccountUtil.checkUsernameAndPassword("ginger", "password")) {
+			if (AccountUtility.checkUsernameAndPassword("ginger", "password")) {
 				System.out.println("Valid credential");
 			} else {
 				System.out.println("Invalid credential");

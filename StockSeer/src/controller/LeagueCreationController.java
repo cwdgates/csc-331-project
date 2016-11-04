@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import persistence.Date;
-import persistence.LeagueUtil;
+import persistence.LeagueUtility;
 import view.AppView;
 import view.LeagueCreationPane;
 import model.UserModel;
@@ -34,7 +34,7 @@ public class LeagueCreationController implements ActionListener {
 			if (createLeaguePane.getLeagueName().length() == 0) {
 				JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
 						JOptionPane.WARNING_MESSAGE);
-			} else if (!LeagueUtil.isLeagueNameUnique(createLeaguePane.getLeagueName())) {
+			} else if (!LeagueUtility.isLeagueUnique(createLeaguePane.getLeagueName())) {
 				JOptionPane.showMessageDialog(appView,
 						"The name has been used in another league.\nPlease use another name.", "",
 						JOptionPane.WARNING_MESSAGE);
@@ -65,7 +65,7 @@ public class LeagueCreationController implements ActionListener {
 						String name = createLeaguePane.getLeagueName();
 						int capacity = createLeaguePane.getCapacity();
 						Difficulty difficulty = createLeaguePane.getDifficulty();
-						boolean isSuccess = LeagueUtil.createLeague(name, capacity, startDate, endDate, difficulty);
+						boolean isSuccess = LeagueUtility.createLeague(name, capacity, startDate, endDate, difficulty);
 						if (isSuccess) {
 							JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
 									JOptionPane.INFORMATION_MESSAGE);
