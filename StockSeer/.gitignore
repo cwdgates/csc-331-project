@@ -9,15 +9,6 @@ bin/
 # Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
-# ignore all .idea
-.idea/
-
-# ignore all .eml
-*.eml
-
-# ignore all .iml
-*.iml
-
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
@@ -43,7 +34,7 @@ bin/
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+StockSeer/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
