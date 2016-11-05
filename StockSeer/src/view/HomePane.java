@@ -92,7 +92,6 @@ public class HomePane extends JPanel {
         table.setDragEnabled(false);
         scrollPane.setViewportView(table);
 
-
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ListSelectionModel cellSelectionModel = table.getSelectionModel();
         table.getTableHeader().setReorderingAllowed(false); // prevent dragging column
@@ -125,10 +124,6 @@ public class HomePane extends JPanel {
 
             }
         });
-    }
-
-    public void updateTable() {
-        leagueTableModel.fireTableDataChanged();
     }
 
     public void setTableData(Vector<Vector<String>> vector) {
