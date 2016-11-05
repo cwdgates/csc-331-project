@@ -30,7 +30,7 @@ public class HomePaneController implements ActionListener {
 
 		case HomePane.REFRESH: {
 			System.out.println(HomePane.REFRESH);
-			homePane.refreshTable();
+			homePane.updateTable();
 			break;
 		}
 

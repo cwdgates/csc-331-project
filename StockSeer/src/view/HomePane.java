@@ -1,19 +1,17 @@
 package view;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Vector;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controller.HomePaneController;
-
-import javax.swing.JTable;
 
 public class HomePane extends JPanel {
 
@@ -87,16 +85,51 @@ public class HomePane extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         // --------TABLE------------------------------------------
-        final String[] columnNames = {"Name", "Start", "End", "Capacity", "Difficulty"};
+        final String[] columnNames = {"Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty"};
         columnIdentifiers = new Vector<>();
         columnIdentifiers.addAll(Arrays.asList(columnNames));
         leagueTableModel = new NonEditableTableModel();
         leagueTableModel.setDataVector(null, columnIdentifiers);
         JTable table = new JTable(leagueTableModel);
+        table.setDragEnabled(false);
         scrollPane.setViewportView(table);
+
+
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ListSelectionModel cellSelectionModel = table.getSelectionModel();
+        table.getTableHeader().setReorderingAllowed(false); // prevent dragging column
+
+        // FIXME this need to go
+        table.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int selectedRow = table.getSelectedRow();
+                System.out.println((String) table.getValueAt(selectedRow, 0));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
-    public void refreshTable() {
+    public void updateTable() {
         leagueTableModel.fireTableDataChanged();
     }
 

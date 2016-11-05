@@ -28,7 +28,7 @@ public class League {
     public League(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty) {
         this.leagueID = id;
         this.leagueName = name;
-        this.capacity = 0;
+        this.capacity = capacity;
         this.startDate = startDate;
         this.endDate = endDate;
         this.difficulty = difficulty;
