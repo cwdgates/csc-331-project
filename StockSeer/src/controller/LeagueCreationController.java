@@ -3,22 +3,20 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.swing.JOptionPane;
-
-import model.LeagueModel;
-import model.LeagueModel.Difficulty;
-import model.CurrentUserModel;
-import ui.AppView;
-import ui.LeagueCreationPane;
+import persistence.Date;
+import persistence.LeagueUtility;
+import view.AppView;
+import view.LeagueCreationPane;
+import model.UserModel;
+import model.Difficulty;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;
 	LeagueCreationPane createLeaguePane;
-	CurrentUserModel userModel;
+	UserModel userModel;
 
-	public LeagueCreationController(AppView appView, CurrentUserModel userModel) {
+	public LeagueCreationController(AppView appView, UserModel userModel) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
 		this.userModel = userModel;
@@ -27,6 +25,7 @@ public class LeagueCreationController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+
 		switch (command) {
 		// CREATE button clicked
 		case LeagueCreationPane.CREATE: {
@@ -35,13 +34,13 @@ public class LeagueCreationController implements ActionListener {
 			if (createLeaguePane.getLeagueName().length() == 0) {
 				JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
 						JOptionPane.WARNING_MESSAGE);
-			} else if (!LeagueModel.isLeagueUnique(createLeaguePane.getLeagueName())) {
+			} else if (!LeagueUtility.isLeagueUnique(createLeaguePane.getLeagueName())) {
 				JOptionPane.showMessageDialog(appView,
 						"The name has been used in another league.\nPlease use another name.", "",
 						JOptionPane.WARNING_MESSAGE);
 			} else {
-				GregorianCalendar startDate = createLeaguePane.getStartDate();
-				GregorianCalendar endDate = createLeaguePane.getEndDate();
+				Date startDate = createLeaguePane.getStartDate();
+				Date endDate = createLeaguePane.getEndDate();
 				// check start date
 				if (startDate == null) {
 					JOptionPane.showMessageDialog(appView, "Start date is invalid.", "", JOptionPane.WARNING_MESSAGE);
@@ -66,15 +65,15 @@ public class LeagueCreationController implements ActionListener {
 						String name = createLeaguePane.getLeagueName();
 						int capacity = createLeaguePane.getCapacity();
 						Difficulty difficulty = createLeaguePane.getDifficulty();
-						LeagueModel leagueModel = LeagueModel.createLeague(name, capacity, startDate, endDate,
-								difficulty);
-						if (leagueModel == null) {
-							JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",
-									JOptionPane.WARNING_MESSAGE);
-						} else {
+						boolean isSuccess = LeagueUtility.createLeague(name, capacity, startDate, endDate, difficulty);
+						if (isSuccess) {
 							JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
 									JOptionPane.INFORMATION_MESSAGE);
-							createLeaguePane.reset();
+							createLeaguePane.resetFields();
+							appView.viewHome();
+						} else {
+							JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",
+									JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				}
@@ -85,7 +84,12 @@ public class LeagueCreationController implements ActionListener {
 		// CANCEL button clicked
 		case LeagueCreationPane.CANCEL: {
 			System.out.println(LeagueCreationPane.CANCEL);
-			appView.viewHome();
+			int choice = JOptionPane.showConfirmDialog(appView, "Do you want to cancel?", "",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (choice == JOptionPane.OK_OPTION) {
+				appView.viewHome();
+				createLeaguePane.resetFields();
+			}
 			break;
 		}
 

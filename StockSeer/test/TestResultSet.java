@@ -19,7 +19,7 @@ public class TestResultSet {
 		} finally {
 			try {
 				preparedStatement.close(); // this will close rs as well
-				System.out.println("statement status=" + (preparedStatement.isClosed() == true ? "closed" : "open"));
+				System.out.println("statement status=" + (preparedStatement.isClosed() ? "closed" : "open"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
