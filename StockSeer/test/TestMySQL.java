@@ -35,12 +35,6 @@ public class TestMySQL {
 				System.out.println(rs.getString("last_name"));
 			}
 
-			// check credential
-			if (AccountUtility.checkUsernameAndPassword("ginger", "password")) {
-				System.out.println("Valid credential");
-			} else {
-				System.out.println("Invalid credential");
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end try

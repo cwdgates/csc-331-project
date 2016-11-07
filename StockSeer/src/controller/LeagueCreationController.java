@@ -8,22 +8,25 @@ import persistence.Date;
 import persistence.LeagueUtility;
 import view.AppView;
 import view.LeagueCreationPane;
-import model.UserModel;
+import model.AccountModel;
 import model.Difficulty;
 
 public class LeagueCreationController implements ActionListener {
 	AppView appView;
 	LeagueCreationPane createLeaguePane;
-	UserModel userModel;
+	AccountModel accountModel;
 
-	public LeagueCreationController(AppView appView, UserModel userModel) {
+	public LeagueCreationController(AppView appView, AccountModel accountModel) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
-		this.userModel = userModel;
+		this.accountModel = accountModel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		System.out.println("****" + accountModel);
+		
 		String command = e.getActionCommand();
 
 		switch (command) {

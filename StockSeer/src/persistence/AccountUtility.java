@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.AccountModel;
+
 /**
  * talk to database
  * 
@@ -12,8 +14,15 @@ import java.sql.SQLException;
  */
 public abstract class AccountUtility {
 
-	public static boolean checkUsernameAndPassword(String username, String password) {
-		String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+	/**
+	 * get an account from the database using username and password
+	 * 
+	 * @param username
+	 * @param password
+	 * @return AccountModel
+	 */
+	public static AccountModel getAccountFromDB(String username, String password) {
+		String query = "SELECT username, first_name, last_name FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
@@ -22,7 +31,9 @@ public abstract class AccountUtility {
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				return true;
+				System.out.println(resultSet.getString("username"));
+				return new AccountModel(resultSet.getString("username"), resultSet.getString("first_name"),
+						resultSet.getString("last_name"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,7 +46,7 @@ public abstract class AccountUtility {
 			}
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
@@ -79,11 +90,14 @@ public abstract class AccountUtility {
 			statement = DBConnection.getConnection().prepareStatement(sql);
 			statement.setString(1, email);
 			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
+			if (!resultSet.next()) {
+				return true;
+			} else {
 				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				statement.close();
@@ -91,7 +105,6 @@ public abstract class AccountUtility {
 				e.printStackTrace();
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -119,6 +132,7 @@ public abstract class AccountUtility {
 			return result == 1 ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				statement.close();
@@ -126,7 +140,34 @@ public abstract class AccountUtility {
 				e.printStackTrace();
 			}
 		}
-		return false;
+	}
+
+	/**
+	 * 
+	 * @param username
+	 * @param leagueName
+	 * @return
+	 */
+	public static boolean joinLeague(String username, String leagueName) {
+		PreparedStatement statement = null;
+		int result = 0;
+		try {
+			String sql = "INSERT INTO user_league (username, league_name) VALUES (?,?)";
+			statement = DBConnection.getConnection().prepareStatement(sql);
+			statement.setString(1, username);
+			statement.setString(2, leagueName);
+			result = statement.executeUpdate();
+			return result == 1 ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
