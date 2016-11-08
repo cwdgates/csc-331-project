@@ -16,9 +16,9 @@ import model.Difficulty;
  *
  */
 public class LeagueCreationController implements ActionListener {
-    AppView appView;
-    LeagueCreationPane createLeaguePane;
-    AccountModel accountModel;
+    private AppView appView;
+    private LeagueCreationPane createLeaguePane;
+    private AccountModel accountModel;
 
     public LeagueCreationController(AppView appView) {
         this.appView = appView;
