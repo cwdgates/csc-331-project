@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
+import model.LeagueListModel;
 import persistence.Date;
 import persistence.LeagueUtility;
 import view.AppView;
@@ -20,11 +21,14 @@ public class LeagueCreationController implements ActionListener {
     private AppView appView;
     private LeagueCreationPane createLeaguePane;
     private AccountModel accountModel;
+    private LeagueListModel leagueListModel;
     
-    public LeagueCreationController(AppView appView, AccountModel accountModel) {
+    
+    public LeagueCreationController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
         this.appView = appView;
         this.createLeaguePane = appView.getCreateLeaguePane();
         this.accountModel = accountModel;
+        this.leagueListModel = leagueListModel;
     }
     
     @Override
@@ -75,6 +79,7 @@ public class LeagueCreationController implements ActionListener {
                                 JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
                                         JOptionPane.INFORMATION_MESSAGE);
                                 createLeaguePane.resetFields();
+                                leagueListModel.update();
                                 appView.viewHome();
                             } else {
                                 JOptionPane.showMessageDialog(appView, "The league was NOT successfully created.", "",

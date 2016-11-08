@@ -8,6 +8,7 @@ import controller.LeagueCreationController;
 import controller.LoginController;
 import controller.RegistrationController;
 import model.AccountModel;
+import model.LeagueListModel;
 import persistence.DBConnection;
 import view.AppView;;
 //
@@ -42,17 +43,21 @@ public class StockSeer {
         
         // ------------------- INITIALIZE MODELS ---------------------
         AccountModel accountModel = new AccountModel(); // only one user per instance of
+        LeagueListModel leagueListModel = new LeagueListModel();
+        
         // ----------------- INITIALIZE CONTROLLERS -----------------
-        LoginController loginController = new LoginController(appView, accountModel);
+        LoginController loginController = new LoginController(appView, accountModel, leagueListModel);
         RegistrationController registrationController = new RegistrationController(appView);
-        HomePaneController homePaneController = new HomePaneController(appView, accountModel);
-        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel);
+        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel);
+        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
         
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);
         appView.getCreateLeaguePane().registerListeners(leagueCreationController);
         appView.getSignUpPane().registerListeners(registrationController);
         appView.getHomePane().registerListeners(homePaneController);
+        
+        appView.getHomePane().setDefaultTableModel(leagueListModel);
         
         // -------------------- SET VISIBLE -------------------------
         appView.setVisible(true);

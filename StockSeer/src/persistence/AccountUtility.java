@@ -31,7 +31,6 @@ public abstract class AccountUtility {
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				System.out.println(resultSet.getString("username"));
 				return new AccountModel(resultSet.getString("username"), resultSet.getString("first_name"),
 						resultSet.getString("last_name"));
 			}

@@ -54,8 +54,6 @@ public abstract class LeagueUtility {
                 System.err.println("Can't insert a league to the database");
                 return false;
             } else {
-                System.out.println(
-                        name + " " + startDate.toString() + " " + endDate.toString() + " " + difficulty.toString());
                 return true;
             }
         } catch (SQLException e) {
@@ -130,7 +128,6 @@ public abstract class LeagueUtility {
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
                 League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
-//                System.out.println(league.toString());
                 leagues.add(league);
             }
             

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import model.League;
 import model.AccountModel;
+import model.LeagueListModel;
 import persistence.AccountUtility;
 import persistence.LeagueUtility;
 import view.AppView;
@@ -18,11 +19,13 @@ public class HomePaneController implements ActionListener {
 	private AppView appView;
 	private HomePane homePane;
 	private AccountModel accountModel;
+	private LeagueListModel leagueListModel;
 
-	public HomePaneController(AppView appView, AccountModel accountModel) {
+	public HomePaneController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
 		this.appView = appView;
 		this.homePane = appView.getHomePane();
 		this.accountModel = accountModel;
+		this.leagueListModel = leagueListModel;
 	}
 
 	@Override
@@ -38,22 +41,8 @@ public class HomePaneController implements ActionListener {
 
 		case HomePane.REFRESH: {
 			System.out.println(HomePane.REFRESH);
-			System.out.println(accountModel); // FIXME debug
-			ArrayList<League> leagues = LeagueUtility.getAllLeaguesFromDB();
-			if (leagues != null) {
-				Vector<Vector<String>> tableData = new Vector<>();
-				for (League league : leagues) {
-					Vector<String> row = new Vector<>();
-					row.add(league.getName());
-					row.add(league.getStartDate().toString());
-					row.add(league.getEndDate().toString());
-					row.add(league.getCapacity() + "");
-					row.add(league.getDifficulty().name());
-					row.add(league.getOwner());
-					tableData.add(row);
-				}
-				appView.getHomePane().setTableData(tableData);
-			}
+			
+			leagueListModel.update();
 			break;
 		}
 
@@ -69,13 +58,11 @@ public class HomePaneController implements ActionListener {
 
 		case HomePane.JOIN_LEAGUE: {
 			// FIXME still working
-			System.out.println(homePane.getLeagueSelected());
 			String league = homePane.getLeagueSelected();
 			if (league != null) {
 				int choice = JOptionPane.showConfirmDialog(appView, "Do you want to join " + league + " ?", "",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (choice == JOptionPane.OK_OPTION) {
-					System.out.println("****" + accountModel.getUsername());
 					AccountUtility.joinLeague(accountModel.getUsername(),league);
 				}
 			}
