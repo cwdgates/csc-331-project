@@ -34,7 +34,7 @@ bin/
 ## Plugin-specific files:
 
 # IntelliJ
-StockSeer/out/
+main.StockSeer/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/

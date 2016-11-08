@@ -69,14 +69,13 @@ public class HomePaneController implements ActionListener {
 
 		case HomePane.JOIN_LEAGUE: {
 			// FIXME still working
-			System.out.println(HomePane.REFRESH);
 			System.out.println(homePane.getLeagueSelected());
 			String league = homePane.getLeagueSelected();
 			if (league != null) {
 				int choice = JOptionPane.showConfirmDialog(appView, "Do you want to join " + league + " ?", "",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (choice == JOptionPane.OK_OPTION) {
-					System.out.println(accountModel);
+					System.out.println("****" + accountModel.getUsername());
 					AccountUtility.joinLeague(accountModel.getUsername(),league);
 				}
 			}

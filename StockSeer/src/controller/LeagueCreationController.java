@@ -16,7 +16,7 @@ public class LeagueCreationController implements ActionListener {
 	LeagueCreationPane createLeaguePane;
 	AccountModel accountModel;
 
-	public LeagueCreationController(AppView appView, AccountModel accountModel) {
+	public LeagueCreationController(AppView appView) {
 		this.appView = appView;
 		this.createLeaguePane = appView.getCreateLeaguePane();
 		this.accountModel = accountModel;
