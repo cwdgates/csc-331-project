@@ -8,6 +8,7 @@ import controller.LeagueCreationController;
 import controller.LoginController;
 import controller.RegistrationController;
 import model.AccountModel;
+import model.LeagueListModel;
 import persistence.DBConnection;
 import view.AppView;;
 //
@@ -18,19 +19,9 @@ import view.AppView;;
  * @author aqv
  */
 public class StockSeer {
-    // view ------------------
-    private AppView appView;
-
-    // controllers --------------------
-    private LoginController loginController;
-    private RegistrationController registrationController;
-    private LeagueCreationController leagueCreationController;
-    private HomePaneController homePaneController;
-
-    // models ---------------------
-    private AccountModel accountModel = new AccountModel(); // only one user per instance of
     
-
+    // models ---------------------
+    
     public void run() {
         // set look and feel
         try {
@@ -38,7 +29,7 @@ public class StockSeer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         // try to connect to database
         if (DBConnection.getConnection() == null) {
             JOptionPane.showMessageDialog(null, "Can't connect to database.", "Database Error",
@@ -46,30 +37,35 @@ public class StockSeer {
             System.err.println("Can't connect to database.");
             return;
         }
-
+        
         // ------------------- INITIALIZE VIEW -----------------------
-        appView = new AppView();
-
+        AppView appView = new AppView();
+        
         // ------------------- INITIALIZE MODELS ---------------------
+        AccountModel accountModel = new AccountModel(); // only one user per instance of
+        LeagueListModel leagueListModel = new LeagueListModel();
+        
         // ----------------- INITIALIZE CONTROLLERS -----------------
-        loginController = new LoginController(appView, accountModel);
-        registrationController = new RegistrationController(appView);
-        homePaneController = new HomePaneController(appView, accountModel);
-        leagueCreationController = new LeagueCreationController(appView);
-
+        LoginController loginController = new LoginController(appView, accountModel, leagueListModel);
+        RegistrationController registrationController = new RegistrationController(appView);
+        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel);
+        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
+        
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);
         appView.getCreateLeaguePane().registerListeners(leagueCreationController);
         appView.getSignUpPane().registerListeners(registrationController);
         appView.getHomePane().registerListeners(homePaneController);
-
+        
+        appView.getHomePane().setDefaultTableModel(leagueListModel);
+        
         // -------------------- SET VISIBLE -------------------------
         appView.setVisible(true);
     }
-
+    
     public static void main(String[] args) {
         StockSeer stockSeer = new StockSeer();
         stockSeer.run();
     }
-
+    
 }

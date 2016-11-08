@@ -10,9 +10,11 @@ import javax.swing.JOptionPane;
 
 import main.StockSeer;
 import model.League;
+import model.LeagueListModel;
 import persistence.AccountUtility;
 import persistence.LeagueUtility;
 import view.AppView;
+import view.HomePane;
 import view.LoginPane;
 import model.AccountModel;
 
@@ -25,17 +27,19 @@ public class LoginController implements ActionListener, KeyListener {
     private LoginPane loginPane;
     private AppView appView;
     private AccountModel accountModel;
-
-    public LoginController(AppView appView, AccountModel accountModel) {
+    private LeagueListModel leagueListModel;
+    
+    public LoginController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
         this.loginPane = appView.getLoginPane();
         this.appView = appView;
         this.accountModel = accountModel;
+        this.leagueListModel = leagueListModel;
     }
-
+    
     public AccountModel getAccountModel() {
         return accountModel;
     }
-
+    
     /**
      * check for button click in login panel
      */
@@ -51,17 +55,17 @@ public class LoginController implements ActionListener, KeyListener {
             case LoginPane.SIGNUP_BTN:
                 appView.viewSignUp();
                 break;
-
+            
             default:
                 break;
         }
-
+        
     }
-
+    
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
+    
     @Override
     public void keyPressed(KeyEvent e) {
         // if press enter key
@@ -71,11 +75,11 @@ public class LoginController implements ActionListener, KeyListener {
             }
         }
     }
-
+    
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
+    
     private void performLogin() {
         AccountModel tempAccount = AccountUtility.getAccountFromDB(loginPane.getUsername(), loginPane.getPassword());
         if (tempAccount != null) {
@@ -83,37 +87,22 @@ public class LoginController implements ActionListener, KeyListener {
             accountModel.setUsername(tempAccount.getUsername());
             accountModel.setLastName(tempAccount.getLastName());
             accountModel.setFirstName(tempAccount.getFirstName());
-
+            
             String msg = "Welcome " + accountModel.getFirstName() + " " + accountModel.getLastName() + ".\nClick OK to "
                     + "continue.";
             JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
 
-            ArrayList<League> leagues = LeagueUtility.getAllLeaguesFromDB();
-            if (leagues != null) {
-                Vector<Vector<String>> tableData = new Vector<>();
-                for (League league : leagues) {
-                    Vector<String> row = new Vector<>();
-                    row.add(league.getName());
-                    row.add(league.getStartDate().toString());
-                    row.add(league.getEndDate().toString());
-                    row.add(league.getCapacity() + "");
-                    row.add(league.getDifficulty().name());
-                    tableData.add(row);
-                }
-
-                appView.getHomePane().setTableData(tableData);
-            }
-
+            leagueListModel.update();
             appView.viewHome(); // change the scene to Home
             loginPane.setTextFieldsEmpty(); // clear text field
-
+            
         } else {
             JOptionPane.showMessageDialog(loginPane, "Wrong username or password.", "Warning",
                     JOptionPane.WARNING_MESSAGE);
         }
-
+        
     }
-
+    
     /**
      * Check whether the username and password fields are empty
      *
