@@ -9,7 +9,7 @@ import model.Difficulty;
 import model.League;
 
 public abstract class LeagueUtility {
-
+    
     public static boolean isLeagueNameUnique(String leagueName) {
         PreparedStatement selectSTMT = null;
         try {
@@ -34,7 +34,7 @@ public abstract class LeagueUtility {
         }
         return true;
     }
-
+    
     public static boolean createLeague(String name, int capacity, Date startDate, Date endDate, Difficulty
             difficulty, String owner) {
         PreparedStatement insertSTMT = null;
@@ -48,7 +48,7 @@ public abstract class LeagueUtility {
             insertSTMT.setInt(4, capacity);
             insertSTMT.setString(5, difficulty.toString());
             insertSTMT.setString(6, owner);
-
+            
             int numAffectedRow = insertSTMT.executeUpdate();
             if (numAffectedRow == 0) {
                 System.err.println("Can't insert a league to the database");
@@ -72,7 +72,7 @@ public abstract class LeagueUtility {
         }
         return false;
     }
-
+    
     /**
      * get league from the database
      *
@@ -95,7 +95,8 @@ public abstract class LeagueUtility {
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
-                league = new League(id, name, capacity, startDate, endDate, difficulty);
+                String owner = rs.getString("owner");
+                league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
             }
         } catch (SQLException e) {
             System.err.println("Can't get league.");
@@ -104,7 +105,7 @@ public abstract class LeagueUtility {
         }
         return league;
     }
-
+    
     /**
      * get all league objects
      *
@@ -114,9 +115,9 @@ public abstract class LeagueUtility {
         PreparedStatement selectSTMT = null;
         ResultSet rs = null;
         ArrayList<League> leagues = null;
-
+        
         try {
-            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty FROM league";
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             rs = selectSTMT.executeQuery();
             leagues = new ArrayList<League>();
@@ -127,11 +128,12 @@ public abstract class LeagueUtility {
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
-                League league = new League(id, name, capacity, startDate, endDate, difficulty);
-                System.out.println(league.toString());
+                String owner = rs.getString("owner");
+                League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
+//                System.out.println(league.toString());
                 leagues.add(league);
             }
-
+            
         } catch (SQLException e) {
             System.err.println("Can't get all leagues from DB");
             e.printStackTrace();
@@ -145,7 +147,7 @@ public abstract class LeagueUtility {
                 e.printStackTrace();
             }
         }
-
+        
         return leagues;
     }
 }

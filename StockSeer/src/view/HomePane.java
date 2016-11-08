@@ -86,7 +86,7 @@ public class HomePane extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         // --------TABLE------------------------------------------
-        final String[] columnNames = {"Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty"};
+        final String[] columnNames = {"Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty", "Created By"};
         columnIdentifiers = new Vector<>();
         columnIdentifiers.addAll(Arrays.asList(columnNames));
         leagueTableModel = new NonEditableTableModel();

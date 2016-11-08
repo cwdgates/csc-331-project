@@ -49,9 +49,9 @@ public class HomePaneController implements ActionListener {
 					row.add(league.getEndDate().toString());
 					row.add(league.getCapacity() + "");
 					row.add(league.getDifficulty().name());
+					row.add(league.getOwner());
 					tableData.add(row);
 				}
-
 				appView.getHomePane().setTableData(tableData);
 			}
 			break;
