@@ -13,116 +13,114 @@ import controller.HomePaneController;
 
 public class HomePane extends JPanel {
 
-	/**
-	 * create NonEditableTableModel class in order to disable ability to edit
-	 * leagues data using GUI at Home Pane
-	 */
-	private final class NonEditableTableModel extends DefaultTableModel {
-		@Override
-		public boolean isCellEditable(int row, int column) {
-			return false;
-		}
+    /**
+     * create NonEditableTableModel class in order to disable ability to edit
+     * leagues data using GUI at Home Pane
+     */
+    private final class NonEditableTableModel extends DefaultTableModel {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
 
-	}
+    }
 
-	public static final String CREATE_LEAGUE = "Create a league";
-	public static final String JOIN_LEAGUE = "Join";
-	public static final String LOGOUT = "Logout";
-	public static final String REFRESH = "Refresh";
-	public static final String DETAIL = "Detail";
-	private JButton btnCreate;
-	private JButton btnLogout;
-	private JButton btnJoin;
-	private JButton btnRefresh;
-	private JButton btnDetail;
-	private JTable table;
-	private Vector<String> columnIdentifiers;
+    public static final String CREATE_LEAGUE = "Create a league";
+    public static final String JOIN_LEAGUE = "Join";
+    public static final String LOGOUT = "Logout";
+    public static final String REFRESH = "Refresh";
+    public static final String DETAIL = "Detail";
+    private JButton btnCreate;
+    private JButton btnLogout;
+    private JButton btnJoin;
+    private JButton btnRefresh;
+    private JButton btnDetail;
+    private JTable table;
+    private Vector<String> columnIdentifiers;
 
-	private NonEditableTableModel leagueTableModel;
+    private NonEditableTableModel leagueTableModel;
 
-	/**
-	 * Create the panel.
-	 */
-	HomePane() {
+    /**
+     * Create the panel.
+     */
+    HomePane() {
 
-		setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
 
-		JPanel panelBottomControl = new JPanel();
-		add(panelBottomControl, BorderLayout.SOUTH);
-		panelBottomControl.setLayout(new BoxLayout(panelBottomControl, BoxLayout.X_AXIS));
+        JPanel panelBottomControl = new JPanel();
+        add(panelBottomControl, BorderLayout.SOUTH);
+        panelBottomControl.setLayout(new BoxLayout(panelBottomControl, BoxLayout.X_AXIS));
 
-		btnRefresh = new JButton(REFRESH);
-		panelBottomControl.add(btnRefresh);
+        btnRefresh = new JButton(REFRESH);
+        panelBottomControl.add(btnRefresh);
 
-		Component horizontalGlue_1 = Box.createHorizontalGlue();
-		panelBottomControl.add(horizontalGlue_1);
+        Component horizontalGlue_1 = Box.createHorizontalGlue();
+        panelBottomControl.add(horizontalGlue_1);
 
-		btnDetail = new JButton(DETAIL);
-		panelBottomControl.add(btnDetail);
+        btnDetail = new JButton(DETAIL);
+        panelBottomControl.add(btnDetail);
 
-		Component horizontalGlue = Box.createHorizontalGlue();
-		panelBottomControl.add(horizontalGlue);
+        Component horizontalGlue = Box.createHorizontalGlue();
+        panelBottomControl.add(horizontalGlue);
 
-		btnJoin = new JButton(JOIN_LEAGUE);
-		panelBottomControl.add(btnJoin);
+        btnJoin = new JButton(JOIN_LEAGUE);
+        panelBottomControl.add(btnJoin);
 
-		Component horizontalGlue_3 = Box.createHorizontalGlue();
-		panelBottomControl.add(horizontalGlue_3);
+        Component horizontalGlue_3 = Box.createHorizontalGlue();
+        panelBottomControl.add(horizontalGlue_3);
 
-		btnCreate = new JButton(CREATE_LEAGUE);
-		panelBottomControl.add(btnCreate);
+        btnCreate = new JButton(CREATE_LEAGUE);
+        panelBottomControl.add(btnCreate);
 
-		JPanel panelTopControl = new JPanel();
-		add(panelTopControl, BorderLayout.NORTH);
-		panelTopControl.setLayout(new BoxLayout(panelTopControl, BoxLayout.X_AXIS));
+        JPanel panelTopControl = new JPanel();
+        add(panelTopControl, BorderLayout.NORTH);
+        panelTopControl.setLayout(new BoxLayout(panelTopControl, BoxLayout.X_AXIS));
 
-		btnLogout = new JButton(LOGOUT);
-		panelTopControl.add(btnLogout);
+        btnLogout = new JButton(LOGOUT);
+        panelTopControl.add(btnLogout);
 
-		Component horizontalGlue_2 = Box.createHorizontalGlue();
-		panelTopControl.add(horizontalGlue_2);
+        Component horizontalGlue_2 = Box.createHorizontalGlue();
+        panelTopControl.add(horizontalGlue_2);
 
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane();
+        add(scrollPane, BorderLayout.CENTER);
 
-		// --------TABLE------------------------------------------
-		final String[] columnNames = { "Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty" };
-		columnIdentifiers = new Vector<>();
-		columnIdentifiers.addAll(Arrays.asList(columnNames));
-		leagueTableModel = new NonEditableTableModel();
-		leagueTableModel.setDataVector(null, columnIdentifiers);
-		table = new JTable(leagueTableModel);
-		table.setDragEnabled(false);
-		scrollPane.setViewportView(table);
+        // --------TABLE------------------------------------------
+        final String[] columnNames = {"Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty"};
+        columnIdentifiers = new Vector<>();
+        columnIdentifiers.addAll(Arrays.asList(columnNames));
+        leagueTableModel = new NonEditableTableModel();
+        leagueTableModel.setDataVector(null, columnIdentifiers);
+        table = new JTable(leagueTableModel);
+        table.setDragEnabled(false);
+        scrollPane.setViewportView(table);
 
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		ListSelectionModel cellSelectionModel = table.getSelectionModel();
-		table.getTableHeader().setReorderingAllowed(false); // prevent dragging
-		// column
-	}
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ListSelectionModel cellSelectionModel = table.getSelectionModel();
+        table.getTableHeader().setReorderingAllowed(false); // prevent dragging column
+    }
 
-	public void setTableData(Vector<Vector<String>> vector) {
-		leagueTableModel.setDataVector(vector, columnIdentifiers);
-	}
+    public void setTableData(Vector<Vector<String>> vector) {
+        leagueTableModel.setDataVector(vector, columnIdentifiers);
+    }
 
-	public void registerListeners(HomePaneController homePaneController) {
-		btnCreate.addActionListener(homePaneController);
-		btnLogout.addActionListener(homePaneController);
-		btnJoin.addActionListener(homePaneController);
-		btnRefresh.addActionListener(homePaneController);
-		btnDetail.addActionListener(homePaneController);
-	}
+    public void registerListeners(HomePaneController homePaneController) {
+        btnCreate.addActionListener(homePaneController);
+        btnLogout.addActionListener(homePaneController);
+        btnJoin.addActionListener(homePaneController);
+        btnRefresh.addActionListener(homePaneController);
+        btnDetail.addActionListener(homePaneController);
+    }
 
-	/**
-	 * 
-	 * @return league name if a league is selected<br>
-	 *         Null if no league is selected
-	 */
-	public String getLeagueSelected() {
-		int selectedRow = table.getSelectedRow();
-		if (selectedRow >= 0) {
-			return (String) table.getValueAt(selectedRow, 0);
-		}
-		return null;
-	}
+    /**
+     * @return league name if a league is selected<br>
+     * Null if no league is selected
+     */
+    public String getLeagueSelected() {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow >= 0) {
+            return (String) table.getValueAt(selectedRow, 0);
+        }
+        return null;
+    }
 }

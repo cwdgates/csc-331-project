@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 public class Date extends GregorianCalendar {
 
 	public Date() {
+		super();
 	}
 
 	/**
@@ -67,4 +68,6 @@ public class Date extends GregorianCalendar {
 		String mm = (month + "").length() == 2 ? (month + "") : ("0" + month);
 		return year + "-" + mm + "-" + dd;
 	}
+	
 }
+

@@ -10,7 +10,7 @@ import model.League;
 
 public abstract class LeagueUtility {
 
-    public static boolean isLeagueUnique(String leagueName) {
+    public static boolean isLeagueNameUnique(String leagueName) {
         PreparedStatement selectSTMT = null;
         try {
             String sql = "SELECT id FROM league WHERE name = ?";
