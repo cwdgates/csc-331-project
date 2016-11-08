@@ -67,8 +67,9 @@ public class StockSeer {
         appView.setVisible(true);
     }
 
-    public StockSeer(){
-
+    public static void main(String[] args) {
+        StockSeer stockSeer = new StockSeer();
+        stockSeer.run();
     }
 
 }

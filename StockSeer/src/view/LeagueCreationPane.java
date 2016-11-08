@@ -171,10 +171,6 @@ public class LeagueCreationPane extends JPanel {
 
     }
 
-    public void registerListeners(LeagueCreationController controller) {
-        btnCancel.addActionListener(controller);
-        btnCreate.addActionListener(controller);
-    }
 
     /**
      * @return null if date is invalid <br>
@@ -229,5 +225,10 @@ public class LeagueCreationPane extends JPanel {
         rdbtnEasy.setSelected(true);
         startDatePicker.reset();
         endDatePicker.reset();
+    }
+
+    public void registerListeners(LeagueCreationController controller) {
+        btnCancel.addActionListener(controller);
+        btnCreate.addActionListener(controller);
     }
 }

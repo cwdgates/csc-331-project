@@ -10,8 +10,8 @@ import view.RegistrationPane;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class RegistrationController implements ActionListener {
-	AppView appView;
-	RegistrationPane regPane;
+	private AppView appView;
+	private RegistrationPane regPane;
 
 	public RegistrationController(AppView appView) {
 		this.appView = appView;
@@ -86,12 +86,9 @@ public class RegistrationController implements ActionListener {
 	 * @return false if at least one field is empty. True otherwise
 	 */
 	private boolean isFieldsEmpty() {
-		if (regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
+		return regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
 				|| regPane.getLastName().length() == 0 || regPane.getPassword().length() == 0
-				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0) {
-			return true;
-		}
-		return false;
+				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0;
 	}
 
 	/**
@@ -113,10 +110,7 @@ public class RegistrationController implements ActionListener {
 	 * @return
 	 */
 	private boolean isPasswordValid(String password) {
-		if (password.indexOf(' ') == -1) {
-			return true;
-		}
-		return false;
+		return password.indexOf(' ') == -1;
 	}
 
 }
