@@ -12,12 +12,11 @@ public abstract class LeagueUtility {
 
     public static boolean isLeagueUnique(String leagueName) {
         PreparedStatement selectSTMT = null;
-        ResultSet rs = null;
         try {
             String sql = "SELECT id FROM league WHERE name = ?";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             selectSTMT.setString(1, leagueName);
-            rs = selectSTMT.executeQuery();
+            ResultSet rs = selectSTMT.executeQuery();
             if (rs.next()) {
                 return false;
             }
@@ -26,7 +25,8 @@ public abstract class LeagueUtility {
             return false; // operation failed
         } finally {
             try {
-                selectSTMT.close();
+                if (selectSTMT != null)
+                    selectSTMT.close();
             } catch (SQLException e) {
                 System.err.println("Can't close statement");
                 e.printStackTrace();
@@ -35,17 +35,20 @@ public abstract class LeagueUtility {
         return true;
     }
 
-    public static boolean createLeague(String name, int capacity, Date startDate, Date endDate, Difficulty difficulty) {
+    public static boolean createLeague(String name, int capacity, Date startDate, Date endDate, Difficulty
+            difficulty, String owner) {
         PreparedStatement insertSTMT = null;
         try {
-            String sql = "INSERT INTO league " + " (name, start_date, end_date, capacity, difficulty) "
-                    + " VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO league " + " (name, start_date, end_date, capacity, difficulty, owner) "
+                    + " VALUES (?,?,?,?,?,?)";
             insertSTMT = DBConnection.getConnection().prepareStatement(sql);
             insertSTMT.setString(1, name);
             insertSTMT.setString(2, startDate.toString());
             insertSTMT.setString(3, endDate.toString());
             insertSTMT.setInt(4, capacity);
             insertSTMT.setString(5, difficulty.toString());
+            insertSTMT.setString(6, owner);
+
             int numAffectedRow = insertSTMT.executeUpdate();
             if (numAffectedRow == 0) {
                 System.err.println("Can't insert a league to the database");
@@ -60,7 +63,8 @@ public abstract class LeagueUtility {
             e.printStackTrace();
         } finally {
             try {
-                insertSTMT.close();
+                if (insertSTMT != null)
+                    insertSTMT.close();
             } catch (SQLException e) {
                 System.err.println("Can't close statement.");
                 e.printStackTrace();
@@ -103,6 +107,7 @@ public abstract class LeagueUtility {
 
     /**
      * get all league objects
+     *
      * @return ArrayList contains all league objects
      */
     public static ArrayList<League> getAllLeaguesFromDB() {
@@ -133,7 +138,8 @@ public abstract class LeagueUtility {
             return null;
         } finally {
             try {
-                selectSTMT.close();
+                if (selectSTMT != null)
+                    selectSTMT.close();
             } catch (SQLException e) {
                 System.err.println("Can't close SELECT statement.");
                 e.printStackTrace();
