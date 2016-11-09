@@ -31,6 +31,7 @@ public class HomePane extends JPanel {
     private JTable table;
     
     private DefaultTableModel leagueTableModel;
+    private final ButtonGroup buttonGroup = new ButtonGroup();
     
     /**
      * Create the panel.
@@ -73,6 +74,21 @@ public class HomePane extends JPanel {
         
         Component horizontalGlue_2 = Box.createHorizontalGlue();
         panelTopControl.add(horizontalGlue_2);
+        
+        JPanel panel = new JPanel();
+        panelTopControl.add(panel);
+        
+        JRadioButton rdbtnAll = new JRadioButton("All");
+        buttonGroup.add(rdbtnAll);
+        panel.add(rdbtnAll);
+        
+        JRadioButton rdbtnMyLeagues = new JRadioButton("My Leagues");
+        buttonGroup.add(rdbtnMyLeagues);
+        panel.add(rdbtnMyLeagues);
+        
+        JRadioButton rdbtnJoinedLeagues = new JRadioButton("Joined Leagues");
+        buttonGroup.add(rdbtnJoinedLeagues);
+        panel.add(rdbtnJoinedLeagues);
         
         JScrollPane scrollPane = new JScrollPane();
         add(scrollPane, BorderLayout.CENTER);
