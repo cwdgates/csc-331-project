@@ -95,7 +95,7 @@ public class LeagueCreationController implements ActionListener {
             case LeagueCreationPane.CANCEL: {
                 System.out.println(LeagueCreationPane.CANCEL);
                 int choice = JOptionPane.showConfirmDialog(appView, "Do you want to cancel?", "",
-                        JOptionPane.OK_CANCEL_OPTION);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (choice == JOptionPane.OK_OPTION) {
                     appView.viewHome();
                     createLeaguePane.resetFields();
