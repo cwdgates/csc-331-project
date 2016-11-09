@@ -1,5 +1,6 @@
 package persistence;
 
+import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -109,7 +110,7 @@ public abstract class LeagueUtility {
      *
      * @return ArrayList contains all league objects
      */
-    public static ArrayList<League> getAllLeaguesFromDB() {
+    public static ArrayList<League> getAllLeagues() {
         PreparedStatement selectSTMT = null;
         ResultSet rs = null;
         ArrayList<League> leagues = null;
@@ -143,6 +144,76 @@ public abstract class LeagueUtility {
                 System.err.println("Can't close SELECT statement.");
                 e.printStackTrace();
             }
+        }
+        
+        return leagues;
+    }
+    
+    public static ArrayList<League> getAllLeagueOwnedBy(String owner) {
+        ArrayList<League> leagues = null;
+        PreparedStatement statement = null;
+        
+        try {
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner = ?";
+            statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, owner);
+            ResultSet rs = statement.executeQuery();
+            leagues = new ArrayList<>();
+    
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int capacity = rs.getInt("capacity");
+                Date startDate = new Date(rs.getString("start_date"));
+                Date endDate = new Date(rs.getString("end_date"));
+                Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
+                String league_owner = rs.getString("owner");
+                League league = new League(id, name, capacity, startDate, endDate, difficulty, league_owner);
+                leagues.add(league);
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Can't get all leagues owned by ...");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("Can't close statement.");
+                e.printStackTrace();
+            }
+        }
+        
+        return leagues;
+        
+    }
+    
+    public static ArrayList<League> getAllLeaguesJoinedBy(String username){
+        ArrayList<League> leagues = null;
+        PreparedStatement statement = null;
+        
+        try {
+            String sql = ""; // FIXME still need to have sql query here
+            statement = DBConnection.getConnection().prepareStatement(sql);
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            leagues = new ArrayList<>();
+    
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int capacity = rs.getInt("capacity");
+                Date startDate = new Date(rs.getString("start_date"));
+                Date endDate = new Date(rs.getString("end_date"));
+                Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
+                String owner = rs.getString("owner");
+                League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
+                leagues.add(league);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
         
         return leagues;

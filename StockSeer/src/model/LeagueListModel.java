@@ -26,7 +26,7 @@ public class LeagueListModel extends DefaultTableModel {
     }
     
     public void update() {
-        ArrayList<League> leagues = LeagueUtility.getAllLeaguesFromDB();
+        ArrayList<League> leagues = LeagueUtility.getAllLeagues();
         Vector<Vector<String>> tableData = new Vector<>();
         if (leagues != null) {
             tableData = new Vector<>();
