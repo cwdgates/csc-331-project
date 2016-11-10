@@ -92,7 +92,7 @@ public class LoginController implements ActionListener, KeyListener {
                     + "continue.";
             JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
 
-            leagueListModel.update();
+            leagueListModel.allLeagues();
             appView.viewHome(); // change the scene to Home
             loginPane.setTextFieldsEmpty(); // clear text field
             

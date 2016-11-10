@@ -3,10 +3,7 @@ package main;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import controller.HomePaneController;
-import controller.LeagueCreationController;
-import controller.LoginController;
-import controller.RegistrationController;
+import controller.*;
 import model.AccountModel;
 import model.LeagueListModel;
 import persistence.DBConnection;
@@ -50,13 +47,14 @@ public class StockSeer {
         RegistrationController registrationController = new RegistrationController(appView);
         HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel);
         LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
+        LeagueTableController leagueTableFilterController = new LeagueTableController(appView, accountModel, leagueListModel);
         
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);
         appView.getCreateLeaguePane().registerListeners(leagueCreationController);
         appView.getSignUpPane().registerListeners(registrationController);
         appView.getHomePane().registerListeners(homePaneController);
-        
+        appView.getHomePane().registerRadioButtonListeners(leagueTableFilterController);
         appView.getHomePane().setDefaultTableModel(leagueListModel);
         
         // -------------------- SET VISIBLE -------------------------

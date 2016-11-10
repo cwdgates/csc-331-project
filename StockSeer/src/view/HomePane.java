@@ -3,13 +3,14 @@ package view;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
-import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import controller.HomePaneController;
+import controller.LeagueTableController;
 
 public class HomePane extends JPanel {
     
@@ -23,12 +24,18 @@ public class HomePane extends JPanel {
     public static final String LOGOUT = "Logout";
     public static final String REFRESH = "Refresh";
     public static final String DETAIL = "Detail";
+    public static final String RDBTN_ALL = "All";
+    public static final String RDBTN_MY_LEAGUES = "My leagues";
+    public static final String RDBTN_JOINED_LEAGUES = "Joined leagues";
     private JButton btnCreate;
     private JButton btnLogout;
     private JButton btnJoin;
     private JButton btnRefresh;
     private JButton btnDetail;
     private JTable table;
+    private JRadioButton rdbtnAll;
+    private JRadioButton rdbtnMyLeagues;
+    private JRadioButton rdbtnJoinedLeagues;
     
     private DefaultTableModel leagueTableModel;
     private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -78,15 +85,15 @@ public class HomePane extends JPanel {
         JPanel panel = new JPanel();
         panelTopControl.add(panel);
         
-        JRadioButton rdbtnAll = new JRadioButton("All");
+        rdbtnAll = new JRadioButton(RDBTN_ALL);
         buttonGroup.add(rdbtnAll);
         panel.add(rdbtnAll);
         
-        JRadioButton rdbtnMyLeagues = new JRadioButton("My Leagues");
+        rdbtnMyLeagues = new JRadioButton(RDBTN_MY_LEAGUES);
         buttonGroup.add(rdbtnMyLeagues);
         panel.add(rdbtnMyLeagues);
         
-        JRadioButton rdbtnJoinedLeagues = new JRadioButton("Joined Leagues");
+        rdbtnJoinedLeagues = new JRadioButton(RDBTN_JOINED_LEAGUES);
         buttonGroup.add(rdbtnJoinedLeagues);
         panel.add(rdbtnJoinedLeagues);
         
@@ -112,6 +119,12 @@ public class HomePane extends JPanel {
         btnJoin.addActionListener(homePaneController);
         btnRefresh.addActionListener(homePaneController);
         btnDetail.addActionListener(homePaneController);
+    }
+    
+    public void registerRadioButtonListeners(LeagueTableController listener) {
+        rdbtnAll.addItemListener(listener);
+        rdbtnJoinedLeagues.addItemListener(listener);
+        rdbtnMyLeagues.addItemListener(listener);
     }
     
     /**
