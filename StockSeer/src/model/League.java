@@ -13,6 +13,7 @@ public class League {
     private Date endDate;
     private Difficulty difficulty;
     private String owner;
+    private boolean joined = false;
     
     public League() {
         leagueID = null;
@@ -76,5 +77,13 @@ public class League {
     
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+    
+    public void setJoined(boolean joined) {
+        this.joined = joined;
+    }
+    
+    public boolean isJoined() {
+        return joined;
     }
 }

@@ -116,7 +116,8 @@ public abstract class LeagueUtility {
         ArrayList<League> leagues = null;
         
         try {
-            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league";
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league ORDER BY " +
+                    "name ASC";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             rs = selectSTMT.executeQuery();
             leagues = new ArrayList<League>();
@@ -149,17 +150,22 @@ public abstract class LeagueUtility {
         return leagues;
     }
     
+    /**
+     * @param owner
+     * @return all leagues owned by owner, ordered by name ascending
+     */
     public static ArrayList<League> getAllLeagueOwnedBy(String owner) {
         ArrayList<League> leagues = null;
         PreparedStatement statement = null;
         
         try {
-            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner = ?";
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner " +
+                    "= ? ORDER BY name ASC";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, owner);
             ResultSet rs = statement.executeQuery();
             leagues = new ArrayList<>();
-    
+            
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -190,7 +196,7 @@ public abstract class LeagueUtility {
         
     }
     
-    public static ArrayList<League> getAllLeaguesJoinedBy(String username){
+    public static ArrayList<League> getAllLeaguesJoinedBy(String username) {
         ArrayList<League> leagues = null;
         PreparedStatement statement = null;
         
@@ -200,7 +206,7 @@ public abstract class LeagueUtility {
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             leagues = new ArrayList<>();
-    
+            
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -212,7 +218,7 @@ public abstract class LeagueUtility {
                 League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
                 leagues.add(league);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         
