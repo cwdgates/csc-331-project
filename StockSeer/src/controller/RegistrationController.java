@@ -3,15 +3,15 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.UserModel;
-import persistence.AccountUtil;
-import ui.AppView;
-import ui.RegistrationPane;
+import persistence.AccountUtility;
+import view.AppView;
+import view.RegistrationPane;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class RegistrationController implements ActionListener {
-	AppView appView;
-	RegistrationPane regPane;
+	private AppView appView;
+	private RegistrationPane regPane;
 
 	public RegistrationController(AppView appView) {
 		this.appView = appView;
@@ -23,58 +23,58 @@ public class RegistrationController implements ActionListener {
 		String command = event.getActionCommand();
 
 		switch (command) {
-			case RegistrationPane.SIGN_UP:
-				if (isFieldsEmpty()) {
-					JOptionPane.showMessageDialog(appView, "There is at least one empty field.", "Error",
+		case RegistrationPane.SIGN_UP:
+			if (isFieldsEmpty()) {
+				JOptionPane.showMessageDialog(appView, "There is at least one empty field.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+			} else if (!isPasswordsMatched(regPane.getPassword(), regPane.getRetypedPassword())) {
+				JOptionPane.showMessageDialog(appView, "The passwords you entered did not match.", "",
+						JOptionPane.WARNING_MESSAGE);
+			} else if (!isPasswordValid(regPane.getPassword()) || !isPasswordValid(regPane.getRetypedPassword())) {
+				JOptionPane.showMessageDialog(appView,
+						"The password you entered is not valid.\nPassword cannot have space(s).", "",
+						JOptionPane.WARNING_MESSAGE);
+			} else {
+				if (!AccountUtility.isUsernameUnique(regPane.getUsername())) {
+					JOptionPane.showMessageDialog(appView, "This username has been used by another account", "",
 							JOptionPane.WARNING_MESSAGE);
-				} else if (!isPasswordsMatched(regPane.getPassword(), regPane.getRetypedPassword())) {
-					JOptionPane.showMessageDialog(appView, "The passwords you entered did not match.", "",
+				} else if (!EmailValidator.getInstance().isValid(regPane.getEmail())) {
+					JOptionPane.showMessageDialog(appView, "Invalid email.", "", JOptionPane.WARNING_MESSAGE);
+				} else if (!AccountUtility.isEmailUnique(regPane.getEmail())) {
+					JOptionPane.showMessageDialog(appView, "This email has been used by another account.", "",
 							JOptionPane.WARNING_MESSAGE);
-				} else if (!isPasswordValid(regPane.getPassword()) || !isPasswordValid(regPane.getRetypedPassword())) {
-					JOptionPane.showMessageDialog(appView,
-							"The password you entered is not valid.\nPassword cannot have space(s).", "",
+				} else if (regPane.getPassword().length() < 6) {
+					JOptionPane.showMessageDialog(appView, "Password need to have lastleast 6 characters", "",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
-					if (!AccountUtil.isUsernameUnique(regPane.getUsername())) {
-						JOptionPane.showMessageDialog(appView, "This username has been used by another account", "",
-								JOptionPane.WARNING_MESSAGE);
-					} else if (!EmailValidator.getInstance().isValid(regPane.getEmail())) {
-						JOptionPane.showMessageDialog(appView, "Invalid email.", "", JOptionPane.WARNING_MESSAGE);
-					} else if (!AccountUtil.isEmailUnique(regPane.getEmail())) {
-						JOptionPane.showMessageDialog(appView, "This email has been used by another account.", "",
-								JOptionPane.WARNING_MESSAGE);
-					} else if (regPane.getPassword().length() < 6) {
-						JOptionPane.showMessageDialog(appView, "Password need to have lastleast 6 characters", "",
-								JOptionPane.WARNING_MESSAGE);
+					// register
+					String firstName = regPane.getFirstName();
+					String lastName = regPane.getLastName();
+					String email = regPane.getEmail();
+					String username = regPane.getUsername();
+					String password = regPane.getPassword();
+					boolean result = AccountUtility.registerAccount(firstName, lastName, email, username, password);
+					if (result) {
+						JOptionPane.showMessageDialog(appView, "Successfully created an account.", "",
+								JOptionPane.INFORMATION_MESSAGE);
+						appView.viewLogin();
 					} else {
-						// register
-						String firstName = regPane.getFirstName();
-						String lastName = regPane.getLastName();
-						String email = regPane.getEmail();
-						String username = regPane.getUsername();
-						String password = regPane.getPassword();
-						boolean result = AccountUtil.registerAccount(firstName, lastName, email, username, password);
-						if (result) {
-							JOptionPane.showMessageDialog(appView, "Successfully created an account.", "",
-									JOptionPane.INFORMATION_MESSAGE);
-							appView.viewLogin();
-						} else {
-							JOptionPane.showMessageDialog(appView, "Cannot create this account.\nPlease try again.", "",
-									JOptionPane.WARNING_MESSAGE);
-						}
-						// clear text fields
-						regPane.setTextFieldsEmpty();
+						JOptionPane.showMessageDialog(appView, "Cannot create this account.\nPlease try again.", "",
+								JOptionPane.WARNING_MESSAGE);
 					}
+					// clear text fields
+					regPane.setTextFieldsEmpty();
 				}
-				break;
-			// ----------- END SIGN UP---------
-			case RegistrationPane.CANCEL:
-				appView.viewLogin();
-				regPane.setTextFieldsEmpty();
-				break;
-			// ----------- END CANCEL----------
-			default:
-				break;
+			}
+			break;
+		// ----------- END SIGN UP---------
+		case RegistrationPane.CANCEL:
+			appView.viewLogin();
+			regPane.setTextFieldsEmpty();
+			break;
+		// ----------- END CANCEL----------
+		default:
+			break;
 		}
 		// clear all text fields in registration pane
 
@@ -86,12 +86,9 @@ public class RegistrationController implements ActionListener {
 	 * @return false if at least one field is empty. True otherwise
 	 */
 	private boolean isFieldsEmpty() {
-		if (regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
+		return regPane.getUsername().length() == 0 || regPane.getFirstName().length() == 0
 				|| regPane.getLastName().length() == 0 || regPane.getPassword().length() == 0
-				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0) {
-			return true;
-		}
-		return false;
+				|| regPane.getRetypedPassword().length() == 0 || regPane.getEmail().length() == 0;
 	}
 
 	/**
@@ -113,10 +110,7 @@ public class RegistrationController implements ActionListener {
 	 * @return
 	 */
 	private boolean isPasswordValid(String password) {
-		if (password.indexOf(' ') == -1) {
-			return true;
-		}
-		return false;
+		return password.indexOf(' ') == -1;
 	}
 
 }

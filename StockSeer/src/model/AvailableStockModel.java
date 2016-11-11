@@ -1,12 +1,32 @@
 package model;
 
-import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
 
-/**
- * provide data for choosing stock pane
- * @author anvu
- *
- */
-public class AvailableStockModel extends DefaultListModel {
-	
+public class AvailableStockModel implements ListModel {
+
+    public void addElement(String temp) {
+
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
+    public Object getElementAt(int index) {
+        return null;
+    }
+
+    @Override
+    public void addListDataListener(ListDataListener l) {
+
+    }
+
+    @Override
+    public void removeListDataListener(ListDataListener l) {
+
+    }
+
 }

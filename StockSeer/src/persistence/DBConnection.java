@@ -21,7 +21,7 @@ import java.sql.Connection;
  * @author aqv
  *
  */
-public class DBConnection {
+public abstract class DBConnection {
 	private static Connection connection = null;
 
 	/**
