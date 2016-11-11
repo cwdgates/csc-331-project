@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.League;
 import model.AccountModel;
 import model.LeagueListModel;
+import model.PlayersListModel;
 import persistence.AccountUtility;
 import persistence.LeagueUtility;
 import view.AppView;
@@ -20,12 +21,15 @@ public class HomePaneController implements ActionListener {
 	private HomePane homePane;
 	private AccountModel accountModel;
 	private LeagueListModel leagueListModel;
+	private PlayersListModel playersListModel;
 
-	public HomePaneController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
+	public HomePaneController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel,
+			PlayersListModel playersListModel) {
 		this.appView = appView;
 		this.homePane = appView.getHomePane();
 		this.accountModel = accountModel;
 		this.leagueListModel = leagueListModel;
+		this.playersListModel = playersListModel;
 	}
 
 	@Override
@@ -41,8 +45,9 @@ public class HomePaneController implements ActionListener {
 
 		case HomePane.REFRESH: {
 			System.out.println(HomePane.REFRESH);
-			
+
 			leagueListModel.allLeagues();
+			playersListModel.allPlayers();
 			break;
 		}
 
@@ -63,7 +68,7 @@ public class HomePaneController implements ActionListener {
 				int choice = JOptionPane.showConfirmDialog(appView, "Do you want to join " + league + " ?", "",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (choice == JOptionPane.OK_OPTION) {
-					AccountUtility.joinLeague(accountModel.getUsername(),league);
+					AccountUtility.joinLeague(accountModel.getUsername(), league);
 				}
 			}
 

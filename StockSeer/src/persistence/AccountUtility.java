@@ -3,6 +3,7 @@ package persistence;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.AccountModel;
 
@@ -167,6 +168,33 @@ public abstract class AccountUtility {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static ArrayList<String> getAllPlayers() {
+		ArrayList<String> players = null;
+
+		PreparedStatement statement = null;
+		try {
+			String sql = "SELECT username FROM user";
+			statement = DBConnection.getConnection().prepareStatement(sql);
+			ResultSet rs = statement.executeQuery();
+			players = new ArrayList<>();
+			while (rs.next()) {
+				players.add(rs.getString("username"));
+			}
+		} catch (SQLException e) {
+			System.err.println("Can't get all players");
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e2) {
+				System.err.println("Can't close statement.");
+			}
+		}
+
+		return players;
 	}
 
 }

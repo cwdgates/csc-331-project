@@ -47,7 +47,7 @@ public class StockSeer {
         // ----------------- INITIALIZE CONTROLLERS -----------------
         LoginController loginController = new LoginController(appView, accountModel, leagueListModel);
         RegistrationController registrationController = new RegistrationController(appView);
-        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel);
+        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel, playersListModel);
         LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
         LeagueTableController leagueTableFilterController = new LeagueTableController(appView, accountModel, leagueListModel);
         
