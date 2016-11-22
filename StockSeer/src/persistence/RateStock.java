@@ -24,7 +24,7 @@ import javax.swing.text.html.parser.DTD;
 public class RateStock {
     
     public static void main(String[] args) throws IOException {
-        System.out.println(rateStock(stockPrices52w("YHOO")));
+        System.out.println(rateStock(stockPrices52w("AMD")));
     }
     
     public static double[] stockPrices52w(String symbol) throws IOException {
@@ -78,7 +78,7 @@ public class RateStock {
         ArrayList<Double> _above20 = new ArrayList<>();
         
         for (int i = 1; i < prices.length; i++) {
-            Double difference = (prices[i] / prices[0] - 1) * 100.0;
+            Double difference = (prices[i] / prices[i-1] - 1) * 100.0;
             if (difference < -20.0) {
                 belowNeg20.add(difference);
             } else if (difference >= -20.0 && difference < -15.0) {
@@ -134,9 +134,9 @@ public class RateStock {
         double positive = med0to5 + med5to10 + med10to15 + med15to20 + medAbove20;
         double negative = medBelowNeg20 + medNeg20to15 + medNeg15to10 + medNeg10to5 + medNeg5to0;
         
-        System.out.println(totalPositive);
-        System.out.println(totalNegative);
-        
+        System.out.println("total positive" + totalPositive);
+        System.out.println("total negative" + totalNegative);
+
         System.out.println(positive);
         System.out.println(negative);
         
