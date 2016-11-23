@@ -13,5 +13,6 @@
     <orderEntry type="library" name="jcommon-1.0.0" level="project" />
     <orderEntry type="library" name="ojdbc6" level="project" />
     <orderEntry type="library" name="gral (2)" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.5" level="project" />
   </component>
 </module>

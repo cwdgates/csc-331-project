@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import controller.*;
-import model.AccountModel;
+import model.MainUserModel;
 import model.LeagueListModel;
 import model.PlayersListModel;
 import persistence.DBConnection;
@@ -40,16 +40,16 @@ public class StockSeer {
         AppView appView = new AppView();
         
         // ------------------- INITIALIZE MODELS ---------------------
-        AccountModel accountModel = new AccountModel(); // only one user per instance of
+        MainUserModel mainUserModel = new MainUserModel(); // only one user per instance of
         LeagueListModel leagueListModel = new LeagueListModel();
         PlayersListModel playersListModel = new PlayersListModel();
         
         // ----------------- INITIALIZE CONTROLLERS -----------------
-        LoginController loginController = new LoginController(appView, accountModel, leagueListModel);
+        LoginController loginController = new LoginController(appView, mainUserModel, leagueListModel);
         RegistrationController registrationController = new RegistrationController(appView);
-        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel, playersListModel);
-        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
-        LeagueTableController leagueTableFilterController = new LeagueTableController(appView, accountModel, leagueListModel);
+        HomePaneController homePaneController = new HomePaneController(appView, mainUserModel, leagueListModel, playersListModel);
+        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, mainUserModel, leagueListModel);
+        LeagueTableController leagueTableFilterController = new LeagueTableController(appView, mainUserModel, leagueListModel);
         
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);

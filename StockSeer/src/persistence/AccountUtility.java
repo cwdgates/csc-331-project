@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.AccountModel;
+import model.MainUserModel;
 
 /**
  * talk to database
@@ -20,9 +20,9 @@ public abstract class AccountUtility {
 	 * 
 	 * @param username
 	 * @param password
-	 * @return AccountModel
+	 * @return MainUserModel
 	 */
-	public static AccountModel getAccountFromDB(String username, String password) {
+	public static MainUserModel getAccountFromDB(String username, String password) {
 		String query = "SELECT username, first_name, last_name FROM user WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -32,7 +32,7 @@ public abstract class AccountUtility {
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				return new AccountModel(resultSet.getString("username"), resultSet.getString("first_name"),
+				return new MainUserModel(resultSet.getString("username"), resultSet.getString("first_name"),
 						resultSet.getString("last_name"));
 			}
 		} catch (Exception e) {

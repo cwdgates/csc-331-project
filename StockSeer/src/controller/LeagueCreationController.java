@@ -2,16 +2,14 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 import model.LeagueListModel;
+import model.MainUserModel;
 import persistence.Date;
 import persistence.LeagueUtility;
 import view.AppView;
 import view.LeagueCreationPane;
-import model.AccountModel;
 import model.Difficulty;
 
 /**
@@ -20,14 +18,14 @@ import model.Difficulty;
 public class LeagueCreationController implements ActionListener {
     private AppView appView;
     private LeagueCreationPane createLeaguePane;
-    private AccountModel accountModel;
+    private MainUserModel mainUserModel;
     private LeagueListModel leagueListModel;
     
     
-    public LeagueCreationController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
+    public LeagueCreationController(AppView appView, MainUserModel mainUserModel, LeagueListModel leagueListModel) {
         this.appView = appView;
         this.createLeaguePane = appView.getCreateLeaguePane();
-        this.accountModel = accountModel;
+        this.mainUserModel = mainUserModel;
         this.leagueListModel = leagueListModel;
     }
     
@@ -74,7 +72,7 @@ public class LeagueCreationController implements ActionListener {
                             int capacity = createLeaguePane.getCapacity();
                             Difficulty difficulty = createLeaguePane.getDifficulty();
                             boolean isSuccess = LeagueUtility.createLeague(name, capacity, startDate, endDate,
-                                    difficulty, accountModel.getUsername());
+                                    difficulty, mainUserModel.getUsername());
                             if (isSuccess) {
                                 JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
                                         JOptionPane.INFORMATION_MESSAGE);
