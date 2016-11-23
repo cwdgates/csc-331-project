@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.MainUserModel;
-import model.LeagueListModel;
-import model.PlayersListModel;
+import view.model.LeagueListModel;
+import view.model.PlayersListModel;
 import persistence.AccountUtility;
 import view.AppView;
 import view.HomePane;

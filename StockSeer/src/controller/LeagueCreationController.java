@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-import model.LeagueListModel;
+import view.model.LeagueListModel;
 import model.MainUserModel;
 import persistence.Date;
 import persistence.LeagueUtility;

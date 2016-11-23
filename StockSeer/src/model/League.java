@@ -1,23 +1,21 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import persistence.Date;
 
 public class League {
-    private String leagueName;
+    private String name;
     private Integer leagueID;
     private int capacity;
     private Date startDate;
     private Date endDate;
     private Difficulty difficulty;
     private String owner;
-    private boolean joined = false;
     
     public League() {
         leagueID = null;
-        leagueName = null;
+        name = null;
         capacity = 0;
         startDate = null;
         endDate = null;
@@ -27,7 +25,7 @@ public class League {
     public League(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty, String
             owner) {
         this.leagueID = id;
-        this.leagueName = name;
+        this.name = name;
         this.capacity = capacity;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -39,7 +37,7 @@ public class League {
      * @return name of the league
      */
     public String getName() {
-        return leagueName;
+        return name;
     }
     
     public Integer getLeagueID() {
@@ -63,12 +61,11 @@ public class League {
     }
     
     /**
-     * @return id name start_date end_date difficulty
+     * @return name of the league
      */
     @Override
     public String toString() {
-        return "ID=" + leagueID + " NAME=" + leagueName + " START=" + startDate.toString() + " END="
-                + endDate.toString() + " CAPACITY=" + capacity + " DIFFICULTY=" + difficulty.name() + " OWNER=" + owner;
+        return name;
     }
     
     public String getOwner() {
@@ -79,11 +76,14 @@ public class League {
         this.owner = owner;
     }
     
-    public void setJoined(boolean joined) {
-        this.joined = joined;
-    }
-    
-    public boolean isJoined() {
-        return joined;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        
+        return this.name.equals(((League) obj).getName());
     }
 }

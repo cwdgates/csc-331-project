@@ -1,4 +1,4 @@
-package model;
+package view.model;
 
 import java.util.ArrayList;
 import java.util.Vector;

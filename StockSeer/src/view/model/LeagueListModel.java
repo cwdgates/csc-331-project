@@ -1,8 +1,8 @@
-package model;
+package view.model;
 
+import model.League;
 import persistence.LeagueUtility;
 
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;

@@ -9,7 +9,7 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JRadioButton;
 
-import model.LeagueListModel;
+import view.model.LeagueListModel;
 
 /**
  * Created by anvu on 11/8/16.
