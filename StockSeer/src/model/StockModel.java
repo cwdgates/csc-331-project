@@ -1,46 +1,40 @@
 package model;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
+import yahoofinance.YahooFinance;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class StockModel {
-    private double price;
     private String symbol;
     private String name;
-    private String currency;
+    private yahoofinance.Stock stock;
     
-    public double getPrice() {
-        return price;
+    public StockModel(String symbol){
+        this.symbol = symbol;
+        try {
+            stock = YahooFinance.get(symbol);
+            name = stock.getName();
+        } catch (IOException e){
+            System.err.println("ERROR::Can't create stock object from yahoofinance");
+            e.printStackTrace();
+        }
     }
     
-    public void setPrice(double price) {
-        this.price = price;
+    public BigDecimal getPrice() {
+        return stock.getQuote().getPrice();
     }
+    
     
     public String getSymbol() {
         return symbol;
-    }
-    
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
     
     public String getName() {
         return name;
     }
     
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getCurrency() {
-        return currency;
-    }
-    
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
     
     @Override
     public boolean equals(Object obj) {
@@ -58,4 +52,19 @@ public class StockModel {
     public int hashCode() {
         return new HashCodeBuilder(23, 31).append(symbol).toHashCode();
     }
+    
+//    public static void main(String[] args) {
+//        Stock stock = null;
+//        try {
+//            stock = YahooFinance.get("SSNLF");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        BigDecimal price = stock.getQuote().getPrice();
+//        BigDecimal change = stock.getQuote().getChangeInPercent();
+//        BigDecimal peg = stock.getStats().getPeg();
+//        BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
+//        stock.print();
+//        System.out.println(stock.getName());
+//    }
 }

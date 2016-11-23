@@ -1,22 +1,14 @@
 package view;
 
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 
-import model.AvailableStockModel;
+import view.model.AvailableStockModel;
 import javax.swing.JTable;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 
 public class ChooseStockPane extends JPanel {
 	AvailableStockModel availStockModel;
