@@ -1,4 +1,4 @@
-package view.model;
+package view.renderModel;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -6,7 +6,7 @@ import java.util.Vector;
 import persistence.AccountUtility;
 
 /**
- * Sole purpose as render model for view pane
+ * Sole purpose as render renderModel for view pane
  */
 public class PlayersListModel extends FixedTableModel {
     private static Vector<String> columnIdentifier = new Vector<>();

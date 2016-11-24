@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-import view.model.LeagueListModel;
+import view.renderModel.LeagueListModel;
 import model.MainUserModel;
-import persistence.Date;
+import model.Date;
 import persistence.LeagueUtility;
 import view.AppView;
 import view.LeagueCreationPane;

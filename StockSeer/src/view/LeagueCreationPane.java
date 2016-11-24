@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import controller.LeagueCreationController;
 import model.Difficulty;
-import persistence.Date;
+import model.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
@@ -61,7 +61,7 @@ public class LeagueCreationPane extends JPanel {
         gbl_panelForm.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
         panelForm.setLayout(gbl_panelForm);
 
-        JLabel lblLeagueName = new JLabel("League Name");
+        JLabel lblLeagueName = new JLabel("LeagueModel Name");
         GridBagConstraints gbc_lblLeagueName = new GridBagConstraints();
         gbc_lblLeagueName.anchor = GridBagConstraints.EAST;
         gbc_lblLeagueName.insets = new Insets(0, 0, 5, 5);

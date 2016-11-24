@@ -1,16 +1,11 @@
 package persistence;
 
-import de.erichseifert.gral.graphics.Dimension2D;
+import model.Date;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
-import javax.swing.text.html.parser.DTD;
 
 /**
  * Created by anvu on 11/12/16.

@@ -5,8 +5,8 @@ import javax.swing.UIManager;
 
 import controller.*;
 import model.MainUserModel;
-import view.model.LeagueListModel;
-import view.model.PlayersListModel;
+import view.renderModel.LeagueListModel;
+import view.renderModel.PlayersListModel;
 import persistence.DBConnection;
 import view.AppView;;
 //

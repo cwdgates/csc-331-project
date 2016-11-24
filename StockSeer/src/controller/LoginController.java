@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 
-import view.model.LeagueListModel;
+import view.renderModel.LeagueListModel;
 import model.MainUserModel;
 import persistence.AccountUtility;
 import view.AppView;

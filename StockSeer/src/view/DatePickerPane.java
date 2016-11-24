@@ -1,7 +1,7 @@
 package view;
 
 import javax.swing.JPanel;
-import persistence.Date;
+import model.Date;
 import java.util.Calendar;
 import java.util.stream.IntStream;
 import javax.swing.BoxLayout;

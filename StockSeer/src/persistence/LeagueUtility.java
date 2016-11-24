@@ -1,14 +1,13 @@
 package persistence;
 
-import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 
+import model.Date;
 import model.Difficulty;
-import model.League;
+import model.LeagueModel;
 
 public abstract class LeagueUtility {
     
@@ -79,12 +78,12 @@ public abstract class LeagueUtility {
      * @param leagueName Name of the league
      * @return LeagueModel object
      */
-    public static League getLeagueFromDB(String leagueName) {
-        League league = null;
+    public static LeagueModel getLeagueFromDB(String leagueName) {
+        LeagueModel leagueModel = null;
         PreparedStatement selectSTMT = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM league WHERE name = ?";
+            String sql = "SELECT * FROM leagueModel WHERE name = ?";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             selectSTMT.setString(1, leagueName);
             rs = selectSTMT.executeQuery();
@@ -95,14 +94,14 @@ public abstract class LeagueUtility {
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
-                league = new League(name, capacity, startDate, endDate, difficulty, owner);
+                leagueModel = new LeagueModel(name, capacity, startDate, endDate, difficulty, owner);
             }
         } catch (SQLException e) {
-            System.err.println("Can't get league.");
+            System.err.println("Can't get leagueModel.");
             e.printStackTrace();
             return null;
         }
-        return league;
+        return leagueModel;
     }
     
     /**
@@ -110,17 +109,17 @@ public abstract class LeagueUtility {
      *
      * @return ArrayList contains all league objects
      */
-    public static ArrayList<League> getAllLeagues() {
+    public static ArrayList<LeagueModel> getAllLeagues() {
         PreparedStatement selectSTMT = null;
         ResultSet rs = null;
-        ArrayList<League> leagues = null;
+        ArrayList<LeagueModel> leagueModels = null;
         
         try {
             String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league ORDER BY " +
                     "name ASC";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             rs = selectSTMT.executeQuery();
-            leagues = new ArrayList<League>();
+            leagueModels = new ArrayList<LeagueModel>();
             while (rs.next()) {
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
@@ -128,12 +127,12 @@ public abstract class LeagueUtility {
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
-                League league = new League(name, capacity, startDate, endDate, difficulty, owner);
-                leagues.add(league);
+                LeagueModel leagueModel = new LeagueModel(name, capacity, startDate, endDate, difficulty, owner);
+                leagueModels.add(leagueModel);
             }
             
         } catch (SQLException e) {
-            System.err.println("Can't get all leagues from DB");
+            System.err.println("Can't get all leagueModels from DB");
             e.printStackTrace();
             return null;
         } finally {
@@ -146,15 +145,15 @@ public abstract class LeagueUtility {
             }
         }
         
-        return leagues;
+        return leagueModels;
     }
     
     /**
      * @param owner
      * @return all leagues owned by owner, ordered by name ascending
      */
-    public static ArrayList<League> getAllLeagueOwnedBy(String owner) {
-        ArrayList<League> leagues = null;
+    public static ArrayList<LeagueModel> getAllLeagueOwnedBy(String owner) {
+        ArrayList<LeagueModel> leagueModels = null;
         PreparedStatement statement = null;
         
         try {
@@ -163,7 +162,7 @@ public abstract class LeagueUtility {
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, owner);
             ResultSet rs = statement.executeQuery();
-            leagues = new ArrayList<>();
+            leagueModels = new ArrayList<>();
             
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -172,12 +171,12 @@ public abstract class LeagueUtility {
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String league_owner = rs.getString("owner");
-                League league = new League(name, capacity, startDate, endDate, difficulty, league_owner);
-                leagues.add(league);
+                LeagueModel leagueModel = new LeagueModel(name, capacity, startDate, endDate, difficulty, league_owner);
+                leagueModels.add(leagueModel);
             }
             
         } catch (SQLException e) {
-            System.err.println("Can't get all leagues owned by ...");
+            System.err.println("Can't get all leagueModels owned by ...");
             e.printStackTrace();
         } finally {
             try {
@@ -190,20 +189,23 @@ public abstract class LeagueUtility {
             }
         }
         
-        return leagues;
+        return leagueModels;
         
     }
     
-    public static ArrayList<League> getAllLeaguesJoinedBy(String username) {
-        ArrayList<League> leagues = null;
+    /**
+     * @param username the client's username
+     * @return leagues that username joins
+     */
+    public static ArrayList<LeagueModel> getAllLeaguesJoinedBy(String username) {
         PreparedStatement statement = null;
-        
         try {
-            String sql = "SELECT name, capacity, start_date, end_date, difficulty, owner FROM league";
+            String sql = "SELECT * FROM league WHERE name IN (SELECT league_name FROM user_league WHERE username = ?)";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
-            leagues = new ArrayList<>();
+            
+            ArrayList<LeagueModel> leagueModels = new ArrayList<>();
             
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -211,10 +213,12 @@ public abstract class LeagueUtility {
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
-                String owner = rs.getString("owner");
-                League league = new League(name, capacity, startDate, endDate, difficulty, owner);
-                leagues.add(league);
+                String league_owner = rs.getString("owner");
+                LeagueModel leagueModel = new LeagueModel(name, capacity, startDate, endDate, difficulty, league_owner);
+                leagueModels.add(leagueModel);
             }
+            
+            return leagueModels;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -222,11 +226,10 @@ public abstract class LeagueUtility {
                 if (statement != null) {
                     statement.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException e1) {
+                System.err.println("ERROR::Can't close statement");
             }
         }
-        
-        return leagues;
+        return null;
     }
 }
