@@ -89,14 +89,13 @@ public abstract class LeagueUtility {
             selectSTMT.setString(1, leagueName);
             rs = selectSTMT.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
-                league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
+                league = new League(name, capacity, startDate, endDate, difficulty, owner);
             }
         } catch (SQLException e) {
             System.err.println("Can't get league.");
@@ -123,14 +122,13 @@ public abstract class LeagueUtility {
             rs = selectSTMT.executeQuery();
             leagues = new ArrayList<League>();
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
-                League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
+                League league = new League(name, capacity, startDate, endDate, difficulty, owner);
                 leagues.add(league);
             }
             
@@ -160,7 +158,7 @@ public abstract class LeagueUtility {
         PreparedStatement statement = null;
         
         try {
-            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner " +
+            String sql = "SELECT name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner " +
                     "= ? ORDER BY name ASC";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, owner);
@@ -168,14 +166,13 @@ public abstract class LeagueUtility {
             leagues = new ArrayList<>();
             
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String league_owner = rs.getString("owner");
-                League league = new League(id, name, capacity, startDate, endDate, difficulty, league_owner);
+                League league = new League(name, capacity, startDate, endDate, difficulty, league_owner);
                 leagues.add(league);
             }
             
@@ -202,25 +199,32 @@ public abstract class LeagueUtility {
         PreparedStatement statement = null;
         
         try {
-            String sql = ""; // FIXME still need to have sql query here
+            String sql = "SELECT name, capacity, start_date, end_date, difficulty, owner FROM league";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             leagues = new ArrayList<>();
             
             while (rs.next()) {
-                int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
                 Date startDate = new Date(rs.getString("start_date"));
                 Date endDate = new Date(rs.getString("end_date"));
                 Difficulty difficulty = Difficulty.valueOf(rs.getString("difficulty"));
                 String owner = rs.getString("owner");
-                League league = new League(id, name, capacity, startDate, endDate, difficulty, owner);
+                League league = new League(name, capacity, startDate, endDate, difficulty, owner);
                 leagues.add(league);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         
         return leagues;

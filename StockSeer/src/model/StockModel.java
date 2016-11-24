@@ -2,22 +2,29 @@ package model;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import yahoofinance.YahooFinance;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ *
+ */
 public class StockModel {
     private String symbol;
     private String name;
     private yahoofinance.Stock stock;
     
-    public StockModel(String symbol){
+    /**
+     * @param symbol stock symbol
+     */
+    public StockModel(String symbol) {
         this.symbol = symbol;
         try {
             stock = YahooFinance.get(symbol);
             name = stock.getName();
-        } catch (IOException e){
-            System.err.println("ERROR::Can't create stock object from yahoofinance");
+        } catch (IOException e) {
+            System.err.println("ERROR::Can't create stock object from Yahoo Finance");
             e.printStackTrace();
         }
     }
@@ -25,7 +32,6 @@ public class StockModel {
     public BigDecimal getPrice() {
         return stock.getQuote().getPrice();
     }
-    
     
     public String getSymbol() {
         return symbol;
@@ -35,7 +41,10 @@ public class StockModel {
         return name;
     }
     
-    
+    /**
+     * @param obj StockSeer.Model.StockModel object
+     * @return true if two StockModel objects have same symbols
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
@@ -52,7 +61,7 @@ public class StockModel {
     public int hashCode() {
         return new HashCodeBuilder(23, 31).append(symbol).toHashCode();
     }
-    
+
 //    public static void main(String[] args) {
 //        Stock stock = null;
 //        try {

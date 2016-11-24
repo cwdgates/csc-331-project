@@ -6,7 +6,6 @@ import persistence.Date;
 
 public class League {
     private String name;
-    private Integer leagueID;
     private int capacity;
     private Date startDate;
     private Date endDate;
@@ -14,7 +13,6 @@ public class League {
     private String owner;
     
     public League() {
-        leagueID = null;
         name = null;
         capacity = 0;
         startDate = null;
@@ -22,9 +20,16 @@ public class League {
         difficulty = null;
     }
     
-    public League(Integer id, String name, int capacity, Date startDate, Date endDate, Difficulty difficulty, String
+    /**
+     * @param name
+     * @param capacity
+     * @param startDate
+     * @param endDate
+     * @param difficulty
+     * @param owner      who creates the league
+     */
+    public League(String name, int capacity, Date startDate, Date endDate, Difficulty difficulty, String
             owner) {
-        this.leagueID = id;
         this.name = name;
         this.capacity = capacity;
         this.startDate = startDate;
@@ -40,9 +45,6 @@ public class League {
         return name;
     }
     
-    public Integer getLeagueID() {
-        return leagueID;
-    }
     
     public int getCapacity() {
         return capacity;
