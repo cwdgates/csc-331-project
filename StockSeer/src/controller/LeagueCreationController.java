@@ -41,7 +41,7 @@ public class LeagueCreationController implements ActionListener {
                 if (createLeaguePane.getLeagueName().length() == 0) {
                     JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
                             JOptionPane.WARNING_MESSAGE);
-                } else if (!LeagueUtility.isLeagueNameUnique(createLeaguePane.getLeagueName())) {
+                } else if (LeagueUtility.hasLeague(createLeaguePane.getLeagueName())) {
                     JOptionPane.showMessageDialog(appView,
                             "The name has been used in another league.\nPlease use another name.", "",
                             JOptionPane.WARNING_MESSAGE);
@@ -74,7 +74,8 @@ public class LeagueCreationController implements ActionListener {
                                     difficulty, mainUserModel.getUsername());
                             
                             // assign stocks
-                            // FIXME: 11/25/2016 
+                            // FIXME: 11/25/2016
+                            
                             
                             if (isSuccess) {
                                 JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",

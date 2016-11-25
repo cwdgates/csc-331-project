@@ -8,6 +8,9 @@ import view.renderModel.AvailableStockModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Created by aqv on 11/24/2016.
@@ -22,32 +25,37 @@ public class ChooseStockController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        ArrayList<String> stocks = new ArrayList<>();
         
         switch (command) {
             case LeagueCreationPane.BTN_CHOOSE_STOCK: {
                 ChooseStockPane chooseStockPane = ChooseStockPane.showChooseStockPane();
                 chooseStockPane.registerController(e1 -> {
                     String command1 = e1.getActionCommand();
-                    String[] stocks = null;
                     
                     switch (command1) {
                         case ChooseStockPane.BTN_ACCEPT: {
-                            if (stocks != null) {
-                                leagueCreationPane.setStocks(stocks);
-                            } else {
+                            if (stocks.size() == 0) {
                                 System.err.println("WARNING::Stocks array is null");
+                            } else {
+                                stocks.stream().forEach(System.out::println);
+                                leagueCreationPane.setStocks(stocks.stream().toArray(String[]::new));
                             }
                             leagueCreationPane.setBtnCreateEnabled(true);
                             chooseStockPane.setVisible(false);
                             break;
                         }
                         case ChooseStockPane.BTN_REROLL: {
-                            stocks = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
+                            System.out.println("ACTION::Reroll");
+                            String[] temp = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
                                     leagueCreationPane.getCapacity());
-                            AvailableStockModel availableStockModel = new AvailableStockModel();
-                            availableStockModel.setData(stocks);
-                            chooseStockPane.setAvailStockModel(availableStockModel);
+                            Arrays.stream(temp).forEach(stocks::add);
                             
+                            stocks.stream().forEach(System.out::println);
+                            
+                            AvailableStockModel availableStockModel = new AvailableStockModel();
+                            availableStockModel.setData(temp);
+                            chooseStockPane.setAvailStockModel(availableStockModel);
                             chooseStockPane.setBtnAcceptEnabled(true);
                             break;
                         }

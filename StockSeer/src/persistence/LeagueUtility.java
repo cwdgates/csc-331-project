@@ -1,5 +1,6 @@
 package persistence;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,13 @@ import model.LeagueModel;
 
 public abstract class LeagueUtility {
     
-    public static boolean isLeagueNameUnique(String leagueName) {
+    /**
+     * check whether or not the database has this league
+     *
+     * @param leagueName
+     * @return true if database has this league, false otherwise
+     */
+    public static boolean hasLeague(String leagueName) {
         PreparedStatement selectSTMT = null;
         try {
             String sql = "SELECT id FROM leagues WHERE name = ?";
@@ -19,11 +26,10 @@ public abstract class LeagueUtility {
             selectSTMT.setString(1, leagueName);
             ResultSet rs = selectSTMT.executeQuery();
             if (rs.next()) {
-                return false;
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false; // operation failed
         } finally {
             try {
                 if (selectSTMT != null)
@@ -33,7 +39,7 @@ public abstract class LeagueUtility {
                 e.printStackTrace();
             }
         }
-        return true;
+        return false;
     }
     
     public static boolean createLeague(String name, int capacity, Date startDate, Date endDate, Difficulty
@@ -231,5 +237,55 @@ public abstract class LeagueUtility {
             }
         }
         return null;
+    }
+    
+    /**
+     * @param leagueName
+     * @param stocks     stocks symbol
+     * @return
+     */
+    public static boolean assignStocks(String leagueName, String[] stocks) {
+        if (hasLeague(leagueName)) {
+            PreparedStatement statement = null;
+            StringBuilder sql = new StringBuilder("INSERT INTO stock_league (league_name, symbol) VALUES\n");
+            
+            for (int i = 0; i < stocks.length; i++) {
+                sql.append("((SELECT name FROM leagues WHERE name = ?), (SELECT symbol from sp500 WHERE symbol = ?))");
+                if (i != stocks.length - 1) {
+                    sql.append(",\n");
+                } else {
+                    sql.append(";");
+                }
+            }
+            
+            System.out.println(sql.toString());
+            
+            try {
+                statement = DBConnection.getConnection().prepareStatement(sql.toString());
+                for (int i = 0; i < stocks.length; i++) {
+                    statement.setString(i * 2 + 1, leagueName);
+                    statement.setString(i * 2 + 2, stocks[i]);
+                }
+                statement.executeUpdate();
+                return true;
+            } catch (SQLException e) {
+                System.err.println("ERROR: Can't assign stocks");
+                e.printStackTrace();
+                return false;
+            } finally {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                        System.err.println("ERROR::can't close statement");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } else {
+            System.err.println("WARNING::This league does not exists");
+            // league not exist
+            return false;
+        }
     }
 }

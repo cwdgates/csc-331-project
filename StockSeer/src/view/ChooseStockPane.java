@@ -72,7 +72,7 @@ public class ChooseStockPane extends JPanel {
         JFrame frame = new JFrame();
         frame.add(pane);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         pane.registerContainer(frame);
         frame.setVisible(true);
         return pane;
