@@ -1,50 +1,79 @@
 package view;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.DefaultListModel;
-
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import view.renderModel.AvailableStockModel;
-import javax.swing.JTable;
+
 import java.awt.BorderLayout;
-import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
 
 public class ChooseStockPane extends JPanel {
-	AvailableStockModel availStockModel;
-	DefaultListModel addedStockModel;
-	private JTable table;
-
-	/**
-	 * Create the panel.
-	 */
-	public ChooseStockPane() {
-		setLayout(new BorderLayout(0, 0));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.SOUTH);
-		
-		JButton btnReroll = new JButton("Reroll");
-		panel.add(btnReroll);
-		
-		JButton btnAccept = new JButton("Accept");
-		panel.add(btnAccept);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, BorderLayout.NORTH);
-		
-		JTextPane txtpnClickRerollTo = new JTextPane();
-		txtpnClickRerollTo.setText("Click reroll to choose different stocks");
-		txtpnClickRerollTo.setToolTipText("");
-		scrollPane_1.setViewportView(txtpnClickRerollTo);
-
-	}
-
+    static public final String BTN_REROLL = "Reroll";
+    static public final String BTN_ACCEPT = "Accept";
+    private AvailableStockModel availStockModel;
+    private DefaultListModel addedStockModel;
+    private JTable table;
+    private JButton btnReroll;
+    private JButton btnAccept;
+    
+    /**
+     * Create the panel.
+     */
+    private ChooseStockPane() {
+        setLayout(new BorderLayout(0, 0));
+        
+        JScrollPane scrollPane = new JScrollPane();
+        add(scrollPane, BorderLayout.CENTER);
+        
+        table = new JTable(new AvailableStockModel());
+        scrollPane.setViewportView(table);
+        table.getTableHeader().setReorderingAllowed(false); // disable column reordering
+        
+        JPanel panelControl = new JPanel();
+        add(panelControl, BorderLayout.SOUTH);
+        
+        btnReroll = new JButton("Reroll");
+        panelControl.add(btnReroll);
+        
+        btnAccept = new JButton("Accept");
+        panelControl.add(btnAccept);
+        
+        JScrollPane scrollPaneDirection = new JScrollPane();
+        add(scrollPaneDirection, BorderLayout.NORTH);
+        
+        JTextPane txtpnDirection = new JTextPane();
+        txtpnDirection.setText("Click reroll to choose different stocks");
+        txtpnDirection.setToolTipText("");
+        txtpnDirection.setEditable(false);
+        scrollPaneDirection.setViewportView(txtpnDirection);
+        
+    }
+    
+    public void setAvailStockModel(AvailableStockModel availStockModel) {
+        table.setModel(availStockModel);
+    }
+    
+    public void registerController(ActionListener controller) {
+        btnAccept.addActionListener(controller);
+        btnReroll.addActionListener(controller);
+    }
+    
+    public void registerContainer(JFrame frame) {
+        btnAccept.addActionListener(e -> frame.setVisible(false));
+    }
+    
+    /**
+     * @return ChooseStockPane
+     */
+    public static ChooseStockPane showChooseStockPane() {
+        ChooseStockPane pane = new ChooseStockPane();
+        
+        JFrame frame = new JFrame();
+        frame.add(pane);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pane.registerContainer(frame);
+        frame.setVisible(true);
+        return pane;
+    }
 }

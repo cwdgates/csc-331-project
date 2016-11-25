@@ -23,7 +23,7 @@ public abstract class AccountUtility {
 	 * @return MainUserModel
 	 */
 	public static MainUserModel getAccountFromDB(String username, String password) {
-		String query = "SELECT username, first_name, last_name FROM user WHERE username = ? AND password = ?";
+		String query = "SELECT username, first_name, last_name FROM users WHERE username = ? AND password = ?";
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
@@ -58,7 +58,7 @@ public abstract class AccountUtility {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			String sql = "SELECT id FROM user WHERE username = ?";
+			String sql = "SELECT id FROM users WHERE username = ?";
 			statement = DBConnection.getConnection().prepareStatement(sql);
 			statement.setString(1, username);
 			resultSet = statement.executeQuery();
@@ -86,7 +86,7 @@ public abstract class AccountUtility {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			String sql = "SELECT id FROM user WHERE email = ?";
+			String sql = "SELECT id FROM users WHERE email = ?";
 			statement = DBConnection.getConnection().prepareStatement(sql);
 			statement.setString(1, email);
 			resultSet = statement.executeQuery();
@@ -121,7 +121,7 @@ public abstract class AccountUtility {
 		PreparedStatement statement = null;
 		int result = 0;
 		try {
-			String sql = "INSERT INTO user (first_name, last_name, email, username, password) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO users (first_name, last_name, email, username, password) VALUES (?,?,?,?,?)";
 			statement = DBConnection.getConnection().prepareStatement(sql);
 			statement.setString(1, firstName);
 			statement.setString(2, lastName);
@@ -175,7 +175,7 @@ public abstract class AccountUtility {
 
 		PreparedStatement statement = null;
 		try {
-			String sql = "SELECT username FROM user";
+			String sql = "SELECT username FROM users";
 			statement = DBConnection.getConnection().prepareStatement(sql);
 			ResultSet rs = statement.executeQuery();
 			players = new ArrayList<>();

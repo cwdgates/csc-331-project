@@ -12,7 +12,7 @@ import java.util.Vector;
  */
 public class LeagueListModel extends FixedTableModel {
     private static String[] columnNames = {"Name", "Start YYYY-MM-DD", "End YYYY-MM-DD", "Capacity", "Difficulty",
-            "Created By", "Joined"};
+            "Created By"};
     private static Vector<String> columnIdentifiers = new Vector<>();
     
     static {

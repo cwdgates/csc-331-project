@@ -142,7 +142,7 @@ public class HomePane extends JPanel {
 		btnAllPlayers = new JButton(ALL_PLAYERS);
 		panel.add(btnAllPlayers);
 
-		splitPane.setResizeWeight(0.8);
+		splitPane.setResizeWeight(0.85);
 
 	}
 

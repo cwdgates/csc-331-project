@@ -14,7 +14,7 @@ public abstract class LeagueUtility {
     public static boolean isLeagueNameUnique(String leagueName) {
         PreparedStatement selectSTMT = null;
         try {
-            String sql = "SELECT id FROM league WHERE name = ?";
+            String sql = "SELECT id FROM leagues WHERE name = ?";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             selectSTMT.setString(1, leagueName);
             ResultSet rs = selectSTMT.executeQuery();
@@ -40,7 +40,7 @@ public abstract class LeagueUtility {
             difficulty, String owner) {
         PreparedStatement insertSTMT = null;
         try {
-            String sql = "INSERT INTO league " + " (name, start_date, end_date, capacity, difficulty, owner) "
+            String sql = "INSERT INTO leagues " + " (name, start_date, end_date, capacity, difficulty, owner) "
                     + " VALUES (?,?,?,?,?,?)";
             insertSTMT = DBConnection.getConnection().prepareStatement(sql);
             insertSTMT.setString(1, name);
@@ -52,7 +52,7 @@ public abstract class LeagueUtility {
             
             int numAffectedRow = insertSTMT.executeUpdate();
             if (numAffectedRow == 0) {
-                System.err.println("Can't insert a league to the database");
+                System.err.println("Can't insert a leagues to the database");
                 return false;
             } else {
                 return true;
@@ -80,8 +80,8 @@ public abstract class LeagueUtility {
      */
     public static LeagueModel getLeagueFromDB(String leagueName) {
         LeagueModel leagueModel = null;
-        PreparedStatement selectSTMT = null;
-        ResultSet rs = null;
+        PreparedStatement selectSTMT;
+        ResultSet rs;
         try {
             String sql = "SELECT * FROM leagueModel WHERE name = ?";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
@@ -111,15 +111,15 @@ public abstract class LeagueUtility {
      */
     public static ArrayList<LeagueModel> getAllLeagues() {
         PreparedStatement selectSTMT = null;
-        ResultSet rs = null;
-        ArrayList<LeagueModel> leagueModels = null;
+        ResultSet rs;
+        ArrayList<LeagueModel> leagueModels;
         
         try {
-            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM league ORDER BY " +
+            String sql = "SELECT id, name, capacity, start_date, end_date, difficulty, owner FROM leagues ORDER BY " +
                     "name ASC";
             selectSTMT = DBConnection.getConnection().prepareStatement(sql);
             rs = selectSTMT.executeQuery();
-            leagueModels = new ArrayList<LeagueModel>();
+            leagueModels = new ArrayList<>();
             while (rs.next()) {
                 String name = rs.getString("name");
                 int capacity = rs.getInt("capacity");
@@ -149,7 +149,7 @@ public abstract class LeagueUtility {
     }
     
     /**
-     * @param owner
+     * @param owner the league owner
      * @return all leagues owned by owner, ordered by name ascending
      */
     public static ArrayList<LeagueModel> getAllLeagueOwnedBy(String owner) {
@@ -157,7 +157,7 @@ public abstract class LeagueUtility {
         PreparedStatement statement = null;
         
         try {
-            String sql = "SELECT name, capacity, start_date, end_date, difficulty, owner FROM league WHERE owner " +
+            String sql = "SELECT name, capacity, start_date, end_date, difficulty, owner FROM leagues WHERE owner " +
                     "= ? ORDER BY name ASC";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, owner);
@@ -200,7 +200,7 @@ public abstract class LeagueUtility {
     public static ArrayList<LeagueModel> getAllLeaguesJoinedBy(String username) {
         PreparedStatement statement = null;
         try {
-            String sql = "SELECT * FROM league WHERE name IN (SELECT league_name FROM user_league WHERE username = ?)";
+            String sql = "SELECT * FROM leagues WHERE name IN (SELECT league_name FROM user_league WHERE username = ?)";
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();

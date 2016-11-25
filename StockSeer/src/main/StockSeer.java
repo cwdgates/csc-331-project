@@ -50,6 +50,7 @@ public class StockSeer {
         HomePaneController homePaneController = new HomePaneController(appView, mainUserModel, leagueListModel, playersListModel);
         LeagueCreationController leagueCreationController = new LeagueCreationController(appView, mainUserModel, leagueListModel);
         LeagueTableController leagueTableFilterController = new LeagueTableController(appView, mainUserModel, leagueListModel);
+        ChooseStockController chooseStockController = new ChooseStockController(appView.getCreateLeaguePane());
         
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);
@@ -57,6 +58,7 @@ public class StockSeer {
         appView.getSignUpPane().registerListeners(registrationController);
         appView.getHomePane().registerListeners(homePaneController);
         appView.getHomePane().registerRadioButtonListeners(leagueTableFilterController);
+        appView.getCreateLeaguePane().registerListeners(chooseStockController);
         
         appView.getHomePane().setLeagueTableModel(leagueListModel);
         appView.getHomePane().setPlayersListTableModel(playersListModel);

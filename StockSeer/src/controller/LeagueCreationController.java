@@ -21,7 +21,6 @@ public class LeagueCreationController implements ActionListener {
     private MainUserModel mainUserModel;
     private LeagueListModel leagueListModel;
     
-    
     public LeagueCreationController(AppView appView, MainUserModel mainUserModel, LeagueListModel leagueListModel) {
         this.appView = appView;
         this.createLeaguePane = appView.getCreateLeaguePane();
@@ -35,9 +34,9 @@ public class LeagueCreationController implements ActionListener {
         
         switch (command) {
             /**
-             * when CREATE button is clicked
+             * when BTN_CREATE button is clicked
              */
-            case LeagueCreationPane.CREATE: {
+            case LeagueCreationPane.BTN_CREATE: {
                 // check name
                 if (createLeaguePane.getLeagueName().length() == 0) {
                     JOptionPane.showMessageDialog(appView, "Please enter the name of the league.", "",
@@ -89,9 +88,9 @@ public class LeagueCreationController implements ActionListener {
                 
                 break;
             }
-            // CANCEL button clicked
-            case LeagueCreationPane.CANCEL: {
-                System.out.println(LeagueCreationPane.CANCEL);
+            // BTN_CANCEL button clicked
+            case LeagueCreationPane.BTN_CANCEL: {
+                System.out.println(LeagueCreationPane.BTN_CANCEL);
                 int choice = JOptionPane.showConfirmDialog(appView, "Do you want to cancel?", "",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (choice == JOptionPane.OK_OPTION) {
