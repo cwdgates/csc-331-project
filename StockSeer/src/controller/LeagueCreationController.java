@@ -72,6 +72,10 @@ public class LeagueCreationController implements ActionListener {
                             Difficulty difficulty = createLeaguePane.getDifficulty();
                             boolean isSuccess = LeagueUtility.createLeague(name, capacity, startDate, endDate,
                                     difficulty, mainUserModel.getUsername());
+                            
+                            // assign stocks
+                            // FIXME: 11/25/2016 
+                            
                             if (isSuccess) {
                                 JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
                                         JOptionPane.INFORMATION_MESSAGE);

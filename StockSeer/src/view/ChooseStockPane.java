@@ -37,6 +37,7 @@ public class ChooseStockPane extends JPanel {
         
         btnAccept = new JButton("Accept");
         panelControl.add(btnAccept);
+        btnAccept.setEnabled(false);
         
         JScrollPane scrollPaneDirection = new JScrollPane();
         add(scrollPaneDirection, BorderLayout.NORTH);
@@ -75,5 +76,9 @@ public class ChooseStockPane extends JPanel {
         pane.registerContainer(frame);
         frame.setVisible(true);
         return pane;
+    }
+    
+    public void setBtnAcceptEnabled(boolean isEnabled) {
+        btnAccept.setEnabled(isEnabled);
     }
 }

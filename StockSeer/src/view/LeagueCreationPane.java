@@ -40,6 +40,8 @@ public class LeagueCreationPane extends JPanel {
     private JRadioButton rdbtnHard;
     private Component horizontalStrut;
     
+    private String[] stocks;
+    
     /**
      * Create the panel.
      */
@@ -249,5 +251,17 @@ public class LeagueCreationPane extends JPanel {
     
     public void registerListeners(ChooseStockController controller) {
         btnChooseStocks.addActionListener(controller);
+    }
+    
+    public void setStocks(String[] stocks) {
+        this.stocks = stocks;
+    }
+    
+    public String[] getStocks() {
+        return stocks;
+    }
+    
+    public void setBtnCreateEnabled(boolean isEnable) {
+        btnCreate.setEnabled(isEnable);
     }
 }
