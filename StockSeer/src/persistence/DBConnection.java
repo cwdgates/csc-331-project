@@ -44,7 +44,7 @@ public abstract class DBConnection {
 			String password = prop.getProperty("password");
 			Class.forName(driver);
 			System.out.println("Trying to connect to the database...");
-			connection = (Connection) DriverManager.getConnection(url, user, password);
+			connection = DriverManager.getConnection(url, user, password);
 			System.out.println("Successfully connect to the database.");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
