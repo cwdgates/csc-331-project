@@ -4,19 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 
-import main.StockSeer;
-import model.League;
-import model.LeagueListModel;
+import view.renderModel.LeagueListModel;
+import model.MainUserModel;
 import persistence.AccountUtility;
-import persistence.LeagueUtility;
 import view.AppView;
-import view.HomePane;
 import view.LoginPane;
-import model.AccountModel;
 
 /**
  * know about actions performed
@@ -26,18 +20,18 @@ import model.AccountModel;
 public class LoginController implements ActionListener, KeyListener {
     private LoginPane loginPane;
     private AppView appView;
-    private AccountModel accountModel;
+    private MainUserModel mainUserModel;
     private LeagueListModel leagueListModel;
     
-    public LoginController(AppView appView, AccountModel accountModel, LeagueListModel leagueListModel) {
+    public LoginController(AppView appView, MainUserModel mainUserModel, LeagueListModel leagueListModel) {
         this.loginPane = appView.getLoginPane();
         this.appView = appView;
-        this.accountModel = accountModel;
+        this.mainUserModel = mainUserModel;
         this.leagueListModel = leagueListModel;
     }
     
-    public AccountModel getAccountModel() {
-        return accountModel;
+    public MainUserModel getMainUserModel() {
+        return mainUserModel;
     }
     
     /**
@@ -81,18 +75,18 @@ public class LoginController implements ActionListener, KeyListener {
     }
     
     private void performLogin() {
-        AccountModel tempAccount = AccountUtility.getAccountFromDB(loginPane.getUsername(), loginPane.getPassword());
+        MainUserModel tempAccount = AccountUtility.getAccountFromDB(loginPane.getUsername(), loginPane.getPassword());
         if (tempAccount != null) {
             // show welcome pane
-            accountModel.setUsername(tempAccount.getUsername());
-            accountModel.setLastName(tempAccount.getLastName());
-            accountModel.setFirstName(tempAccount.getFirstName());
+            mainUserModel.setUsername(tempAccount.getUsername());
+            mainUserModel.setLastName(tempAccount.getLastName());
+            mainUserModel.setFirstName(tempAccount.getFirstName());
             
-            String msg = "Welcome " + accountModel.getFirstName() + " " + accountModel.getLastName() + ".\nClick OK to "
+            String msg = "Welcome " + mainUserModel.getFirstName() + " " + mainUserModel.getLastName() + ".\nClick OK to "
                     + "continue.";
             JOptionPane.showMessageDialog(appView, msg, "", JOptionPane.INFORMATION_MESSAGE);
 
-            leagueListModel.update();
+            leagueListModel.allLeagues();
             appView.viewHome(); // change the scene to Home
             loginPane.setTextFieldsEmpty(); // clear text field
             
