@@ -8,31 +8,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class StockChart {
-    
-    private static class ImagePanel extends JPanel {
-        public void paint(Graphics g) {
-            try {
-                URL url = new URL("http://chart.finance.yahoo.com/z?s=AAPL&t=7d&q=l&l=on&z=s&p=m50,m200.jpg");
-                BufferedImage image = ImageIO.read(url);
-                Toolkit t = Toolkit.getDefaultToolkit();
-                g.drawImage(image, 0, 0, this);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-        }
-    }
+    private String stockSymbol;
     
     private JFrame frame;
     
     /**
      * Launch the application.
      */
-    public static void show() {
+    public static void show(String stockSymbol) {
         EventQueue.invokeLater(new Thread() {
             public void run() {
                 try {
-                    StockChart window = new StockChart();
+                    StockChart window = new StockChart(stockSymbol);
                     window.frame.pack();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
@@ -45,7 +32,8 @@ public class StockChart {
     /**
      * Create the application.
      */
-    public StockChart() {
+    public StockChart(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
         initialize();
     }
     
@@ -53,14 +41,15 @@ public class StockChart {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frame = new JFrame();
+        frame = new JFrame(stockSymbol);
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         JPanel panel = new JPanel();
         
         try {
-            URL url = new URL("http://stockcharts.com/c-sc/sc?s=%24TSX&p=W&b=5&g=0&i=t21568592423&r=1480119106271.jpg");
+            URL url = new URL("http://stockcharts.com/c-sc/sc?s=" + stockSymbol +
+                    "&p=D&yr=0&mn=3&dy=0&i=t91264094820&.jpg");
             BufferedImage image = ImageIO.read(url);
             JLabel picLabel = new JLabel(new ImageIcon(image));
             panel.add(picLabel);
@@ -70,5 +59,4 @@ public class StockChart {
         
         frame.getContentPane().add(panel);
     }
-    
 }

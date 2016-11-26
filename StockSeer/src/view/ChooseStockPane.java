@@ -98,27 +98,11 @@ public class ChooseStockPane extends JPanel {
         btnAccept.setEnabled(isEnabled);
     }
     
-
-    
-    public static void main(String[] args) {
-//        ImagePanel canvas = new ImagePanel();
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        
-        try {
-            URL url = new URL("http://stockcharts.com/c-sc/sc?s=%24TSX&p=W&b=5&g=0&i=t21568592423&r=1480119106271.jpg");
-            BufferedImage image = ImageIO.read(url);
-            JLabel picLabel = new JLabel(new ImageIcon(image));
-            panel.add(picLabel);
-        } catch (Exception e){
-            
+    public String getSelectedStock(){
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow >= 0) {
+            return (String) table.getValueAt(selectedRow, 0);
         }
-    
-        frame.getContentPane().add(panel);
-        
-//        frame.add(canvas);
-//        frame.setSize(400, 400);
-        frame.pack();
-        frame.setVisible(true);
+        return null;
     }
 }

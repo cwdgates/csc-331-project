@@ -61,8 +61,8 @@ public class ChooseStockController implements ActionListener {
                             break;
                         }
                         case ChooseStockPane.BTN_STOCK_INFO: {
-                            
-                            StockChart.show();
+                            System.out.println(chooseStockPane.getSelectedStock());
+                            StockChart.show(chooseStockPane.getSelectedStock());
                             
                             break;
                         }
