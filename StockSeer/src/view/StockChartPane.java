@@ -9,7 +9,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class StockChart {
+public class StockChartPane {
     private String stockSymbol;
     
     private JFrame frame;
@@ -21,7 +21,7 @@ public class StockChart {
         EventQueue.invokeLater(new Thread() {
             public void run() {
                 try {
-                    StockChart window = new StockChart(stockSymbol);
+                    StockChartPane window = new StockChartPane(stockSymbol);
                     window.frame.pack();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
@@ -34,7 +34,7 @@ public class StockChart {
     /**
      * Create the application.
      */
-    public StockChart(String stockSymbol) {
+    public StockChartPane(String stockSymbol) {
         this.stockSymbol = stockSymbol;
         initialize();
     }
