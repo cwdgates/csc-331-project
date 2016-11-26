@@ -20,6 +20,8 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 public class LeagueCreationPane extends JPanel {
     public final static String BTN_CANCEL = "Cancel";
@@ -41,6 +43,8 @@ public class LeagueCreationPane extends JPanel {
     private Component horizontalStrut;
     
     private String[] stocks;
+    private JScrollPane scrollPane;
+    private JTextPane textPaneStocks;
     
     /**
      * Create the panel.
@@ -48,9 +52,9 @@ public class LeagueCreationPane extends JPanel {
     public LeagueCreationPane() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0};
-        gridBagLayout.rowHeights = new int[]{194, 0, 0};
+        gridBagLayout.rowHeights = new int[]{50, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
         setLayout(gridBagLayout);
         
         JPanel panelForm = new JPanel();
@@ -65,7 +69,7 @@ public class LeagueCreationPane extends JPanel {
         gbl_panelForm.columnWidths = new int[]{115, 327, 0};
         gbl_panelForm.rowHeights = new int[]{26, 27, 27, 27, 0, 0};
         gbl_panelForm.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-        gbl_panelForm.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gbl_panelForm.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panelForm.setLayout(gbl_panelForm);
         
         JLabel lblLeagueName = new JLabel("LeagueModel Name");
@@ -159,11 +163,23 @@ public class LeagueCreationPane extends JPanel {
             comboBoxCapacity.addItem(i);
         }
         
+        scrollPane = new JScrollPane();
+        GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+        gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+        gbc_scrollPane.fill = GridBagConstraints.BOTH;
+        gbc_scrollPane.gridx = 0;
+        gbc_scrollPane.gridy = 1;
+        add(scrollPane, gbc_scrollPane);
+        
+        textPaneStocks = new JTextPane();
+        textPaneStocks.setEditable(false);
+        scrollPane.setViewportView(textPaneStocks);
+        
         JPanel panel = new JPanel();
         GridBagConstraints gbc_panel = new GridBagConstraints();
         gbc_panel.fill = GridBagConstraints.HORIZONTAL;
         gbc_panel.gridx = 0;
-        gbc_panel.gridy = 1;
+        gbc_panel.gridy = 2;
         add(panel, gbc_panel);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         

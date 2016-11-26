@@ -1,20 +1,25 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import view.renderModel.AvailableStockModel;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
 public class ChooseStockPane extends JPanel {
     static public final String BTN_REROLL = "Reroll";
     static public final String BTN_ACCEPT = "Accept";
+    static public final String BTN_STOCK_INFO = "Stock info...";
     private AvailableStockModel availStockModel;
     private DefaultListModel addedStockModel;
     private JTable table;
     private JButton btnReroll;
     private JButton btnAccept;
+    private JButton btnStockInfo;
     
     /**
      * Create the panel.
@@ -27,13 +32,23 @@ public class ChooseStockPane extends JPanel {
         
         table = new JTable(new AvailableStockModel());
         scrollPane.setViewportView(table);
-        table.getTableHeader().setReorderingAllowed(false); // disable column reordering
+        table.getTableHeader().setReorderingAllowed(false);
         
         JPanel panelControl = new JPanel();
         add(panelControl, BorderLayout.SOUTH);
+        panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.X_AXIS));
+        
+        btnStockInfo = new JButton(BTN_STOCK_INFO);
+        panelControl.add(btnStockInfo);
+        
+        Component horizontalGlue = Box.createHorizontalGlue();
+        panelControl.add(horizontalGlue);
         
         btnReroll = new JButton("Reroll");
         panelControl.add(btnReroll);
+        
+        Component horizontalStrut = Box.createHorizontalStrut(20);
+        panelControl.add(horizontalStrut);
         
         btnAccept = new JButton("Accept");
         panelControl.add(btnAccept);
@@ -57,6 +72,7 @@ public class ChooseStockPane extends JPanel {
     public void registerController(ActionListener controller) {
         btnAccept.addActionListener(controller);
         btnReroll.addActionListener(controller);
+        btnStockInfo.addActionListener(controller);
     }
     
     public void registerContainer(JFrame frame) {
@@ -70,7 +86,7 @@ public class ChooseStockPane extends JPanel {
         ChooseStockPane pane = new ChooseStockPane();
         
         JFrame frame = new JFrame();
-        frame.add(pane);
+        frame.getContentPane().add(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         pane.registerContainer(frame);
@@ -80,5 +96,29 @@ public class ChooseStockPane extends JPanel {
     
     public void setBtnAcceptEnabled(boolean isEnabled) {
         btnAccept.setEnabled(isEnabled);
+    }
+    
+
+    
+    public static void main(String[] args) {
+//        ImagePanel canvas = new ImagePanel();
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        
+        try {
+            URL url = new URL("http://stockcharts.com/c-sc/sc?s=%24TSX&p=W&b=5&g=0&i=t21568592423&r=1480119106271.jpg");
+            BufferedImage image = ImageIO.read(url);
+            JLabel picLabel = new JLabel(new ImageIcon(image));
+            panel.add(picLabel);
+        } catch (Exception e){
+            
+        }
+    
+        frame.getContentPane().add(panel);
+        
+//        frame.add(canvas);
+//        frame.setSize(400, 400);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

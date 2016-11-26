@@ -4,6 +4,7 @@ import model.StockModel;
 import persistence.StockUtility;
 import view.ChooseStockPane;
 import view.LeagueCreationPane;
+import view.StockChart;
 import view.renderModel.AvailableStockModel;
 
 import java.awt.event.ActionEvent;
@@ -57,6 +58,12 @@ public class ChooseStockController implements ActionListener {
                             availableStockModel.setData(temp);
                             chooseStockPane.setAvailStockModel(availableStockModel);
                             chooseStockPane.setBtnAcceptEnabled(true);
+                            break;
+                        }
+                        case ChooseStockPane.BTN_STOCK_INFO: {
+                            
+                            StockChart.show();
+                            
                             break;
                         }
                         default:
