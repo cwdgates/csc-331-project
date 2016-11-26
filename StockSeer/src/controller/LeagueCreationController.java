@@ -70,14 +70,13 @@ public class LeagueCreationController implements ActionListener {
                             String name = createLeaguePane.getLeagueName();
                             int capacity = createLeaguePane.getCapacity();
                             Difficulty difficulty = createLeaguePane.getDifficulty();
-                            boolean isSuccess = LeagueUtility.createLeague(name, capacity, startDate, endDate,
+                            boolean isCreateLeague = LeagueUtility.createLeague(name, capacity, startDate, endDate,
                                     difficulty, mainUserModel.getUsername());
                             
-                            // assign stocks
-                            // FIXME: 11/25/2016
+                            boolean isAssignStock = LeagueUtility.assignStocks(createLeaguePane.getLeagueName(),
+                                    createLeaguePane.getStocks());
                             
-                            
-                            if (isSuccess) {
+                            if (isCreateLeague && isAssignStock) {
                                 JOptionPane.showMessageDialog(appView, "The league was successfully created.", "",
                                         JOptionPane.INFORMATION_MESSAGE);
                                 createLeaguePane.resetFields();
@@ -93,7 +92,6 @@ public class LeagueCreationController implements ActionListener {
                 
                 break;
             }
-            // BTN_CANCEL button clicked
             case LeagueCreationPane.BTN_CANCEL: {
                 System.out.println(LeagueCreationPane.BTN_CANCEL);
                 int choice = JOptionPane.showConfirmDialog(appView, "Do you want to cancel?", "",

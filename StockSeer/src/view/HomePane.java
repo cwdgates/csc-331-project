@@ -3,9 +3,6 @@ package view;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -21,11 +18,11 @@ public class HomePane extends JPanel {
 	 * leagues data using GUI at Home Pane
 	 */
 
-	public static final String CREATE_LEAGUE = "Create a league";
-	public static final String JOIN_LEAGUE = "Join";
-	public static final String LOGOUT = "Logout";
-	public static final String REFRESH = "Refresh";
-	public static final String DETAIL = "Detail";
+	public static final String BTN_CREATE_LEAGUE = "Create a league";
+	public static final String BTN_JOIN_LEAGUE = "Join";
+	public static final String BTN_LOGOUT = "Logout";
+	public static final String BTN_REFRESH = "Refresh";
+	public static final String BTN_DETAIL = "Detail";
 	public static final String RDBTN_ALL = "All";
 	public static final String RDBTN_MY_LEAGUES = "My leagues";
 	public static final String RDBTN_JOINED_LEAGUES = "Joined leagues";
@@ -88,32 +85,32 @@ public class HomePane extends JPanel {
 		add(panelBottomControl, BorderLayout.SOUTH);
 		panelBottomControl.setLayout(new BoxLayout(panelBottomControl, BoxLayout.X_AXIS));
 
-		btnRefresh = new JButton(REFRESH);
+		btnRefresh = new JButton(BTN_REFRESH);
 		panelBottomControl.add(btnRefresh);
 
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue_1);
 
-		btnDetail = new JButton(DETAIL);
+		btnDetail = new JButton(BTN_DETAIL);
 		panelBottomControl.add(btnDetail);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue);
 
-		btnJoin = new JButton(JOIN_LEAGUE);
+		btnJoin = new JButton(BTN_JOIN_LEAGUE);
 		panelBottomControl.add(btnJoin);
 
 		Component horizontalGlue_3 = Box.createHorizontalGlue();
 		panelBottomControl.add(horizontalGlue_3);
 
-		btnCreate = new JButton(CREATE_LEAGUE);
+		btnCreate = new JButton(BTN_CREATE_LEAGUE);
 		panelBottomControl.add(btnCreate);
 
 		JPanel panelTopControl = new JPanel();
 		add(panelTopControl, BorderLayout.NORTH);
 		panelTopControl.setLayout(new BoxLayout(panelTopControl, BoxLayout.X_AXIS));
 
-		btnLogout = new JButton(LOGOUT);
+		btnLogout = new JButton(BTN_LOGOUT);
 		panelTopControl.add(btnLogout);
 
 		JPanel panel = new JPanel();

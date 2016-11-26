@@ -85,7 +85,7 @@ public class ChooseStockPane extends JPanel {
     public static ChooseStockPane showChooseStockPane() {
         ChooseStockPane pane = new ChooseStockPane();
         
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Choose Stocks");
         frame.getContentPane().add(pane);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

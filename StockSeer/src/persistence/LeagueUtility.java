@@ -284,7 +284,6 @@ public abstract class LeagueUtility {
             }
         } else {
             System.err.println("WARNING::This league does not exists");
-            // league not exist
             return false;
         }
     }

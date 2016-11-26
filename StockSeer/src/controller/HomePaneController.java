@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.MainUserModel;
+import view.LeagueInfoPane;
 import view.renderModel.LeagueListModel;
 import view.renderModel.PlayersListModel;
 import persistence.AccountUtility;
@@ -33,22 +34,22 @@ public class HomePaneController implements ActionListener {
         String command = e.getActionCommand();
         
         switch (command) {
-            case HomePane.CREATE_LEAGUE: {
-                System.out.println(HomePane.CREATE_LEAGUE);
+            case HomePane.BTN_CREATE_LEAGUE: {
+                System.out.println(HomePane.BTN_CREATE_LEAGUE);
                 appView.viewCreateLeaguePane();
                 break;
             }
             
-            case HomePane.REFRESH: {
-                System.out.println(HomePane.REFRESH);
+            case HomePane.BTN_REFRESH: {
+                System.out.println(HomePane.BTN_REFRESH);
                 
                 leagueListModel.allLeagues();
                 playersListModel.allPlayers();
                 break;
             }
             
-            case HomePane.LOGOUT: {
-                System.out.println(HomePane.LOGOUT);
+            case HomePane.BTN_LOGOUT: {
+                System.out.println(HomePane.BTN_LOGOUT);
                 int choice = JOptionPane.showConfirmDialog(appView, "Do you want to log out ?", "",
                         JOptionPane.OK_CANCEL_OPTION);
                 if (choice == JOptionPane.OK_OPTION) {
@@ -57,7 +58,7 @@ public class HomePaneController implements ActionListener {
                 break;
             }
             
-            case HomePane.JOIN_LEAGUE: {
+            case HomePane.BTN_JOIN_LEAGUE: {
                 // FIXME still working
                 String league = homePane.getLeagueSelected();
                 if (league != null) {
@@ -74,6 +75,13 @@ public class HomePaneController implements ActionListener {
             case HomePane.ALL_PLAYERS: {
                 System.out.println("ALL PLAYER");
                 playersListModel.allPlayers();
+                break;
+            }
+            
+            case HomePane.BTN_DETAIL:{
+                System.out.println("DETAIL");
+                LeagueInfoPane.show("");
+                break;
             }
             
             default:

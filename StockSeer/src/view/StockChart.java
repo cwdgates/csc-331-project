@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -58,5 +60,19 @@ public class StockChart {
         }
         
         frame.getContentPane().add(panel);
+        
+        JPanel panel_1 = new JPanel();
+        frame.getContentPane().add(panel_1, BorderLayout.SOUTH);
+        
+        JButton btnClose = new JButton("Close");
+        panel_1.add(btnClose);
+        btnClose.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.dispose();
+			}
+		});
     }
 }
