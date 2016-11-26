@@ -49,7 +49,7 @@ public class StockChart {
         
         try {
             URL url = new URL("http://stockcharts.com/c-sc/sc?s=" + stockSymbol +
-                    "&p=D&yr=0&mn=3&dy=0&i=t91264094820&.jpg");
+                    "&p=D&yr=0&mn=3&dy=0&i=t68318560406&.jpg");
             BufferedImage image = ImageIO.read(url);
             JLabel picLabel = new JLabel(new ImageIcon(image));
             panel.add(picLabel);
