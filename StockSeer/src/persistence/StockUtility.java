@@ -25,8 +25,13 @@ public class StockUtility {
         num = num + 2;
         PreparedStatement statement;
         try {
-            String sql = "SELECT symbol FROM sp500 AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM sp500)) AS " +
-                    "id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT ?;";
+//            String sql = "SELECT symbol FROM sp500 AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM sp500)) AS "
+//                    + "id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT ?;";
+            
+            String sql = "SELECT symbol FROM sp500\n" +
+                    "ORDER BY RAND()\n" +
+                    "LIMIT ?;";
+            
             statement = DBConnection.getConnection().prepareStatement(sql);
             statement.setInt(1, num);
             ResultSet rs = statement.executeQuery();

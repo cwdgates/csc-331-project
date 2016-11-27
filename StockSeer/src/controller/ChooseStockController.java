@@ -1,17 +1,15 @@
 package controller;
 
-import model.StockModel;
 import persistence.StockUtility;
 import view.ChooseStockPane;
 import view.LeagueCreationPane;
-import view.StockChart;
+import view.StockChartPane;
 import view.renderModel.AvailableStockModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Created by aqv on 11/24/2016.
@@ -61,8 +59,7 @@ public class ChooseStockController implements ActionListener {
                             break;
                         }
                         case ChooseStockPane.BTN_STOCK_INFO: {
-                            System.out.println(chooseStockPane.getSelectedStock());
-                            StockChart.show(chooseStockPane.getSelectedStock());
+                            StockChartPane.show(chooseStockPane.getSelectedStock());
                             
                             break;
                         }
