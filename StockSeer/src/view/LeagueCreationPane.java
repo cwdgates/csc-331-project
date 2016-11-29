@@ -44,7 +44,7 @@ public class LeagueCreationPane extends JPanel {
     
     private String[] stocks;
     private JScrollPane scrollPane;
-    private JTextPane textPaneStocks;
+    private JTextPane textPaneStocksInfo;
     
     /**
      * Create the panel.
@@ -171,9 +171,9 @@ public class LeagueCreationPane extends JPanel {
         gbc_scrollPane.gridy = 1;
         add(scrollPane, gbc_scrollPane);
         
-        textPaneStocks = new JTextPane();
-        textPaneStocks.setEditable(false);
-        scrollPane.setViewportView(textPaneStocks);
+        textPaneStocksInfo = new JTextPane();
+        textPaneStocksInfo.setEditable(false);
+        scrollPane.setViewportView(textPaneStocksInfo);
         
         JPanel panel = new JPanel();
         GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -279,5 +279,9 @@ public class LeagueCreationPane extends JPanel {
     
     public void setBtnCreateEnabled(boolean isEnable) {
         btnCreate.setEnabled(isEnable);
+    }
+    
+    public void setTextPaneStocksInfo(String info){
+        textPaneStocksInfo.setText(info);
     }
 }

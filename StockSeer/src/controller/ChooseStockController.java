@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by aqv on 11/24/2016.
@@ -32,6 +34,7 @@ public class ChooseStockController implements ActionListener {
                 ChooseStockPane chooseStockPane = ChooseStockPane.showChooseStockPane();
                 chooseStockPane.registerController(e1 -> {
                     String command1 = e1.getActionCommand();
+                    Vector<Vector<String>> temp;
                     
                     switch (command1) {
                         case ChooseStockPane.BTN_ACCEPT: {
@@ -43,16 +46,17 @@ public class ChooseStockController implements ActionListener {
                                 leagueCreationPane.setStocks(stocks.stream().toArray(String[]::new));
                             }
                             leagueCreationPane.setBtnCreateEnabled(true);
+                            String info = stocks.stream().collect(Collectors.joining("\n"));
+                            leagueCreationPane.setTextPaneStocksInfo(info);
                             chooseStockPane.setVisible(false);
                             break;
                         }
                         case ChooseStockPane.BTN_REROLL: {
                             System.out.println("ACTION::Reroll");
-                            Vector<Vector<String>> temp = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
+                            temp = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
                                     leagueCreationPane.getCapacity());
                             if (temp != null) {
                                 temp.forEach(item -> stocks.add(item.get(0)));
-//                                Arrays.stream(temp).forEach(stocks::add);
                             }
                             
                             stocks.forEach(System.out::println);
