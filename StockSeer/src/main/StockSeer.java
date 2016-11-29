@@ -59,7 +59,6 @@ public class StockSeer {
         appView.getHomePane().registerListeners(homePaneController);
         appView.getHomePane().registerRadioButtonListeners(leagueTableFilterController);
         appView.getCreateLeaguePane().registerListeners(chooseStockController);
-        
         appView.getHomePane().setLeagueTableModel(leagueListModel);
         appView.getHomePane().setPlayersListTableModel(playersListModel);
         

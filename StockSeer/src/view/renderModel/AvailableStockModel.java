@@ -27,4 +27,14 @@ public class AvailableStockModel extends FixedTableModel {
         this.setDataVector(data, columnIdentifiers);
     }
     
+    public void setData(Vector<Vector<String>> data) {
+//
+//        for (String stock : data) {
+//            Vector<String> temp = new Vector<>();
+//            temp.add(stock);
+//            data.add(temp);
+//        }
+        this.setDataVector(data, columnIdentifiers);
+    }
+    
 }

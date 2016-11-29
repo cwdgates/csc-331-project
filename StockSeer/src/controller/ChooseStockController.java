@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * Created by aqv on 11/24/2016.
@@ -34,10 +35,11 @@ public class ChooseStockController implements ActionListener {
                     
                     switch (command1) {
                         case ChooseStockPane.BTN_ACCEPT: {
+                            System.out.println("ACTION::ACCEPT");
                             if (stocks.size() == 0) {
                                 System.err.println("WARNING::Stocks array is null");
                             } else {
-                                stocks.stream().forEach(System.out::println);
+                                stocks.forEach(System.out::println);
                                 leagueCreationPane.setStocks(stocks.stream().toArray(String[]::new));
                             }
                             leagueCreationPane.setBtnCreateEnabled(true);
@@ -46,11 +48,14 @@ public class ChooseStockController implements ActionListener {
                         }
                         case ChooseStockPane.BTN_REROLL: {
                             System.out.println("ACTION::Reroll");
-                            String[] temp = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
+                            Vector<Vector<String>> temp = StockUtility.getStocksForLeague(leagueCreationPane.getDifficulty(),
                                     leagueCreationPane.getCapacity());
-                            Arrays.stream(temp).forEach(stocks::add);
+                            if (temp != null) {
+                                temp.forEach(item -> stocks.add(item.get(0)));
+//                                Arrays.stream(temp).forEach(stocks::add);
+                            }
                             
-                            stocks.stream().forEach(System.out::println);
+                            stocks.forEach(System.out::println);
                             
                             AvailableStockModel availableStockModel = new AvailableStockModel();
                             availableStockModel.setData(temp);
