@@ -3,12 +3,10 @@ package main;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import controller.HomePaneController;
-import controller.LeagueCreationController;
-import controller.LoginController;
-import controller.RegistrationController;
-import model.AccountModel;
-import model.LeagueListModel;
+import controller.*;
+import model.MainUserModel;
+import view.renderModel.LeagueListModel;
+import view.renderModel.PlayersListModel;
 import persistence.DBConnection;
 import view.AppView;;
 //
@@ -42,22 +40,27 @@ public class StockSeer {
         AppView appView = new AppView();
         
         // ------------------- INITIALIZE MODELS ---------------------
-        AccountModel accountModel = new AccountModel(); // only one user per instance of
+        MainUserModel mainUserModel = new MainUserModel(); // only one user per instance of
         LeagueListModel leagueListModel = new LeagueListModel();
+        PlayersListModel playersListModel = new PlayersListModel();
         
         // ----------------- INITIALIZE CONTROLLERS -----------------
-        LoginController loginController = new LoginController(appView, accountModel, leagueListModel);
+        LoginController loginController = new LoginController(appView, mainUserModel, leagueListModel);
         RegistrationController registrationController = new RegistrationController(appView);
-        HomePaneController homePaneController = new HomePaneController(appView, accountModel, leagueListModel);
-        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, accountModel, leagueListModel);
+        HomePaneController homePaneController = new HomePaneController(appView, mainUserModel, leagueListModel, playersListModel);
+        LeagueCreationController leagueCreationController = new LeagueCreationController(appView, mainUserModel, leagueListModel);
+        LeagueTableController leagueTableFilterController = new LeagueTableController(appView, mainUserModel, leagueListModel);
+        ChooseStockController chooseStockController = new ChooseStockController(appView.getCreateLeaguePane());
         
         // --------------------REGISTER LISTENERS --------------------------
         appView.getLoginPane().registerListeners(loginController);
         appView.getCreateLeaguePane().registerListeners(leagueCreationController);
         appView.getSignUpPane().registerListeners(registrationController);
         appView.getHomePane().registerListeners(homePaneController);
-        
-        appView.getHomePane().setDefaultTableModel(leagueListModel);
+        appView.getHomePane().registerRadioButtonListeners(leagueTableFilterController);
+        appView.getCreateLeaguePane().registerListeners(chooseStockController);
+        appView.getHomePane().setLeagueTableModel(leagueListModel);
+        appView.getHomePane().setPlayersListTableModel(playersListModel);
         
         // -------------------- SET VISIBLE -------------------------
         appView.setVisible(true);

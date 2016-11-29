@@ -11,7 +11,15 @@
     <orderEntry type="library" name="commons-validator-1.5.1" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.40-bin" level="project" />
     <orderEntry type="library" name="jcommon-1.0.0" level="project" />
-    <orderEntry type="library" name="ojdbc6" level="project" />
     <orderEntry type="library" name="gral (2)" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.5" level="project" />
+    <orderEntry type="library" name="commons-email-1" level="project" />
+    <orderEntry type="library" name="commons-lang3-3" level="project" />
+    <orderEntry type="library" name="commons-validator-1.5" level="project" />
+    <orderEntry type="library" name="gral" level="project" />
+    <orderEntry type="library" name="mysql-connector" level="project" />
+    <orderEntry type="library" name="yahoo-finance" level="project" />
+    <orderEntry type="library" name="jgoodies-forms-1.8.0" level="project" />
+    <orderEntry type="library" name="ojdbc6" level="project" />
   </component>
 </module>

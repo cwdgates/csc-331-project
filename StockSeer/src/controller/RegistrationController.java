@@ -72,7 +72,7 @@ public class RegistrationController implements ActionListener {
 			appView.viewLogin();
 			regPane.setTextFieldsEmpty();
 			break;
-		// ----------- END CANCEL----------
+		// ----------- END BTN_CANCEL----------
 		default:
 			break;
 		}
